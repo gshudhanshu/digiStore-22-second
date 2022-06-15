@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+// import { ToastProvider } from 'react-toast-notifications'
+import { BreadcrumbsProvider } from 'react-breadcrumbs-dynamic'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreens from './screens/HomeScreen'
@@ -20,10 +23,12 @@ import OrderListScreen from './screens/OrderListScreen'
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <main className='py-3'>
-        <Container>
+    // <ToastProvider placement='bottom-left'>
+    <BreadcrumbsProvider>
+      <Router>
+        <Header />
+        <main>
+          {/* <Container> */}
           <Routes>
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />
@@ -55,10 +60,12 @@ function App() {
             />
             <Route path='/' element={<HomeScreens />} />
           </Routes>
-        </Container>
-      </main>
-      <Footer />
-    </Router>
+          {/* </Container> */}
+        </main>
+        <Footer />
+      </Router>
+    </BreadcrumbsProvider>
+    // </ToastProvider>
   )
 }
 
