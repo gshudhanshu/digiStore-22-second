@@ -1,9 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+
+import { Button } from 'react-bootstrap'
 
 const Product = ({ product }) => {
+  // const { id } = useParams()
+  const navigate = useNavigate()
+  const [qty, setQty] = useState(1)
+
+  const addToCartHandler = () => {
+    navigate(`/cart/${product._id}?qty=${qty}`)
+  }
+
   return (
     <>
       <div className='product-wrap mb-25'>
@@ -14,14 +24,19 @@ const Product = ({ product }) => {
           </Link>
           <div className='product-action'>
             <div className='pro-same-action pro-cart'>
-              <button className='' title='Add to cart'>
+              <Button
+                onClick={addToCartHandler}
+                className='btn-block'
+                type='button'
+                disabled={product.countInStock === 0}
+              >
                 <i className='pe-7s-cart'></i> Add to cart{' '}
-              </button>
+              </Button>
             </div>
             <div className='pro-same-action pro-quickview'>
-              <button title='Quick View'>
+              <Link title='Quick View' to={`/product/${product._id}`}>
                 <i className='pe-7s-look'></i>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -33,19 +48,6 @@ const Product = ({ product }) => {
               </Card.Title>
             </Link>
           </h3>
-          {/* <div className='product-rating'>
-            <i className='fa fa-star-o yellow'></i>
-            <i className='fa fa-star-o yellow'></i>
-            <i className='fa fa-star-o yellow'></i>
-            <i className='fa fa-star-o yellow'></i>
-            <i className='fa fa-star-o'></i>
-          </div> */}
-          {/* <Card.Text as='div'>
-            <Rating
-              value={product.rating}
-              text={`${product.numReviews} reviews`}
-            />
-          </Card.Text> */}
 
           <div className='product-price'>
             <img
