@@ -8,10 +8,10 @@ const Product = ({ product }) => {
     <>
       <div className='product-wrap mb-25'>
         <div className='product-img'>
-          <a href='/product/15'>
+          <Link to={`/product/${product._id}`}>
             <img className='default-img' src={product.image} alt='' />
             <img className='hover-img' src={product.image} alt='' />
-          </a>
+          </Link>
           <div className='product-action'>
             <div className='pro-same-action pro-cart'>
               <button className='' title='Add to cart'>
@@ -27,7 +27,11 @@ const Product = ({ product }) => {
         </div>
         <div className='product-content text-center'>
           <h3>
-            <a href='/product/15'>{product.name}</a>
+            <Link to={`/product/${product._id}`}>
+              <Card.Title as='div'>
+                <strong>{product.name}</strong>
+              </Card.Title>
+            </Link>
           </h3>
           {/* <div className='product-rating'>
             <i className='fa fa-star-o yellow'></i>
