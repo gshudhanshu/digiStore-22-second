@@ -1,5 +1,10 @@
 /*----- 2. Header style ----*/
 
+.navbar {
+  // background-color: #eeeeee;
+  padding: 15px 0;
+}
+
 .header-area {
   position: relative;
   &.header-absolute {
@@ -30,7 +35,7 @@
   animation: 700ms ease-in-out 0s normal none 1 running fadeInDown;
 
   border-bottom: 0 solid #4a90e2;
-  background-color: #fff;
+  background-color: #eeeeee;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.06);
 
   .center-menu-logo {
@@ -106,59 +111,3 @@
 // #basic-navbar-nav {
 //   max-width: 250px;
 // }
-
-// Bottom navigation CSS
-.bottom-nav-container {
-  // margin: 0;
-  // padding: 0;
-  display: flex;
-  padding: 20px;
-  font-size: 20px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.tab-nav-container {
-  box-shadow: 0 -10px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-.tab {
-  border-radius: 50px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // padding: 0 10px;
-  // margin: 0 5px;
-  transition: background-color 0.4s linear;
-  color: #2c2d67;
-}
-.tab i {
-  font-size: 1.2em;
-}
-.tab p {
-  font-weight: bold;
-  overflow: hidden;
-  max-width: 0;
-}
-
-.active.tab {
-  background: rgb(246, 64, 42);
-  background: linear-gradient(
-    90deg,
-    rgba(246, 64, 42, 1) 0%,
-    rgba(153, 1, 255, 1) 100%
-  );
-  padding: 10px 20px;
-}
-p {
-  max-width: 100px;
-  padding-left: 9px;
-}
-
-.tab.active p,
-.tab.active i {
-  color: #fff;
-  max-width: 100px;
-  transition: max-width 0.4s linear;
-}

@@ -32,7 +32,7 @@ const Header = ({}) => {
     <>
       <header>
         <Navbar
-          bg='white'
+          // bg='white'
           variant='light'
           expand='lg'
           collapseOnSelect

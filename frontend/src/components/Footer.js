@@ -3,10 +3,10 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className='bottom-footer'>
       <Container>
         <Row>
-          <Col className='text-center'>
+          <Col className='copyright text-center my-4'>
             Copyright &copy; 2021 Digicel Group. All rights reserved.
           </Col>
         </Row>

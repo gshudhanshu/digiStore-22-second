@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
@@ -20,6 +21,8 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
     },
   })
 
+  toast.success('ADDED')
+
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
@@ -28,6 +31,7 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     type: CART_REMOVE_ITEM,
     payload: id,
   })
+  toast.warn('REMOVED')
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 

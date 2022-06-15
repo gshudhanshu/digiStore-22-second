@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-
 import { Button } from 'react-bootstrap'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 
 const Product = ({ product }) => {
   // const { id } = useParams()
-  const navigate = useNavigate()
-  const [qty, setQty] = useState(1)
+  // const navigate = useNavigate()
+  // const [qty, setQty] = useState(1)
+  const dispatch = useDispatch()
 
   const addToCartHandler = () => {
-    navigate(`/cart/${product._id}?qty=${qty}`)
+    // navigate(`/cart/${product._id}?qty=${qty}`)
+    dispatch(addToCart(product._id))
   }
 
   return (

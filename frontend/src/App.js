@@ -21,13 +21,15 @@ import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import BottomNav from './components/BottomNav'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
-    // <ToastProvider placement='bottom-left'>
     <BreadcrumbsProvider>
       <Router>
         <Header />
+        <ToastContainer autoClose={2000} />
         <main>
           {/* <Container> */}
           <Routes>
@@ -67,7 +69,6 @@ function App() {
         <BottomNav />
       </Router>
     </BreadcrumbsProvider>
-    // </ToastProvider>
   )
 }
 

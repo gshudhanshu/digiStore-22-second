@@ -40,11 +40,13 @@ const HomeScreen = () => {
         </Link>
       )} */}
 
-      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
-      <Breadcrumb /> */}
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>
+        Welcome To DigiStore
+      </BreadcrumbsItem>
+      <Breadcrumb />
 
-      <Container className='mt-100'>
-        <h1>Latest Products</h1>
+      <Container>
+        {/* <h1 className='text-center page heading'>Welcome to DigiStore</h1> */}
         {loading ? (
           <Loader />
         ) : error ? (
