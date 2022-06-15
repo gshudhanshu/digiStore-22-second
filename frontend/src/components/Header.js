@@ -19,15 +19,15 @@ const Header = ({}) => {
   return (
     <header className='header-area clearfix container'>
       <Navbar
-        className='sticky-bar header-res-padding clearfix '
-        // fixed='top'
+        className='stick sticky-bar header-res-padding clearfix '
+        fixed='top'
         // className='py-4 stick'
         bg='white'
         variant='light'
         expand='lg'
         collapseOnSelect
       >
-        <Container fluid>
+        <Container>
           <LinkContainer to='/' className='col-xl-2 col-lg-2 col-md-6 col-4'>
             <Link to='/'>
               <img alt='' className='logo' src={'/assets/img/logo.png'} />
@@ -36,13 +36,20 @@ const Header = ({}) => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             {/* <SearchBox /> */}
-            <Nav className='ms-auto'>
+            <Nav className='col-xl-8 col-lg-8 d-none d-lg-block'>
               <LinkContainer to='/'>
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/transactions'>
                 <Nav.Link>Transactions</Nav.Link>
               </LinkContainer>
+              <a
+                target='_blank'
+                href='https://www.digicelgroup.com/bb/en/contact-us.html'
+                rel='noreferrer'
+              >
+                Contact us
+              </a>
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'></i>Cart

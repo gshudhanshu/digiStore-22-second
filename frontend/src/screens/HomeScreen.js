@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -28,6 +28,7 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
+
   return (
     <>
       <Meta />
@@ -42,7 +43,7 @@ const HomeScreen = () => {
       {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
       <Breadcrumb /> */}
 
-      <Container>
+      <Container className='mt-100'>
         <h1>Latest Products</h1>
         {loading ? (
           <Loader />
