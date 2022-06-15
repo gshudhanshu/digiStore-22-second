@@ -78,51 +78,86 @@
 }
 
 .logo {
-  width: 100%;
-  max-width: 170px;
-  min-width: 140px;
-}
-
-.logo {
   // margin-top: 32px;
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
+  max-width: 170px;
+  min-width: 140px;
+
   @media #{$md-layout} {
     margin-top: 0;
   }
   @media #{$xs-layout} {
     margin-top: 0;
-  }
-  &.logo-hm5 {
-    // margin-top: 41px;
-    a.sticky-block {
-      display: none;
-      @media #{$md-layout,
-      $xs-layout} {
-        display: block;
-      }
-    }
-    a.sticky-none {
-      display: block;
-      @media #{$md-layout,
-      $xs-layout} {
-        display: none;
-      }
-    }
-    @media #{$md-layout} {
-      margin-top: 0;
-
-      text-align: left !important;
-    }
-    @media #{$xs-layout} {
-      margin-top: 0;
-
-      text-align: left !important;
-    }
+    max-width: 140px;
   }
 }
 
-#basic-navbar-nav {
-  max-width: 250px;
+.customer-points {
+  margin-right: 0px;
+  @media #{$xs-layout} {
+    div {
+      margin-right: 20px;
+    }
+  }
+}
+// #basic-navbar-nav {
+//   max-width: 250px;
+// }
+
+// Bottom navigation CSS
+.bottom-nav-container {
+  // margin: 0;
+  // padding: 0;
+  display: flex;
+  padding: 30px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tab-nav-container {
+  box-shadow: 0 -10px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+.tab {
+  background-color: rgb(226, 226, 226);
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  margin: 0 5px;
+  transition: background-color 0.4s linear;
+}
+.tab i {
+  font-size: 1.2em;
+}
+.tab p {
+  font-weight: bold;
+  overflow: hidden;
+  max-width: 0;
+}
+.tab.active p {
+  margin-left: 10px;
+  max-width: 100px;
+  transition: max-width 0.4s linear;
+}
+.tab.active.purple {
+  background-color: rgba(91, 55, 183, 0.2);
+  color: rgba(91, 55, 183, 1);
+}
+.tab.active.pink {
+  background-color: rgba(201, 55, 157, 0.2);
+  color: rgba(201, 55, 157, 1);
+}
+.tab.active.yellow {
+  background-color: rgba(230, 169, 25, 0.2);
+  color: rgba(230, 169, 25, 1);
+}
+.tab.active.teal {
+  background-color: rgba(28, 150, 162, 0.2);
+  color: rgba(28, 150, 162, 1);
 }

@@ -20,6 +20,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import BottomNav from './components/BottomNav'
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
           {/* </Container> */}
         </main>
         <Footer />
+        <BottomNav />
       </Router>
     </BreadcrumbsProvider>
     // </ToastProvider>
