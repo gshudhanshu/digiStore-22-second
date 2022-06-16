@@ -112,15 +112,17 @@ const Header = ({}) => {
                 </Nav>
               </Navbar.Collapse>
             </div>
-            <div className='customer-points'>
-              <img
-                className='price-dollas-icon'
-                src={'/assets/img/digi_dollar.png'}
-                alt='Digi dollas'
-              />
-              <div className=''>{100}</div>
-              <span className='d-none d-md-block'>Digi Dollas</span>
-            </div>
+            {userInfo && (
+              <div className='customer-points'>
+                <img
+                  className='price-dollas-icon'
+                  src={'/assets/img/digi_dollar.png'}
+                  alt='Digi dollas'
+                />
+                <div className=''>{userInfo.digiDollas}</div>
+                <span className='d-none d-md-block'>Digi Dollas</span>
+              </div>
+            )}
           </Container>
         </Navbar>
       </header>

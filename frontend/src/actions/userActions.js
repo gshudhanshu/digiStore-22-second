@@ -320,7 +320,7 @@ export const getScrachCardDetails = (user) => async (dispatch, getState) => {
 }
 
 export const addDigiDollas =
-  (user, digiDollas) => async (dispatch, getState) => {
+  (user, cardDetails) => async (dispatch, getState) => {
     try {
       dispatch({
         type: USER_SCRATCH_REQUEST,
@@ -337,13 +337,24 @@ export const addDigiDollas =
       }
       const { data } = await axios.put(
         `/api/users/${user._id}/cards`,
-        digiDollas,
+        { _id: user._id, cardDetails },
         config
       )
 
+      console.log(data)
       dispatch({
         type: USER_SCRATCH_SUCCESS,
-        payload: data,
+        payload: {
+          digiDollas: data.cardDetails.digiDollas,
+          expiryDate: data.cardDetails.expiryDate,
+          todayDate: data.cardDetails.todayDate,
+          message: data.message,
+        },
+      })
+
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: data.user,
       })
     } catch (error) {
       dispatch({

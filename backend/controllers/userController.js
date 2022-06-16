@@ -20,6 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
       fname: user.fname,
       lname: user.lname,
       full_mobile: user.full_mobile,
+      digiDollas: user.digiDollas,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     })
@@ -65,6 +66,7 @@ const registerUser = asyncHandler(async (req, res) => {
         fname: user.fname,
         lname: user.lname,
         full_mobile: user.full_mobile,
+        digiDollas: user.digiDollas,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
       })
@@ -130,6 +132,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       fname: user.fname,
       lname: user.lname,
       full_mobile: user.full_mobile,
+      digiDollas: user.digiDollas,
       isAdmin: user.isAdmin,
     })
   } else {
@@ -216,6 +219,7 @@ const updateUser = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       fname: updatedUser.fname,
       lname: updatedUser.lname,
+      digiDollas: user.digiDollas,
       full_mobile: updatedUser.full_mobile,
       isAdmin: updatedUser.isAdmin,
     })
@@ -271,16 +275,55 @@ const generateScratchCard = asyncHandler(async (req, res) => {
   randomNum = Math.floor(Math.random() * (max - min + 1)) + min
   expiryDate = await DateTime.fromFormat('20220101', 'yyyyMMdd').plus({ days })
 
-  res.json({ digiDollas: randomNum, expiryDate })
+  res.json({ digiDollas: randomNum, expiryDate, todayDate: Date.now() })
 })
 
 // @desc Generate scratch card points
 // @route PUT /api/users/:id/cards
 // @access Private
 const saveScratchedCard = asyncHandler(async (req, res) => {
-  const generateCardDetails = await User.find({ user: req.user._id }).res.json(
-    generateCardDetails
+  const { cardDetails } = req.body
+  const user = await User.findById(req.user._id).select(
+    '-password -isAdmin -createdAt -updatedAt -planDetails'
   )
+
+  if (!cardDetails && typeof cardDetails.digiDollas !== 'number') {
+    res.status(400)
+    throw new Error('Invalid scratch card details')
+  }
+
+  console.log(user)
+
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  } else {
+    user.digiDollas += cardDetails.digiDollas
+    await user.save()
+    res.status(202).json({
+      user,
+      cardDetails,
+      message: 'DigiDollas is added to total',
+    })
+  }
+
+  // if (user) {
+  //   // user.mobile = req.body.mobile || user.mobile
+  //   if (req.body.password) {
+  //     user.password = req.body.password
+  //   }
+  //   const updatedUser = await user.save()
+  //   res.json({
+  //     _id: updatedUser._id,
+  //     fname: updatedUser.fname,
+  //     lname: updatedUser.lname,
+  //     isAdmin: updatedUser.isAdmin,
+  //     token: generateToken(updatedUser._id),
+  //   })
+  // } else {
+  //   res.status(404)
+  //   throw new Error('User not found')
+  // }
 })
 
 export {

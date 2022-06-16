@@ -7607,6 +7607,11 @@ react-scratch-me@^1.0.5:
   resolved "https://registry.yarnpkg.com/react-scratch-me/-/react-scratch-me-1.0.5.tgz#df8651341af4a60d12b17d0269640abce299bbfa"
   integrity sha512-lQbNOJqWRm39ab7rYOjdkb4IDqrXbNOQPWZYD9JcRdS4WVxn6NPOwVQEM4l/jjdOgY8vYqZh9CyvaYkG2h0tHQ==
 
+react-scratchcard-v2@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-scratchcard-v2/-/react-scratchcard-v2-1.1.1.tgz#a1bfe1503b416a59b905c21b61dfa3a7ecfade6b"
+  integrity sha512-2yzLLOqJBthSIxeN7JViDqzRX/OBR8tLVPxe408AL3aWi/V1nVvUvOwU7aY+1/oAR/uuVTK3DC46unv4LzTKeg==
+
 react-scratchcard-v3@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-scratchcard-v3/-/react-scratchcard-v3-1.1.1.tgz#fda4b4116f6d7d765173024f581522859f7db8e4"

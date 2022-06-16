@@ -3,7 +3,8 @@ import { Link, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Offcanvas, Container, Row, Col } from 'react-bootstrap'
-import ScratchCard from 'react-scratchcard-v3'
+import ScratchCard from 'react-scratchcard-v2'
+
 import foregroundImageSrc from '../assets/img/placeimg_400_300_people.jpg'
 import backgroundImageSrc from '../assets/img/placeimg_400_300_arch.jpg'
 
@@ -23,11 +24,13 @@ import Meta from '../components/Meta'
 import SearchBox from '../components/SearchBox'
 
 const HomeScreen = () => {
+  let isScratched = false
   const { keyword, pageNumber = '1' } = useParams()
   let location = useLocation()
 
   const [showCard, setShowCard] = useState(false)
   const [cardScratch, setCardScratch] = useState(false)
+  // const [cardScratchCompleted, setCardScratchCompleted] = useState(false)
 
   const ref = useRef < ScratchCard > null
   const onClickReset = () => {
@@ -48,15 +51,15 @@ const HomeScreen = () => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
 
+  const addDigiDollasHandler = async () => {
+    dispatch(addDigiDollas(userInfo, cardDetails))
+  }
+
   // Card Offcanvas handlers
   const handleCardClose = () => setShowCard(false)
   const handleCardShow = () => {
     dispatch(getScrachCardDetails(userInfo))
     setShowCard(true)
-  }
-
-  const addDigiDollasHandler = () => {
-    dispatch(addDigiDollas(userInfo))
   }
 
   return (
@@ -90,8 +93,10 @@ const HomeScreen = () => {
               width={250}
               height={300}
               image={backgroundImageSrc}
-              finishPercent={70}
-              onComplete={() => addDigiDollas}
+              finishPercent={30}
+              fadeOutOnComplete
+              // onComplete={!isCompleted && !cardScratchCompleted && addDigiDollasHandler}
+              onComplete={() => addDigiDollasHandler()}
             >
               <div
                 className='scratch-card-bg'
@@ -105,7 +110,11 @@ const HomeScreen = () => {
                 }}
               >
                 <h1>Contratulations!</h1>
-                <h1>You Won {cardDetails.digiDollas}</h1>
+                <h1>
+                  {cardDetails
+                    ? 'You Won ' + cardDetails.digiDollas
+                    : 'Please login'}
+                </h1>
               </div>
             </ScratchCard>
           </div>
