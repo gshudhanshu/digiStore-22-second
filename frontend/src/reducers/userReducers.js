@@ -138,7 +138,7 @@ export const userScratchCardReducer = (state = { cardDetails: {} }, action) => {
     case USER_SCRATCH_REQUEST:
       return { ...state, loading: true }
     case USER_SCRATCH_SUCCESS:
-      return { loading: false, user: action.payload }
+      return { loading: false, cardDetails: action.payload }
     case USER_SCRATCH_FAIL:
       return { loading: false, error: action.payload }
     case USER_SCRATCH_RESET:

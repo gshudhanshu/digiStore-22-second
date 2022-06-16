@@ -17,7 +17,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listProducts } from '../actions/productActions'
-import { getScrachCardDetails } from '../actions/userActions'
+import { getScrachCardDetails, addDigiDollas } from '../actions/userActions'
 // import ProductsCarousel from '../components/ProductsCarousel'
 import Meta from '../components/Meta'
 import SearchBox from '../components/SearchBox'
@@ -55,6 +55,10 @@ const HomeScreen = () => {
     setShowCard(true)
   }
 
+  const addDigiDollasHandler = () => {
+    dispatch(addDigiDollas(userInfo))
+  }
+
   return (
     <>
       <Meta />
@@ -87,7 +91,7 @@ const HomeScreen = () => {
               height={300}
               image={backgroundImageSrc}
               finishPercent={70}
-              onComplete={() => console.log('complete')}
+              onComplete={() => addDigiDollas}
             >
               <div
                 className='scratch-card-bg'

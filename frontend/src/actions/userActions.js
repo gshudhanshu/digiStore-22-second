@@ -297,8 +297,12 @@ export const getScrachCardDetails = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    console.log(user)
-    const { data } = await axios.post(`/api/cards`, user, config)
+
+    const { data } = await axios.post(
+      `/api/users/${user._id}/cards`,
+      user,
+      config
+    )
 
     dispatch({
       type: USER_SCRATCH_SUCCESS,
@@ -314,3 +318,40 @@ export const getScrachCardDetails = (user) => async (dispatch, getState) => {
     })
   }
 }
+
+export const addDigiDollas =
+  (user, digiDollas) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_SCRATCH_REQUEST,
+      })
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      const { data } = await axios.put(
+        `/api/users/${user._id}/cards`,
+        digiDollas,
+        config
+      )
+
+      dispatch({
+        type: USER_SCRATCH_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: USER_SCRATCH_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }

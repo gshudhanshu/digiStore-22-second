@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema(
       purchaseDate: { type: Date },
       plan: { type: String },
     },
+    digiDollas: { type: Number, default: 0 },
   },
   {
     timestamps: true,

@@ -45,7 +45,7 @@ const generateScratchCard = asyncHandler(async (req, res) => {
   randomNum = Math.floor(Math.random() * (max - min + 1)) + min
   expiryDate = await DateTime.fromFormat('20220101', 'yyyyMMdd').plus({ days })
 
-  res.json({ randomNum, expiryDate })
+  res.json({ digiDollas: randomNum, expiryDate })
 })
 
 // @desc Generate scratch card points
