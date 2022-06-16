@@ -40,6 +40,9 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList)
   const { loading, error, products, page, pages } = productList
 
+  const userScratchCard = useSelector((state) => state.userScratchCard)
+  const { cardDetails } = userScratchCard
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
@@ -49,7 +52,6 @@ const HomeScreen = () => {
   const handleCardClose = () => setShowCard(false)
   const handleCardShow = () => {
     dispatch(getScrachCardDetails(userInfo))
-
     setShowCard(true)
   }
 
@@ -79,7 +81,7 @@ const HomeScreen = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div>
-            <button onClick={onClickReset}>Reset</button>
+            {/* <button onClick={onClickReset}>Reset</button> */}
             <ScratchCard
               width={250}
               height={300}
@@ -98,7 +100,8 @@ const HomeScreen = () => {
                   background: 'red',
                 }}
               >
-                <h1>Scratch card</h1>
+                <h1>Contratulations!</h1>
+                <h1>You Won {cardDetails.digiDollas}</h1>
               </div>
             </ScratchCard>
           </div>
