@@ -47,12 +47,13 @@ function ProfileScreen() {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!user || !user.name || success) {
+      if (!user || !user.fname || !user.lname || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
       } else {
         setFname(user.fname)
+        setLname(user.lname)
         setFull_mobile(user.full_mobile)
       }
     }
@@ -64,7 +65,7 @@ function ProfileScreen() {
       setMessage('Password do not match')
     } else {
       dispatch(
-        updateUserProfile({ id: user._id, fname, full_mobile, password })
+        updateUserProfile({ id: user._id, fname, lname, full_mobile, password })
       )
     }
   }

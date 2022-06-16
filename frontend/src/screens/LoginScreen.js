@@ -71,7 +71,7 @@ function LoginScreen() {
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group> */}
-              <Form.Group controlId='mobile' className='mb-4'>
+              {/* <Form.Group controlId='phone' className='mb-4'>
                 <Form.Label>Mobile Number</Form.Label>
                 <PhoneInput
                   country={'bb'}
@@ -81,8 +81,19 @@ function LoginScreen() {
                   id='mobile-number-field'
                   value={full_mobile}
                   onChange={(e) => setFull_mobile(e.target.value)}
+                  // onChange={(e) => setFull_mobile(e.target.value)}
                 />
+              </Form.Group> */}
+              <Form.Group controlId='full_mobile' className='mb-4'>
+                <Form.Label>Mobile Number</Form.Label>
+                <Form.Control
+                  type='full_mobile'
+                  placeholder='Enter Mobile'
+                  value={full_mobile}
+                  onChange={(e) => setFull_mobile(e.target.value)}
+                ></Form.Control>
               </Form.Group>
+
               <Form.Group controlId='password' className='mb-4'>
                 <Form.Label>Password</Form.Label>
                 <Form.Control

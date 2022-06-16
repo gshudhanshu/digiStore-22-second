@@ -58,20 +58,20 @@ const registerUser = asyncHandler(async (req, res) => {
       full_mobile,
       password,
     })
-  }
 
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      fname: user.fname,
-      lname: user.lname,
-      full_mobile: user.full_mobile,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    })
-  } else {
-    res.status(400)
-    throw new Error('Invalid user data')
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        fname: user.fname,
+        lname: user.lname,
+        full_mobile: user.full_mobile,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      })
+    } else {
+      res.status(400)
+      throw new Error('Invalid user data')
+    }
   }
 })
 
@@ -127,8 +127,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     res.json({
       _id: user._id,
-      fname: fname.name,
-      lname: lname.name,
+      fname: user.fname,
+      lname: user.lname,
       full_mobile: user.full_mobile,
       isAdmin: user.isAdmin,
     })

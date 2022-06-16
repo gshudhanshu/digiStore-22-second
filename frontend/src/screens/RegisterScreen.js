@@ -76,7 +76,7 @@ function RegisterScreen() {
         <Form.Group controlId='full_mobile'>
           <Form.Label>Mobile Number</Form.Label>
           <Form.Control
-            type='text'
+            type='full_mobile'
             placeholder='Enter Mobile No'
             value={full_mobile}
             onChange={(e) => setFull_mobile(e.target.value)}
