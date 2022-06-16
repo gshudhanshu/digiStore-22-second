@@ -25,7 +25,7 @@ function LoginScreen() {
   const [searchParams, setSearchParams] = useSearchParams()
   let location = useLocation()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  const [full_mobile, setFull_mobile] = useState('')
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
@@ -42,7 +42,7 @@ function LoginScreen() {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(login(email, password))
+    dispatch(login(full_mobile, password))
   }
 
   return (
@@ -78,9 +78,9 @@ function LoginScreen() {
                   onlyCountries={['bb', 'in']}
                   placeholder='+1246 530 3444'
                   name='mobile-number'
-                  // id='mobile-number-field'
-                  // value={this.state.phone}
-                  // onChange={(phone) => this.setState({ phone })}
+                  id='mobile-number-field'
+                  value={full_mobile}
+                  onChange={(e) => setFull_mobile(e.target.value)}
                 />
               </Form.Group>
               <Form.Group controlId='password' className='mb-4'>

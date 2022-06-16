@@ -22,8 +22,9 @@ function ProfileScreen() {
   let location = useLocation()
   const navigate = useNavigate()
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [fname, setFname] = useState('')
+  const [lname, setLname] = useState('')
+  const [full_mobile, setFull_mobile] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -51,8 +52,8 @@ function ProfileScreen() {
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
       } else {
-        setName(user.name)
-        setEmail(user.email)
+        setFname(user.fname)
+        setFull_mobile(user.full_mobile)
       }
     }
   }, [dispatch, navigate, userInfo, user, success])
@@ -62,7 +63,9 @@ function ProfileScreen() {
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }))
+      dispatch(
+        updateUserProfile({ id: user._id, fname, full_mobile, password })
+      )
     }
   }
   return (
@@ -74,22 +77,31 @@ function ProfileScreen() {
         {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId='name'>
-            <Form.Label>Name</Form.Label>
+          <Form.Group controlId='fname'>
+            <Form.Label>First Name</Form.Label>
             <Form.Control
-              type='name'
-              placeholder='Enter Name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type='fname'
+              placeholder='Enter First Name'
+              value={fname}
+              onChange={(e) => setFname(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='email'>
-            <Form.Label>Email Address</Form.Label>
+          <Form.Group controlId='lname'>
+            <Form.Label>Last Name</Form.Label>
             <Form.Control
-              type='email'
-              placeholder='Enter Email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type='lname'
+              placeholder='Enter Last Name'
+              value={lname}
+              onChange={(e) => setLname(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId='full_mobile'>
+            <Form.Label>Mobile Number</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Enter Mobile Number'
+              value={full_mobile}
+              onChange={(e) => setFull_mobile(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId='password'>

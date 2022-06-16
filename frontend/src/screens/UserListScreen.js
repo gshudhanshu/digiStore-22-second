@@ -45,7 +45,7 @@ const UserListScreen = () => {
             <tr>
               <th>ID</th>
               <th>NAME</th>
-              <th>EMAIL</th>
+              <th>MOBILE</th>
               <th>ADMIN</th>
               <th></th>
             </tr>
@@ -54,9 +54,11 @@ const UserListScreen = () => {
             {users.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
-                <td>{user.name}</td>
                 <td>
-                  <a href={`mailto:${user.email}`}>{user.email}</a>
+                  {user.fname} {` `} {user.lname}
+                </td>
+                <td>
+                  <a href={`mailto:${user.full_mobile}`}>{user.full_mobile}</a>
                 </td>
                 <td>
                   {user.isAdmin ? (

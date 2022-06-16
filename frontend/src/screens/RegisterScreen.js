@@ -19,8 +19,9 @@ function RegisterScreen() {
   let location = useLocation()
   const navigate = useNavigate()
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [fname, setFname] = useState('')
+  const [lname, setLname] = useState('')
+  const [full_mobile, setFull_mobile] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -43,7 +44,7 @@ function RegisterScreen() {
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
-      dispatch(register(name, email, password))
+      dispatch(register(fname, lname, full_mobile, password))
     }
   }
 
@@ -54,22 +55,31 @@ function RegisterScreen() {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='name'>
-          <Form.Label>Name</Form.Label>
+        <Form.Group controlId='fname'>
+          <Form.Label>First Name</Form.Label>
           <Form.Control
-            type='name'
-            placeholder='Enter Name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            type='fname'
+            placeholder='Enter First Name'
+            value={fname}
+            onChange={(e) => setFname(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+        <Form.Group controlId='lname'>
+          <Form.Label>Last Name</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Enter Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type='lname'
+            placeholder='Enter Last Name'
+            value={lname}
+            onChange={(e) => setLname(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId='full_mobile'>
+          <Form.Label>Mobile Number</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter Mobile No'
+            value={full_mobile}
+            onChange={(e) => setFull_mobile(e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='password'>

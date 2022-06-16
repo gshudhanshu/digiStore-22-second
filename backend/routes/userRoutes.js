@@ -9,8 +9,11 @@ import {
   deleteUser,
   getUserById,
   updateUser,
+  sendOtp,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddlware.js'
+
+router.post('/send-otp', sendOtp)
 
 router.route('/').post(registerUser).get(protect, admin, getUsers)
 router.post('/login', authUser)
