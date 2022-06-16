@@ -20,6 +20,8 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import TransactionScreen from './screens/TransactionScreen'
+import ScratchCardScreen from './screens/ScratchCardScreen'
 import BottomNav from './components/BottomNav'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -40,6 +42,8 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/transactions' element={<TransactionScreen />} />
+            <Route path='/scratchcard' element={<ScratchCardScreen />} />
             <Route path='/product/:id' element={<ProductScreen />} />
             <Route path='/cart/:id' element={<CartScreen />} />
             <Route path='/cart/' element={<CartScreen />} />

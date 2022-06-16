@@ -14,7 +14,7 @@ const Product = ({ product }) => {
 
   const addToCartHandler = () => {
     // navigate(`/cart/${product._id}?qty=${qty}`)
-    dispatch(addToCart(product._id))
+    dispatch(addToCart(product._id, 1))
   }
 
   return (
