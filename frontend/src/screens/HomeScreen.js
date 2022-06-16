@@ -18,7 +18,7 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listProducts } from '../actions/productActions'
 import { getScrachCardDetails } from '../actions/userActions'
-import ProductsCarousel from '../components/ProductsCarousel'
+// import ProductsCarousel from '../components/ProductsCarousel'
 import Meta from '../components/Meta'
 import SearchBox from '../components/SearchBox'
 
@@ -27,12 +27,15 @@ const HomeScreen = () => {
   let location = useLocation()
 
   const [showCard, setShowCard] = useState(false)
-  const [cardScratched, setCardScratched] = useState(false)
+  const [cardScratch, setCardScratch] = useState(false)
 
   const ref = useRef < ScratchCard > null
   const onClickReset = () => {
     ref.current && ref.current.reset()
   }
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading: loadingUser, error: errorUser, userInfo } = userLogin
 
   const productList = useSelector((state) => state.productList)
   const { loading, error, products, page, pages } = productList
@@ -44,7 +47,11 @@ const HomeScreen = () => {
 
   // Card Offcanvas handlers
   const handleCardClose = () => setShowCard(false)
-  const handleCardShow = () => setShowCard(true)
+  const handleCardShow = () => {
+    dispatch(getScrachCardDetails(userInfo))
+
+    setShowCard(true)
+  }
 
   return (
     <>

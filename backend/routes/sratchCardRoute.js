@@ -8,7 +8,7 @@ import { protect, admin } from '../middleware/authMiddlware.js'
 
 router
   .route('/')
-  .get(protect, generateScratchCard)
-  .post(protect, saveScratchedCard)
+  .post(protect, generateScratchCard)
+  .get(protect, saveScratchedCard)
 
 export default router

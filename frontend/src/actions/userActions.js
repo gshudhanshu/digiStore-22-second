@@ -297,7 +297,8 @@ export const getScrachCardDetails = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    const { data } = await axios.get(`/api/cards`, user, config)
+    console.log(user)
+    const { data } = await axios.post(`/api/cards`, user, config)
 
     dispatch({
       type: USER_SCRATCH_SUCCESS,

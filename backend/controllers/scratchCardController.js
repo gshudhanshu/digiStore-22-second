@@ -4,11 +4,11 @@ import asyncHandler from 'express-async-handler'
 import { DateTime } from 'luxon'
 
 // @desc Generate scratch card points
-// @route GET /api/cards
+// @route POST /api/cards
 // @access Private
 const generateScratchCard = asyncHandler(async (req, res) => {
-  console.log(req.user)
-  //   const user = await User.findById(req.user._id)
+  // console.log(req.body)
+  // const user = await User.findById(req.user._id)
   let user = await User.findOne({
     user: req.body._id,
   })
