@@ -905,6 +905,14 @@
     "@babel/helper-create-regexp-features-plugin" "^7.16.7"
     "@babel/helper-plugin-utils" "^7.16.7"
 
+"@babel/polyfill@^7.0.0":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.12.1.tgz#1f2d6371d1261bbd961f3c5d5909150e12d0bd96"
+  integrity sha512-X0pi0V6gxLi6lFZpGmeNa4zxtwEmCs42isWLNjZZDE0Y8yVfgu0T2OAHlzBbdYlqbW/YXVvoBHpATEM+goCj8g==
+  dependencies:
+    core-js "^2.6.5"
+    regenerator-runtime "^0.13.4"
+
 "@babel/preset-env@^7.11.0", "@babel/preset-env@^7.12.1", "@babel/preset-env@^7.16.4":
   version "7.18.2"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.18.2.tgz#f47d3000a098617926e674c945d95a28cb90977a"
@@ -1026,7 +1034,7 @@
     core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.16", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.16", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.18.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.3.tgz#c7b654b57f6f63cf7f8b418ac9ca04408c4579f4"
   integrity sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==
@@ -3366,6 +3374,11 @@ core-js-pure@^3.20.2, core-js-pure@^3.8.1:
   version "3.22.8"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.22.8.tgz#f2157793b58719196ccf9673cc14f3683adc0957"
   integrity sha512-bOxbZIy9S5n4OVH63XaLVXZ49QKicjowDx/UELyJ68vxfCRpYsbyh/WNZNfEfAk+ekA8vSjt+gCDpvh672bc3w==
+
+core-js@^2.6.5:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-js@^3.19.2:
   version "3.22.8"
@@ -7589,6 +7602,16 @@ react-router@6.3.0:
   dependencies:
     history "^5.2.0"
 
+react-scratch-me@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-scratch-me/-/react-scratch-me-1.0.5.tgz#df8651341af4a60d12b17d0269640abce299bbfa"
+  integrity sha512-lQbNOJqWRm39ab7rYOjdkb4IDqrXbNOQPWZYD9JcRdS4WVxn6NPOwVQEM4l/jjdOgY8vYqZh9CyvaYkG2h0tHQ==
+
+react-scratchcard-v3@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-scratchcard-v3/-/react-scratchcard-v3-1.1.1.tgz#fda4b4116f6d7d765173024f581522859f7db8e4"
+  integrity sha512-D/FH6p+N8+q9s2yMKmayLmyJ48boBh5Q7luWmij/9HV17yYR2qBr4cPB7cbfhb1OKT+YZXoQcsngDVwwpDlDGg==
+
 react-scripts@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-5.0.1.tgz#6285dbd65a8ba6e49ca8d651ce30645a6d980003"
@@ -8026,6 +8049,14 @@ schema-utils@^4.0.0:
     ajv "^8.8.0"
     ajv-formats "^2.1.1"
     ajv-keywords "^5.0.0"
+
+scratchcard-js@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.yarnpkg.com/scratchcard-js/-/scratchcard-js-1.4.10.tgz#f23ed0718ed41c1e4d70828c8873b1febda3b1dd"
+  integrity sha512-CKCC0uGGMlGXRgKxfDumZcCfPUhvH2yr3NUceA3QlgEMqCatTaCYNcjPxHpe0lLGMOQhCSYrh8JACP6x8qFXgw==
+  dependencies:
+    "@babel/polyfill" "^7.0.0"
+    "@babel/runtime" "^7.1.2"
 
 select-hose@^2.0.0:
   version "2.0.0"

@@ -25,6 +25,10 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_RESET,
+  USER_SCRATCH_REQUEST,
+  USER_SCRATCH_SUCCESS,
+  USER_SCRATCH_FAIL,
+  USER_SCRATCH_RESET,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -123,6 +127,22 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
       return { loading: false, error: action.payload }
     case USER_UPDATE_RESET:
       return { user: {} }
+    default:
+      return state
+  }
+}
+
+// SCRACH CARD
+export const userScratchCardReducer = (state = { cardDetails: {} }, action) => {
+  switch (action.type) {
+    case USER_SCRATCH_REQUEST:
+      return { ...state, loading: true }
+    case USER_SCRATCH_SUCCESS:
+      return { loading: false, user: action.payload }
+    case USER_SCRATCH_FAIL:
+      return { loading: false, error: action.payload }
+    case USER_SCRATCH_RESET:
+      return { cardDetails: {} }
     default:
       return state
   }

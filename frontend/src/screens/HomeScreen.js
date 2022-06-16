@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Button, Offcanvas, Container, Row, Col } from 'react-bootstrap'
+import ScratchCard from 'react-scratchcard-v3'
+import foregroundImageSrc from '../assets/img/placeimg_400_300_people.jpg'
+import backgroundImageSrc from '../assets/img/placeimg_400_300_arch.jpg'
+
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 
 import Breadcrumb from '../wrappers/Breadcrumb'
@@ -13,6 +17,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listProducts } from '../actions/productActions'
+import { getScrachCardDetails } from '../actions/userActions'
 import ProductsCarousel from '../components/ProductsCarousel'
 import Meta from '../components/Meta'
 import SearchBox from '../components/SearchBox'
@@ -21,13 +26,25 @@ const HomeScreen = () => {
   const { keyword, pageNumber = '1' } = useParams()
   let location = useLocation()
 
-  const dispatch = useDispatch()
+  const [showCard, setShowCard] = useState(false)
+  const [cardScratched, setCardScratched] = useState(false)
+
+  const ref = useRef < ScratchCard > null
+  const onClickReset = () => {
+    ref.current && ref.current.reset()
+  }
+
   const productList = useSelector((state) => state.productList)
   const { loading, error, products, page, pages } = productList
 
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
+
+  // Card Offcanvas handlers
+  const handleCardClose = () => setShowCard(false)
+  const handleCardShow = () => setShowCard(true)
 
   return (
     <>
@@ -44,6 +61,42 @@ const HomeScreen = () => {
         Welcome To DigiStore
       </BreadcrumbsItem>
       <Breadcrumb />
+
+      <Button variant='primary' onClick={handleCardShow}>
+        Launch
+      </Button>
+
+      <Offcanvas show={showCard} onHide={handleCardClose} placement='end'>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Scratch card</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div>
+            <button onClick={onClickReset}>Reset</button>
+            <ScratchCard
+              width={250}
+              height={300}
+              image={backgroundImageSrc}
+              finishPercent={70}
+              onComplete={() => console.log('complete')}
+            >
+              <div
+                className='scratch-card-bg'
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  height: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: 'red',
+                }}
+              >
+                <h1>Scratch card</h1>
+              </div>
+            </ScratchCard>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
 
       <Container>
         {/* <h1 className='text-center page heading'>Welcome to DigiStore</h1> */}
