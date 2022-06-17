@@ -29,7 +29,10 @@ import {
   USER_SCRATCH_SUCCESS,
   USER_SCRATCH_FAIL,
   USER_SCRATCH_RESET,
+  USER_LOGIN_ADD_DOLLAS,
 } from '../constants/userConstants'
+
+import produce from 'immer'
 
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
@@ -39,6 +42,10 @@ export const userLoginReducer = (state = {}, action) => {
       return { loading: false, userInfo: action.payload }
     case USER_LOGIN_FAIL:
       return { loading: false, error: action.payload }
+    case USER_LOGIN_ADD_DOLLAS:
+      return produce(state, (draftState) => {
+        draftState.userInfo.digiDollas = action.payload
+      })
     case USER_LOGOUT:
       return {}
     default:

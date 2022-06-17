@@ -292,8 +292,6 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
     throw new Error('Invalid scratch card details')
   }
 
-  console.log(user)
-
   if (!user) {
     res.status(404)
     throw new Error('User not found')

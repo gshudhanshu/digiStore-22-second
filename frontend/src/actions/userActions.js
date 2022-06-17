@@ -26,6 +26,7 @@ import {
   USER_SCRATCH_REQUEST,
   USER_SCRATCH_SUCCESS,
   USER_SCRATCH_FAIL,
+  USER_LOGIN_ADD_DOLLAS,
 } from '../constants/userConstants'
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
@@ -329,10 +330,11 @@ export const addDigiDollas =
       const {
         userLogin: { userInfo },
       } = getState()
+
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       }
       const { data } = await axios.put(
@@ -341,7 +343,6 @@ export const addDigiDollas =
         config
       )
 
-      console.log(data)
       dispatch({
         type: USER_SCRATCH_SUCCESS,
         payload: {
@@ -353,9 +354,14 @@ export const addDigiDollas =
       })
 
       dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: data.user,
+        type: USER_LOGIN_ADD_DOLLAS,
+        payload: data.user.digiDollas,
       })
+
+      localStorage.setItem(
+        'userInfo',
+        JSON.stringify(getState().userLogin.userInfo)
+      )
     } catch (error) {
       dispatch({
         type: USER_SCRATCH_FAIL,
