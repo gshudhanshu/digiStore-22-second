@@ -64,7 +64,7 @@ p {
 }
 
 .tab.active p,
-.tab.active i {
+.tab.active svg {
   color: #fff;
   max-width: 100px;
   transition: max-width 0.4s linear;

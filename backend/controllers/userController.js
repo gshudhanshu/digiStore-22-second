@@ -1,4 +1,5 @@
 import User from '../models/userModel.js'
+import ScrachCard from '../models/scratchCardModel.js'
 import asyncHandler from 'express-async-handler'
 import generateToken from './utils/generateToken.js'
 
@@ -297,7 +298,15 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
     throw new Error('User not found')
   } else {
     user.digiDollas += cardDetails.digiDollas
+
     await user.save()
+
+    await ScrachCard.create({
+      digiDollas: cardDetails.digiDollas,
+      Date: Date.now(),
+      user: req.user._id,
+    })
+
     res.status(202).json({
       user,
       cardDetails,

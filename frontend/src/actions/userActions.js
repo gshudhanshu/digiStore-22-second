@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
@@ -353,6 +354,7 @@ export const addDigiDollas =
         },
       })
 
+      toast(`${data.cardDetails.digiDollas} DigiDollas Added`)
       dispatch({
         type: USER_LOGIN_ADD_DOLLAS,
         payload: data.user.digiDollas,

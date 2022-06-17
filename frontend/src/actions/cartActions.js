@@ -23,7 +23,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
     },
   })
 
-  toast.success('ADDED')
+  toast('ADDED')
 
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }

@@ -29,6 +29,9 @@ const userSchema = mongoose.Schema(
       plan: { type: String },
     },
     digiDollas: { type: Number, default: 0 },
+    lastScratchDate: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
