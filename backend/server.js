@@ -9,7 +9,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-import { generateScratchCard } from './controllers/scratchCardController.js'
+// import { generateScratchCard } from './controllers/scratchCardController.js'
 
 // dotenv.config()
 connectDB()

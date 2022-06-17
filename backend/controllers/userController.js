@@ -232,17 +232,36 @@ const updateUser = asyncHandler(async (req, res) => {
 
 // ScratchCARD routes
 import ScratchCard from '../models/scratchCardModel.js'
-import { DateTime } from 'luxon'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc.js'
+import timezone from 'dayjs/plugin/timezone.js'
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 // @desc Generate scratch card points
 // @route POST /api/users/:id/cards
 // @access Private
 const generateScratchCard = asyncHandler(async (req, res) => {
-  // console.log(req.body)
-  // const user = await User.findById(req.user._id)
   let user = await User.findOne({
     user: req.body._id,
   })
+
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+  const todayDate = Date.now()
+  const lastScratchDate = dayjs(user.lastScratchDate).format('YYYYMMDD')
+  if (
+    lastScratchDate ===
+    dayjs(todayDate).tz('America/Barbados').format('YYYYMMDD')
+  ) {
+    res.status(400).json({
+      message: "You have already used your today's scratch card",
+      lastScratchDate,
+    })
+  }
 
   let days,
     min,
@@ -274,9 +293,12 @@ const generateScratchCard = asyncHandler(async (req, res) => {
       max = 1
   }
   randomNum = Math.floor(Math.random() * (max - min + 1)) + min
-  expiryDate = await DateTime.fromFormat('20220101', 'yyyyMMdd').plus({ days })
+  expiryDate = await dayjs(user.planDetails.purchaseDate, 'YYYYMMDD').add(
+    days,
+    'day'
+  )
 
-  res.json({ digiDollas: randomNum, expiryDate, todayDate: Date.now() })
+  res.json({ digiDollas: randomNum, expiryDate, todayDate })
 })
 
 // @desc Generate scratch card points
@@ -297,15 +319,17 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('User not found')
   } else {
+    let scrachCard = {
+      digiDollas: cardDetails.digiDollas,
+      scratchDate: Date.now(),
+      user: req.user._id,
+    }
+
     user.digiDollas += cardDetails.digiDollas
+    user.lastScratchDate = scrachCard.scratchDate
 
     await user.save()
-
-    await ScrachCard.create({
-      digiDollas: cardDetails.digiDollas,
-      Date: Date.now(),
-      user: req.user._id,
-    })
+    await ScrachCard.create(scrachCard)
 
     res.status(202).json({
       user,

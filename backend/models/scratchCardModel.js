@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const scratchCardSchema = mongoose.Schema(
   {
     digiDollas: { type: Number, required: true },
-    Date: { type: Date, default: Date.now() },
+    scratchDate: { type: Date, default: Date.now() },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
