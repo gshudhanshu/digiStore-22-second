@@ -7,6 +7,8 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import IntlTelInput from 'react-intl-tel-input'
+import 'react-intl-tel-input/dist/main.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -22,6 +24,8 @@ function RegisterScreen() {
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
   const [full_mobile, setFull_mobile] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [otp, setOtp] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -39,12 +43,24 @@ function RegisterScreen() {
     }
   }, [navigate, userInfo, redirect])
 
+  let use = 'register'
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
-      dispatch(register(fname, lname, full_mobile, password))
+      dispatch(
+        register(
+          fname,
+          lname,
+          mobile,
+          full_mobile,
+          otp,
+          password,
+          confirmPassword,
+          use
+        )
+      )
     }
   }
 
@@ -54,7 +70,7 @@ function RegisterScreen() {
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
-      <Form onSubmit={submitHandler}>
+      <Form className='registration-form' onSubmit={submitHandler}>
         <Form.Group controlId='fname'>
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -74,11 +90,34 @@ function RegisterScreen() {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='full_mobile'>
-          <Form.Label>Mobile Number</Form.Label>
-          <Form.Control
+          <label className='form-label' htmlFor='full_mobile'>
+            Mobile Number
+          </label>
+          {/* <Form.Control
             type='full_mobile'
             placeholder='Enter Mobile No'
             value={full_mobile}
+            onChange={(e) => setFull_mobile(e.target.value)}
+          ></Form.Control> */}
+          <IntlTelInput
+            containerClassName='intl-tel-input w-100'
+            inputClassName='form-control'
+            preferredCountries={[]}
+            onlyCountries={['bb', 'in']}
+            defaultCountry='bb'
+            type='full_mobile'
+            placeholder='Enter Mobile No'
+            value={full_mobile}
+            onChange={(e) => setFull_mobile(e.target.value)}
+            fieldId='full_mobile'
+          />
+        </Form.Group>
+        <Form.Group controlId='otp'>
+          <Form.Label>SMS Code</Form.Label>
+          <Form.Control
+            type='otp'
+            placeholder='SMS Code'
+            value={otp}
             onChange={(e) => setFull_mobile(e.target.value)}
           ></Form.Control>
         </Form.Group>

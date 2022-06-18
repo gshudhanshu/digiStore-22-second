@@ -34,7 +34,8 @@ const Product = ({ product }) => {
                 type='button'
                 disabled={product.countInStock === 0}
               >
-                <Icon.ShoppingCart /> Add to cart{' '}
+                <Icon.ShoppingCart />
+                {product.countInStock === 0 ? `Out of stock` : `Add to cart`}
               </Button>
             </div>
             <div className='pro-same-action pro-quickview d-none d-lg-block'>
@@ -60,7 +61,7 @@ const Product = ({ product }) => {
               alt='Digi dollas'
             />
             <div>{product.price}</div>
-            <span className='d-none d-lg-block'>Digi Dollas</span>
+            <span className='d-none d-md-block'>Digi Dollas</span>
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/register
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { fname, lname, mobile, full_mobile, password, password2, otp } =
+  const { fname, lname, mobile, full_mobile, password, confirmPassword, otp } =
     req.body
   const userExists = await User.findOne({ full_mobile })
   let isOtpVerified = false
@@ -44,13 +44,13 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('User already exists')
   } else {
-    // client.verify
-    //   .services(process.env.VERIFY_SERVICE_SID)
-    //   .verificationChecks.create({ to: full_mobile, code: otp })
-    //   .then((verification_check) => {
-    //     isOtpVerified = verification_check.valid
-    //   })
-    isOtpVerified = true
+    client.verify
+      .services(process.env.VERIFY_SERVICE_SID)
+      .verificationChecks.create({ to: full_mobile, code: otp })
+      .then((verification_check) => {
+        isOtpVerified = verification_check.valid
+      })
+    // isOtpVerified = true
   }
 
   if (isOtpVerified) {
