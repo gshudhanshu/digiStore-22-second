@@ -52,7 +52,7 @@ const HomeScreen = () => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
 
-  const addDigiDollasHandler = async () => {
+  const addDigiDollasHandler = async (e) => {
     dispatch(addDigiDollas(userInfo, cardDetails))
   }
 
@@ -119,7 +119,7 @@ const HomeScreen = () => {
                 finishPercent={30}
                 fadeOutOnComplete
                 // onComplete={!isCompleted && !cardScratchCompleted && addDigiDollasHandler}
-                onComplete={() => addDigiDollasHandler()}
+                onComplete={(e) => addDigiDollasHandler(e)}
               >
                 <div
                   className='scratch-card-bg'

@@ -1,4 +1,6 @@
 import Order from '../models/orderModel.js'
+import User from '../models/userModel.js'
+import Product from '../models/productModel.js'
 import asyncHandler from 'express-async-handler'
 
 import dayjs from 'dayjs'
@@ -39,6 +41,84 @@ const addOrderItems = asyncHandler(async (req, res) => {
     })
     const createdOrder = await order.save()
     res.status(201).json(createdOrder)
+  }
+})
+
+// @desc Create new order
+// @route POST /api/orders
+// @access Private
+const placeOrder = asyncHandler(async (req, res) => {
+  const {
+    orderItems,
+    // shippingAddress,
+    // paymentMethod,
+    itemsPrice,
+    // taxPrice,
+    // shippingPrice,
+    totalPrice,
+  } = req.body
+
+  if (orderItems && orderItems.length === 0) {
+    res.status(400)
+    throw new Error('No order items')
+  } else {
+    const user = await User.findById(req.user._id).select(
+      '-password -isAdmin -planDetails'
+    )
+
+    let productList = []
+
+    for (let x = 0; x < orderItems.length; x++) {
+      let p = await Product.findById(orderItems[x].product)
+      productList.push(p)
+    }
+
+    for (let i = 0; i < orderItems.length; i++) {
+      if (orderItems[i].qty > productList[i].countInStock) {
+        res.status(400)
+        throw new Error(
+          `We have ${productList[i].countInStock} qty of "${productList[i].name}". It is not enough to fulfill the order. Please reduce the quantity`
+        )
+      }
+    }
+
+    if (!user) {
+      res.status(404)
+      throw new Error('User not found')
+    }
+
+    if (user.digiDollas < totalPrice) {
+      res.status(404)
+      throw new Error("You don't have enough DigiDollas")
+    }
+
+    const order = new Order({
+      orderItems,
+      user: req.user._id,
+      // shippingAddress,
+      // paymentMethod,
+      itemsPrice,
+      // taxPrice,
+      // shippingPrice,
+      totalPrice,
+    })
+
+    const createdOrder = await order.save()
+    user.digiDollas = user.digiDollas - Number(totalPrice)
+    await user.save()
+
+    for (let y = 0; y < orderItems.length; y++) {
+      productList[y].countInStock -= orderItems[y].qty
+      await productList[y].save()
+    }
+
+    // for (let i = 0; i < orderItems.length; i++) {
+    //   let op = Product.findById(orderItems[i].product)
+    //   op.countInStock -= orderItems[i].qty
+    //   op.save()
+    // }
+
+    res.status(201).json({ createdOrder, user })
   }
 })
 
@@ -124,4 +204,5 @@ export {
   updateOrderToDelivered,
   getMyOrders,
   getOrders,
+  placeOrder,
 }

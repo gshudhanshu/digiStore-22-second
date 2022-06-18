@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
+
 import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
@@ -18,7 +20,11 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
+  ORDER_NEW_CREATE_REQUEST,
+  ORDER_NEW_CREATE_SUCCESS,
+  ORDER_NEW_CREATE_FAIL,
 } from '../constants/orderConstants'
+import { USER_LOGIN_ADD_DOLLAS } from '../constants/userConstants'
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -44,6 +50,48 @@ export const createOrder = (order) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const createNewOrder = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_NEW_CREATE_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const { data } = await axios.post(`/api/orders/neworder`, order, config)
+
+    dispatch({
+      type: ORDER_NEW_CREATE_SUCCESS,
+      payload: data.createdOrder,
+    })
+
+    dispatch({
+      type: USER_LOGIN_ADD_DOLLAS,
+      payload: data.user.digiDollas,
+    })
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify(getState().userLogin.userInfo)
+    )
+    toast.success('Order Placed!')
+  } catch (error) {
+    dispatch({
+      type: ORDER_NEW_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -119,6 +167,7 @@ export const payOrder =
       })
     }
   }
+
 export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({

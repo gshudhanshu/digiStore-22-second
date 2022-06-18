@@ -1,5 +1,4 @@
 .row {
-  --bs-gutter-x: 0;
 }
 .order-container {
   max-width: 750px;
@@ -12,29 +11,17 @@
   }
   .product-container {
     row-gap: 20px;
-    margin: 0;
-    padding: 0;
     .img-container {
-      margin: 0;
-      padding: 0;
       img {
         max-width: 150px;
       }
     }
     .order.product-content {
-      margin: 0;
-      padding: 0;
       .order.product-name {
-        margin: 0;
-        padding: 0;
       }
       .order-product-price-qty {
-        margin: 0;
-        padding: 0;
         align-items: flex-end;
         .order-product-price {
-          margin: 0;
-          padding: 0;
           justify-content: end;
           font-size: 20px;
           div {
