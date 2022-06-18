@@ -101,53 +101,48 @@ function TransactionScreen() {
         ) : (
           orders.map((order) => (
             <Row className='order-container' key={order._id}>
-              <Col className='orderId' xs={6}>
-                Order ID: {order.orderId}
-              </Col>
-              <Col xs={6} className='align-self-end'>
+              <Col className='order orderId'>Order ID: {order.orderId}</Col>
+              <Col className='order order-date'>
                 Date: {order.createdAt.substring(0, 10)}
               </Col>
               {order.orderItems.map((product) => (
-                <Row key={product._id}>
-                  <Col xs={3}>
-                    <Image className='img-fluid' src={product.image} alt='' />
+                <Row key={product._id} className='product-container'>
+                  <Col xs={2} className='order img-container'>
+                    <Image className=' img-fluid' src={product.image} alt='' />
                   </Col>
-                  <Col xs={6}>
-                    <Row>{product.name}</Row>
-                    <Row>Quantity: {product.qty}</Row>
-                  </Col>
-                  <Col xs={3} className='align-self-end'>
-                    <Row>
+                  <Col className=' order-product-price-qty'>
+                    <Row className=' product-name'>{product.name}</Row>
+                    <Row className=' product-price-qty'>
+                      <Col>Quantity: {product.qty}</Col>
                       <Col>
-                        <Image
-                          className='img-fluid'
-                          src='/assets/img/digi_dollar.png'
-                        />
+                        <Row className=' order-product-price'>
+                          <Col>
+                            <Image
+                              className='order img-fluid'
+                              src='/assets/img/digi_dollar.png'
+                            />
+                            {product.qty * product.price}
+                          </Col>
+                          {/* <Col xs={6}>{product.qty * product.price}</Col> */}
+                        </Row>
                       </Col>
-                      <Col>{product.qty * product.price}</Col>
                     </Row>
                   </Col>
                 </Row>
               ))}
               <Row className='justify-content-end'>
-                {/* <Col xs={2}>
-                  <h3 className='p-0 m-0'>
-                    <Badge pill bg='warning' text='dark'>
-                      Debit
-                    </Badge>
-                  </h3>
-                </Col> */}
-                <Col xs={2}>Total: </Col>
-
-                <Col xs={3}>
+                {/* <Col xs={2}>Total: </Col> */}
+                <Col xs={4}>
                   <Row>
                     <Col xs={6}>
+                      Total:{' '}
                       <Image
                         className='img-fluid'
                         src='/assets/img/digi_dollar.png'
                       />
+                      {order.totalPrice}
                     </Col>
-                    <Col xs={6}>{order.totalPrice}</Col>
+                    {/* <Col xs={6}>{order.totalPrice}</Col> */}
                   </Row>
                 </Col>
               </Row>
