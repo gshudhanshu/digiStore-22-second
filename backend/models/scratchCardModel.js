@@ -5,7 +5,7 @@ const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 7)
 const scratchCardSchema = mongoose.Schema(
   {
     digiDollas: { type: Number, required: true },
-    scratchDate: { type: Date, default: Date.now() },
+    // scratchDate: { type: Date, default: Date.now() },
     cardId: {
       type: String,
       default: nanoid(),

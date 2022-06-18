@@ -134,9 +134,7 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
 // @route GET /api/orders/myorders
 // @access Private
 const getMyCards = asyncHandler(async (req, res) => {
-  let cards = await ScrachCard.find({ user: req.user._id }).select(
-    '-user -createdAt -updatedAt'
-  )
+  let cards = await ScrachCard.find({ user: req.user._id }).select('-user')
   cards.map((card) => dayjs(card.scratchDate))
   res.json(cards)
 })

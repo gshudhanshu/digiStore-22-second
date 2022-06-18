@@ -93,8 +93,11 @@ function TransactionScreen() {
       </BreadcrumbsItem>
       <Breadcrumb />
       <Container>
-        {(loadingOrders && loadingCards) ? (
+        <h2>Product Orders</h2>
+        {loadingOrders && loadingCards ? (
           <Loader />
+        ) : error || !orders ? (
+          <Message variant='danger'>{error}</Message>
         ) : (
           orders.map((order) => (
             <Row className='order-container' key={order._id}>
@@ -150,76 +153,45 @@ function TransactionScreen() {
               </Row>
             </Row>
           ))
-          cards.map((card) => (
-            <Row key={cards._id}>
-              <Col xs={6}>Card ID: {card.cardId}</Col>
-              <Col xs={6}>Date</Col>
-              <Row>
-                <Col xs={2}>Img</Col>
-                <Col xs={5}></Col>
-                <Col xs={5}>
-                  {/* <Row xs={6}>CR</Row> */}
-                  <Row xs={6}>Total</Row>
-                </Col>
-              </Row>
-            </Row>
-          ))
         )}
-        {loadingCards !== false ? (
-          <Loader />
+        <h2>Scrached Cards</h2>
+
+        {loadingCards ? (
+          <>{/* <Loader /> */}</>
+        ) : error || !cards ? (
+          <Message variant='danger'>{error}</Message>
         ) : (
           cards.map((card) => (
-            <Row key={cards._id}>
+            <Row key={card._id}>
               <Col xs={6}>Card ID: {card.cardId}</Col>
-              <Col xs={6}>Date</Col>
+              <Col xs={6}>Date: {card.createdAt.substring(0, 10)}</Col>
               <Row>
-                <Col xs={2}>Img</Col>
-                <Col xs={5}></Col>
-                <Col xs={5}>
-                  {/* <Row xs={6}>CR</Row> */}
-                  <Row xs={6}>Total</Row>
+                <Col xs={3}>
+                  <Image
+                    className='img-fluid'
+                    src='/assets/img/digi_dollar.png'
+                    alt=''
+                  />
+                </Col>
+                <Col xs={6}>
+                  {/* <Row>{product.name}</Row> */}
+                  {/* <Row>Quantity: {product.qty}</Row> */}
+                </Col>
+                <Col xs={3} className='align-self-end'>
+                  <Row>
+                    <Col>
+                      <Image
+                        className='img-fluid'
+                        src='/assets/img/digi_dollar.png'
+                      />
+                    </Col>
+                    <Col>{card.digiDollas}</Col>
+                  </Row>
                 </Col>
               </Row>
             </Row>
           ))
         )}
-        {/* <Row>
-          <Col md={9}>
-            <h2>My Orders</h2>
-            {loadingOrders ? (
-              <Loader />
-            ) : errorOrders ? (
-              <Message variant='danger'>{errorOrders}</Message>
-            ) : (
-              <Table striped bordered hover responsive className='table-sm'>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>DATE</th>
-                    <th>TOTAL</th>
-                    <th>DETIALS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.map((order) => (
-                    <tr key={order.orderId}>
-                      <td>{order.orderId}</td>
-                      <td>{order.createdAt.substring(0, 10)}</td>
-                      <td>{order.totalPrice}</td>
-                      <td>
-                        <LinkContainer to={`/order/${order._id}`}>
-                          <Button className='btn-sm' variant='light'>
-                            Details
-                          </Button>
-                        </LinkContainer>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            )}
-          </Col>
-        </Row> */}
       </Container>
     </>
   )
