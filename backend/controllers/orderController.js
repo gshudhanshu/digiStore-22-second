@@ -1,6 +1,13 @@
 import Order from '../models/orderModel.js'
 import asyncHandler from 'express-async-handler'
 
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc.js'
+import timezone from 'dayjs/plugin/timezone.js'
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault('America/Barbados')
+
 // @desc Create new order
 // @route POST /api/orders
 // @access Private
@@ -80,7 +87,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @route GET /api/orders/:id/deliver
 // @access Private/admin
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id)
+  let order = await Order.findById(req.params.id)
 
   if (order) {
     order.isDelivered = true

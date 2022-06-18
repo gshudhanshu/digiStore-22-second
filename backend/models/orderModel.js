@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { customAlphabet } from 'nanoid'
-const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 5)
+const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 7)
 
 const orderSchema = mongoose.Schema(
   {

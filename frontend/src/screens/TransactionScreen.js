@@ -56,7 +56,7 @@ function TransactionScreen() {
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
 
   const cardListMy = useSelector((state) => state.cardListMy)
-  const { loading: loadingCard, error: errorCard, cards } = cardListMy
+  const { loading: loadingCards, error: errorCards, cards } = cardListMy
 
   useEffect(() => {
     if (!userInfo) {
@@ -93,7 +93,7 @@ function TransactionScreen() {
       </BreadcrumbsItem>
       <Breadcrumb />
       <Container>
-        {loadingOrders ? (
+        {(loadingOrders && loadingCards) ? (
           <Loader />
         ) : (
           orders.map((order) => (
@@ -127,44 +127,62 @@ function TransactionScreen() {
                 </Row>
               ))}
               <Row className='justify-content-end'>
-                <Col xs={2}>
+                {/* <Col xs={2}>
                   <h3 className='p-0 m-0'>
                     <Badge pill bg='warning' text='dark'>
                       Debit
                     </Badge>
                   </h3>
-                </Col>
+                </Col> */}
                 <Col xs={2}>Total: </Col>
 
                 <Col xs={3}>
                   <Row>
-                    <Col>
+                    <Col xs={6}>
                       <Image
                         className='img-fluid'
                         src='/assets/img/digi_dollar.png'
                       />
                     </Col>
-                    <Col>{order.totalPrice}</Col>
+                    <Col xs={6}>{order.totalPrice}</Col>
                   </Row>
                 </Col>
               </Row>
             </Row>
           ))
+          cards.map((card) => (
+            <Row key={cards._id}>
+              <Col xs={6}>Card ID: {card.cardId}</Col>
+              <Col xs={6}>Date</Col>
+              <Row>
+                <Col xs={2}>Img</Col>
+                <Col xs={5}></Col>
+                <Col xs={5}>
+                  {/* <Row xs={6}>CR</Row> */}
+                  <Row xs={6}>Total</Row>
+                </Col>
+              </Row>
+            </Row>
+          ))
         )}
-
-        <Row>
-          <Col xs={6}>ID</Col>
-          <Col xs={6}>Date</Col>
-          <Row>
-            <Col xs={2}>Img</Col>
-            <Col xs={5}></Col>
-            <Col xs={5}>
-              <Row xs={6}>DR/CR</Row>
-              <Row xs={6}>Total price</Row>
-            </Col>
-          </Row>
-        </Row>
-
+        {loadingCards !== false ? (
+          <Loader />
+        ) : (
+          cards.map((card) => (
+            <Row key={cards._id}>
+              <Col xs={6}>Card ID: {card.cardId}</Col>
+              <Col xs={6}>Date</Col>
+              <Row>
+                <Col xs={2}>Img</Col>
+                <Col xs={5}></Col>
+                <Col xs={5}>
+                  {/* <Row xs={6}>CR</Row> */}
+                  <Row xs={6}>Total</Row>
+                </Col>
+              </Row>
+            </Row>
+          ))
+        )}
         {/* <Row>
           <Col md={9}>
             <h2>My Orders</h2>

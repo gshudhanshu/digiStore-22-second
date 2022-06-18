@@ -34,7 +34,7 @@ export const cardScratchListReducer = (state = { cardListMy: {} }, action) => {
     case CARD_LIST_SCRATCH_MY_SUCCESS:
       return {
         loading: false,
-        orders: action.payload,
+        cards: action.payload,
       }
     case CARD_LIST_SCRATCH_MY_FAIL:
       return {

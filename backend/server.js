@@ -7,11 +7,10 @@ import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
+import cardRoutes from './routes/cardRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-// import { generateScratchCard } from './controllers/scratchCardController.js'
 
-// dotenv.config()
 connectDB()
 
 const app = express()
@@ -23,6 +22,7 @@ app.use(express.json())
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/cards', cardRoutes)
 app.use('/api/upload', uploadRoutes)
 // app.use('/api/cards', generateScratchCard)
 

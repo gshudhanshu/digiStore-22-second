@@ -27,11 +27,7 @@ export const getScrachCardDetails = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(
-      `/api/users/${user._id}/cards`,
-      user,
-      config
-    )
+    const { data } = await axios.post(`/api/cards`, user, config)
 
     dispatch({
       type: CARD_SCRATCH_SUCCESS,
@@ -66,7 +62,7 @@ export const addDigiDollas =
         },
       }
       const { data } = await axios.put(
-        `/api/users/${user._id}/cards`,
+        `/api/cards`,
         { _id: user._id, cardDetails },
         config
       )
@@ -116,7 +112,7 @@ export const listMyCards = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    const { data } = await axios.get(`/api/orders/mycards`, config)
+    const { data } = await axios.get(`/api/cards/mycards`, config)
 
     dispatch({
       type: CARD_LIST_SCRATCH_MY_SUCCESS,
