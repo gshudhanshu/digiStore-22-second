@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Link,
   useParams,
@@ -7,13 +7,13 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import IntlTelInput from 'react-intl-tel-input'
-import 'react-intl-tel-input/dist/main.css'
+import PhoneInput from 'react-phone-input-2'
+// import 'react-phone-input-2/lib/style.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { register } from '../actions/userActions'
+import { register, sendOtp } from '../actions/userActions'
 
 function RegisterScreen() {
   const { id } = useParams()
@@ -25,6 +25,7 @@ function RegisterScreen() {
   const [lname, setLname] = useState('')
   const [full_mobile, setFull_mobile] = useState('')
   const [mobile, setMobile] = useState('')
+
   const [otp, setOtp] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -43,14 +44,14 @@ function RegisterScreen() {
     }
   }, [navigate, userInfo, redirect])
 
-  let use = 'register'
   const submitHandler = (e) => {
+    let use = 'register'
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
       dispatch(
-        register(
+        register({
           fname,
           lname,
           mobile,
@@ -58,10 +59,19 @@ function RegisterScreen() {
           otp,
           password,
           confirmPassword,
-          use
-        )
+          use,
+        })
       )
     }
+  }
+
+  const sendOtpHandler = () => {
+    let use = 'register'
+    let fname = document.querySelector('#fname').value
+    let lname = document.querySelector('#lname').value
+    // let mobile = document.querySelector('#mobile').value
+    let full_mobile = document.querySelector('#full_mobile').value
+    dispatch(sendOtp(fname, lname, mobile, full_mobile, use))
   }
 
   return (
@@ -86,20 +96,39 @@ function RegisterScreen() {
             type='lname'
             placeholder='Enter Last Name'
             value={lname}
-            onChange={(e) => setLname(e.target.value)}
+            onChange={(e) => {
+              setLname(e.target.value)
+            }}
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='full_mobile'>
           <label className='form-label' htmlFor='full_mobile'>
             Mobile Number
           </label>
-          {/* <Form.Control
+          <Form.Control
             type='full_mobile'
             placeholder='Enter Mobile No'
             value={full_mobile}
             onChange={(e) => setFull_mobile(e.target.value)}
-          ></Form.Control> */}
-          <IntlTelInput
+          ></Form.Control>
+          <Button onClick={sendOtpHandler}>Send Code</Button>
+          {/* <Row>
+            <PhoneInput
+              country={'bb'}
+              onlyCountries={['bb', 'in']}
+              value={full_mobile}
+              onChange={(full_mobile) => setFull_mobile(full_mobile)}
+              autoFormat={false}
+              inputProps={{
+                name: 'full_mobile',
+                id: 'full_mobile',
+                required: true,
+                autoFocus: true,
+              }}
+            />
+            <Button onClick={sendOtpHandler}>Send Code</Button>
+          </Row> */}
+          {/* <IntlTelInput
             containerClassName='intl-tel-input w-100'
             inputClassName='form-control'
             preferredCountries={[]}
@@ -107,10 +136,15 @@ function RegisterScreen() {
             defaultCountry='bb'
             type='full_mobile'
             placeholder='Enter Mobile No'
-            value={full_mobile}
-            onChange={(e) => setFull_mobile(e.target.value)}
+            // value
+            // onPhoneNumberChange={onChange(e) => setFull_mobile(e.target.value)}
+            onPhoneNumberBlur={() => {
+              let telVal = document.querySelector('#full_mobile').value
+              setFull_mobile(telVal)
+              console.log(telVal)
+            }}
             fieldId='full_mobile'
-          />
+          /> */}
         </Form.Group>
         <Form.Group controlId='otp'>
           <Form.Label>SMS Code</Form.Label>
@@ -118,7 +152,7 @@ function RegisterScreen() {
             type='otp'
             placeholder='SMS Code'
             value={otp}
-            onChange={(e) => setFull_mobile(e.target.value)}
+            onChange={(e) => setOtp(e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='password'>

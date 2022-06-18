@@ -8,6 +8,9 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_SEND_OTP_REQUEST,
+  USER_SEND_OTP_SUCCESS,
+  USER_SEND_OTP_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
@@ -62,6 +65,41 @@ export const login = (full_mobile, password) => async (dispatch) => {
   }
 }
 
+export const sendOtp =
+  (fname, lname, mobile, full_mobile, use) => async (dispatch) => {
+    try {
+      dispatch({
+        type: USER_SEND_OTP_REQUEST,
+      })
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const { data } = await axios.post('/api/users/send-otp', {
+        fname,
+        lname,
+        mobile,
+        full_mobile,
+        use,
+        config,
+      })
+      dispatch({
+        type: USER_SEND_OTP_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: USER_SEND_OTP_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
+
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
@@ -71,7 +109,17 @@ export const logout = () => (dispatch) => {
 }
 
 export const register =
-  (fname, lname, full_mobile, password) => async (dispatch) => {
+  ({
+    fname,
+    lname,
+    mobile,
+    full_mobile,
+    otp,
+    password,
+    confirmPassword,
+    use,
+  }) =>
+  async (dispatch) => {
     try {
       dispatch({
         type: USER_REGISTER_REQUEST,
@@ -85,8 +133,12 @@ export const register =
       const { data } = await axios.post('/api/users', {
         fname,
         lname,
+        mobile,
         full_mobile,
+        otp,
         password,
+        confirmPassword,
+        use,
         config,
       })
 

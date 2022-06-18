@@ -35,8 +35,16 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/register
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { fname, lname, mobile, full_mobile, password, confirmPassword, otp } =
-    req.body
+  const {
+    fname,
+    lname,
+    mobile,
+    full_mobile,
+    password,
+    confirmPassword,
+    otp,
+    use,
+  } = req.body
   const userExists = await User.findOne({ full_mobile })
   let isOtpVerified = false
 
@@ -44,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('User already exists')
   } else {
-    client.verify
+    await client.verify
       .services(process.env.VERIFY_SERVICE_SID)
       .verificationChecks.create({ to: full_mobile, code: otp })
       .then((verification_check) => {
@@ -52,6 +60,8 @@ const registerUser = asyncHandler(async (req, res) => {
       })
     // isOtpVerified = true
   }
+
+  console.log(isOtpVerified)
 
   if (isOtpVerified) {
     const user = await User.create({
@@ -82,18 +92,17 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/send-otp
 // @access Private
 const sendOtp = asyncHandler(async (req, res) => {
-  const { fname, lname, mobile, full_mobile, password, password2, use } =
-    req.body
-  let errors = []
+  const { fname, lname, mobile, full_mobile, use } = req.body
   console.log(req.body)
-  if (!mobile || !full_mobile) {
+
+  let errors = []
+  if (!full_mobile) {
     errors.push({ msg: 'Please enter mobile number' })
   } else {
     User.findOne({ full_mobile: full_mobile }).then((user) => {
       if (!user && use !== 'register') {
         errors.push({ msg: 'No account with that mobile exists' })
       }
-
       if (errors.length > 0) {
         return res.json({
           layout: false,
@@ -102,8 +111,6 @@ const sendOtp = asyncHandler(async (req, res) => {
           lname,
           mobile,
           full_mobile,
-          password,
-          password2,
         })
       } else {
         client.verify
