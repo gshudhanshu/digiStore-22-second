@@ -5,6 +5,7 @@ import Rating from './Rating'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import { addToCart, removeFromCart } from '../actions/cartActions'
+import * as Icon from 'react-feather'
 
 const Product = ({ product }) => {
   // const { id } = useParams()
@@ -33,12 +34,12 @@ const Product = ({ product }) => {
                 type='button'
                 disabled={product.countInStock === 0}
               >
-                <i className='pe-7s-cart'></i> Add to cart{' '}
+                <Icon.ShoppingCart /> Add to cart{' '}
               </Button>
             </div>
-            <div className='pro-same-action pro-quickview'>
+            <div className='pro-same-action pro-quickview d-none d-lg-block'>
               <Link title='Quick View' to={`/product/${product._id}`}>
-                <i className='pe-7s-look'></i>
+                <Icon.Eye />
               </Link>
             </div>
           </div>
@@ -59,7 +60,7 @@ const Product = ({ product }) => {
               alt='Digi dollas'
             />
             <div>{product.price}</div>
-            <span>Digi Dollas</span>
+            <span className='d-none d-lg-block'>Digi Dollas</span>
           </div>
         </div>
       </div>

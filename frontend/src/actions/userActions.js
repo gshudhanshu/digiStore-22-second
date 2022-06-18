@@ -24,10 +24,6 @@ import {
   USER_DELETE_FAIL,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_SCRATCH_REQUEST,
-  USER_SCRATCH_SUCCESS,
-  USER_SCRATCH_FAIL,
-  USER_LOGIN_ADD_DOLLAS,
 } from '../constants/userConstants'
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
@@ -282,95 +278,3 @@ export const updateUser = (user) => async (dispatch, getState) => {
     })
   }
 }
-
-// SCRATCH CARD
-export const getScrachCardDetails = (user) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_SCRATCH_REQUEST,
-    })
-
-    const {
-      userLogin: { userInfo },
-    } = getState()
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-
-    const { data } = await axios.post(
-      `/api/users/${user._id}/cards`,
-      user,
-      config
-    )
-
-    dispatch({
-      type: USER_SCRATCH_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: USER_SCRATCH_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const addDigiDollas =
-  (user, cardDetails) => async (dispatch, getState) => {
-    try {
-      dispatch({
-        type: USER_SCRATCH_REQUEST,
-      })
-
-      const {
-        userLogin: { userInfo },
-      } = getState()
-
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-      const { data } = await axios.put(
-        `/api/users/${user._id}/cards`,
-        { _id: user._id, cardDetails },
-        config
-      )
-
-      dispatch({
-        type: USER_SCRATCH_SUCCESS,
-        payload: {
-          digiDollas: data.cardDetails.digiDollas,
-          expiryDate: data.cardDetails.expiryDate,
-          todayDate: data.cardDetails.todayDate,
-          message: data.message,
-        },
-      })
-
-      toast(`${data.cardDetails.digiDollas} DigiDollas Added`)
-      dispatch({
-        type: USER_LOGIN_ADD_DOLLAS,
-        payload: data.user.digiDollas,
-      })
-
-      localStorage.setItem(
-        'userInfo',
-        JSON.stringify(getState().userLogin.userInfo)
-      )
-    } catch (error) {
-      dispatch({
-        type: USER_SCRATCH_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      })
-    }
-  }

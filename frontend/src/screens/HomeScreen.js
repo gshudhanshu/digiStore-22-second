@@ -3,6 +3,7 @@ import { Link, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Offcanvas, Container, Row, Col } from 'react-bootstrap'
+// import { Icon } from 'react-materialize'
 import ScratchCard from 'react-scratchcard-v2'
 
 import foregroundImageSrc from '../assets/img/placeimg_400_300_people.jpg'
@@ -18,7 +19,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listProducts } from '../actions/productActions'
-import { getScrachCardDetails, addDigiDollas } from '../actions/userActions'
+import { getScrachCardDetails, addDigiDollas } from '../actions/cardActions'
 // import ProductsCarousel from '../components/ProductsCarousel'
 import Meta from '../components/Meta'
 import SearchBox from '../components/SearchBox'
@@ -29,7 +30,7 @@ const HomeScreen = () => {
   let location = useLocation()
 
   const [showCard, setShowCard] = useState(false)
-  const [cardScratch, setCardScratch] = useState(false)
+  // const [cardScratch, setCardScratch] = useState(false)
   // const [cardScratchCompleted, setCardScratchCompleted] = useState(false)
 
   const ref = useRef < ScratchCard > null
@@ -43,8 +44,8 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList)
   const { loading, error, products, page, pages } = productList
 
-  const userScratchCard = useSelector((state) => state.userScratchCard)
-  const { cardDetails } = userScratchCard
+  const cardScratch = useSelector((state) => state.cardScratch)
+  const { cardDetails } = cardScratch
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -78,9 +79,30 @@ const HomeScreen = () => {
       </BreadcrumbsItem>
       <Breadcrumb />
 
-      <Button variant='primary' onClick={handleCardShow}>
-        Launch
+      <Button
+        className='btn-circle btn-lg rounded-circle'
+        variant='primary'
+        type='button'
+        onClick={handleCardShow}
+      >
+        <img
+          src='./assets/img/emoji.png'
+          alt='scratch window launch button'
+        ></img>
       </Button>
+
+      {/* <Button
+        className='btn-circle btn-lg'
+        floating
+        node='button'
+        waves='light'
+        onClick={handleCardShow}
+      >
+        <img
+          src='./assets/img/emoji.png'
+          alt='scratch window launch button'
+        ></img>
+      </Button> */}
 
       <Offcanvas show={showCard} onHide={handleCardClose} placement='end'>
         <Offcanvas.Header closeButton>
@@ -89,34 +111,38 @@ const HomeScreen = () => {
         <Offcanvas.Body>
           <div>
             {/* <button onClick={onClickReset}>Reset</button> */}
-            <ScratchCard
-              width={250}
-              height={300}
-              image={backgroundImageSrc}
-              finishPercent={30}
-              fadeOutOnComplete
-              // onComplete={!isCompleted && !cardScratchCompleted && addDigiDollasHandler}
-              onComplete={() => addDigiDollasHandler()}
-            >
-              <div
-                className='scratch-card-bg'
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  height: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: 'red',
-                }}
+            {cardDetails ? (
+              <ScratchCard
+                width={250}
+                height={300}
+                image={backgroundImageSrc}
+                finishPercent={30}
+                fadeOutOnComplete
+                // onComplete={!isCompleted && !cardScratchCompleted && addDigiDollasHandler}
+                onComplete={() => addDigiDollasHandler()}
               >
-                <h1>Contratulations!</h1>
-                <h1>
-                  {cardDetails
-                    ? 'You Won ' + cardDetails.digiDollas
-                    : 'Please login'}
-                </h1>
-              </div>
-            </ScratchCard>
+                <div
+                  className='scratch-card-bg'
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'red',
+                  }}
+                >
+                  {cardDetails && (
+                    <>
+                      <h1>Contratulations!</h1>
+                      <div>{`You Won ${cardDetails.digiDollas}`}</div>
+                    </>
+                  )}
+                </div>
+              </ScratchCard>
+            ) : (
+              <h1>Sorry! You have already scratched today's card</h1>
+            )}
           </div>
         </Offcanvas.Body>
       </Offcanvas>

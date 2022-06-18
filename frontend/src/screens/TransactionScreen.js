@@ -6,14 +6,26 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom'
-import { Form, Button, Row, Col, Table } from 'react-bootstrap'
+import {
+  Container,
+  Badge,
+  Image,
+  Button,
+  Row,
+  Col,
+  Table,
+} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+import Breadcrumb from '../wrappers/Breadcrumb'
+
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
 import { listMyOrders } from '../actions/orderActions'
+import { listMyCards } from '../actions/cardActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 function TransactionScreen() {
@@ -43,6 +55,9 @@ function TransactionScreen() {
   const orderListMy = useSelector((state) => state.orderListMy)
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
 
+  const cardListMy = useSelector((state) => state.cardListMy)
+  const { loading: loadingCard, error: errorCard, cards } = cardListMy
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
@@ -51,6 +66,7 @@ function TransactionScreen() {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
+        dispatch(listMyCards())
       } else {
         setFname(user.fname)
         setLname(user.lname)
@@ -70,115 +86,124 @@ function TransactionScreen() {
     }
   }
   return (
-    <Row>
-      <Col md={3}>
-        <h2>User Profile</h2>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile Updated</Message>}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='fname'>
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type='fname'
-              placeholder='Enter First Name'
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='lname'>
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type='lname'
-              placeholder='Enter Last Name'
-              value={lname}
-              onChange={(e) => setLname(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='full_mobile'>
-            <Form.Label>Mobile Number</Form.Label>
-            <Form.Control
-              type='text'
-              placeholder='Enter Mobile Number'
-              value={full_mobile}
-              onChange={(e) => setFull_mobile(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='confirmPassword'>
-            <Form.Label>confirmPassword</Form.Label>
-            <Form.Control
-              type='confirmPassword'
-              placeholder='Enter confirmPassword'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type='submit' variant='primary'>
-            Update
-          </Button>
-        </Form>
-      </Col>
-      <Col md={9}>
-        <h2>My Orders</h2>
+    <>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + location}>
+        Transactions
+      </BreadcrumbsItem>
+      <Breadcrumb />
+      <Container>
         {loadingOrders ? (
           <Loader />
-        ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
         ) : (
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
-                  <td>
-                    {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}
-                  </td>
-                  <td>
-                    {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}
-                  </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm' variant='light'>
-                        Details
-                      </Button>
-                    </LinkContainer>
-                  </td>
-                </tr>
+          orders.map((order) => (
+            <Row className='order-container' key={order._id}>
+              <Col className='orderId' xs={6}>
+                Order ID: {order.orderId}
+              </Col>
+              <Col xs={6} className='align-self-end'>
+                Date: {order.createdAt.substring(0, 10)}
+              </Col>
+              {order.orderItems.map((product) => (
+                <Row key={product._id}>
+                  <Col xs={3}>
+                    <Image className='img-fluid' src={product.image} alt='' />
+                  </Col>
+                  <Col xs={6}>
+                    <Row>{product.name}</Row>
+                    <Row>Quantity: {product.qty}</Row>
+                  </Col>
+                  <Col xs={3} className='align-self-end'>
+                    <Row>
+                      <Col>
+                        <Image
+                          className='img-fluid'
+                          src='/assets/img/digi_dollar.png'
+                        />
+                      </Col>
+                      <Col>{product.qty * product.price}</Col>
+                    </Row>
+                  </Col>
+                </Row>
               ))}
-            </tbody>
-          </Table>
+              <Row className='justify-content-end'>
+                <Col xs={2}>
+                  <h3 className='p-0 m-0'>
+                    <Badge pill bg='warning' text='dark'>
+                      Debit
+                    </Badge>
+                  </h3>
+                </Col>
+                <Col xs={2}>Total: </Col>
+
+                <Col xs={3}>
+                  <Row>
+                    <Col>
+                      <Image
+                        className='img-fluid'
+                        src='/assets/img/digi_dollar.png'
+                      />
+                    </Col>
+                    <Col>{order.totalPrice}</Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Row>
+          ))
         )}
-      </Col>
-    </Row>
+
+        <Row>
+          <Col xs={6}>ID</Col>
+          <Col xs={6}>Date</Col>
+          <Row>
+            <Col xs={2}>Img</Col>
+            <Col xs={5}></Col>
+            <Col xs={5}>
+              <Row xs={6}>DR/CR</Row>
+              <Row xs={6}>Total price</Row>
+            </Col>
+          </Row>
+        </Row>
+
+        {/* <Row>
+          <Col md={9}>
+            <h2>My Orders</h2>
+            {loadingOrders ? (
+              <Loader />
+            ) : errorOrders ? (
+              <Message variant='danger'>{errorOrders}</Message>
+            ) : (
+              <Table striped bordered hover responsive className='table-sm'>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>DATE</th>
+                    <th>TOTAL</th>
+                    <th>DETIALS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order.orderId}>
+                      <td>{order.orderId}</td>
+                      <td>{order.createdAt.substring(0, 10)}</td>
+                      <td>{order.totalPrice}</td>
+                      <td>
+                        <LinkContainer to={`/order/${order._id}`}>
+                          <Button className='btn-sm' variant='light'>
+                            Details
+                          </Button>
+                        </LinkContainer>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}
+          </Col>
+        </Row> */}
+      </Container>
+    </>
   )
 }
 

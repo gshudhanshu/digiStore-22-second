@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import { customAlphabet } from 'nanoid'
+const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 5)
 
 const orderSchema = mongoose.Schema(
   {
@@ -6,6 +8,12 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
+    },
+
+    orderId: {
+      type: String,
+      default: nanoid(),
+      unique: true,
     },
     orderItems: [
       {
