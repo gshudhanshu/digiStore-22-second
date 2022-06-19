@@ -2,21 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  ListGroup,
-  Button,
-  Offcanvas,
-  Container,
-  Row,
-  Col,
-} from 'react-bootstrap'
+import { Button, Offcanvas, Container, Row, Col } from 'react-bootstrap'
 // import { Icon } from 'react-materialize'
 import ScratchCard from 'react-scratchcard-v2'
 
 import foregroundImageSrc from '../assets/img/placeimg_400_300_people.jpg'
-import backgroundImageSrc from '../assets/img/card-img.jpg'
+import backgroundImageSrc from '../assets/img/placeimg_400_300_arch.jpg'
 
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+
 import Breadcrumb from '../wrappers/Breadcrumb'
 import ShopTopbar from '../wrappers/ShopTopbar'
 
@@ -59,7 +53,6 @@ const HomeScreen = () => {
   }, [dispatch, keyword, pageNumber])
 
   const addDigiDollasHandler = async (e) => {
-    e.preventDefault()
     dispatch(addDigiDollas(userInfo, cardDetails))
   }
 
@@ -87,7 +80,7 @@ const HomeScreen = () => {
       <Breadcrumb />
 
       <Button
-        className='btn-circle btn-lg rounded-circle emoji-button'
+        className='btn-circle btn-lg rounded-circle'
         variant='primary'
         type='button'
         onClick={handleCardShow}
@@ -111,22 +104,16 @@ const HomeScreen = () => {
         ></img>
       </Button> */}
 
-      <Offcanvas
-        show={showCard}
-        onHide={handleCardClose}
-        scroll={false}
-        placement='end'
-      >
+      <Offcanvas show={showCard} onHide={handleCardClose} placement='end'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Scratch card</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <h2>Reveal your card</h2>
           <div>
             {/* <button onClick={onClickReset}>Reset</button> */}
             {cardDetails ? (
               <ScratchCard
-                width={300}
+                width={250}
                 height={300}
                 image={backgroundImageSrc}
                 finishPercent={30}
@@ -137,21 +124,18 @@ const HomeScreen = () => {
                 <div
                   className='scratch-card-bg'
                   style={{
+                    display: 'flex',
                     width: '100%',
                     height: '100%',
-                    // alignItems: 'center',
-                    // justifyContent: 'center',
-                    // background: '#E8E8E8',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'red',
                   }}
                 >
                   {cardDetails && (
                     <>
-                      <Row className='no-gutters heading'>Congrats!</Row>
-                      <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
-                      <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
-                      <Row className='note'>
-                        <p>{`This will be credited to your DigiDollas`}</p>
-                      </Row>
+                      <h1>Contratulations!</h1>
+                      <div>{`You Won ${cardDetails.digiDollas}`}</div>
                     </>
                   )}
                 </div>
@@ -160,23 +144,6 @@ const HomeScreen = () => {
               <h1>Sorry! You have already scratched today's card</h1>
             )}
           </div>
-          <Row>
-            <h4>How does it work?</h4>
-            <ListGroup as='ol' numbered variant='flush'>
-              <ListGroup.Item as='li'>
-                Scratch to see your winning amount
-              </ListGroup.Item>
-              {/* <ListGroup.Item as='li'>
-                Scratch card is available only for Digicel customers
-              </ListGroup.Item> */}
-              {/* <ListGroup.Item as='li'>
-                You should have any active plan
-              </ListGroup.Item> */}
-              <ListGroup.Item as='li'>
-                You can use DigiDollas to purchase listed product
-              </ListGroup.Item>
-            </ListGroup>
-          </Row>
         </Offcanvas.Body>
       </Offcanvas>
 
