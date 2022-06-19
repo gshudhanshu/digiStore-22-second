@@ -10,13 +10,16 @@ import {
   getUserById,
   updateUser,
   sendOtp,
+  forgetPassword,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddlware.js'
 
 router.post('/send-otp', sendOtp)
 
 router.route('/').post(registerUser).get(protect, admin, getUsers)
+
 router.post('/login', authUser)
+router.post('/forget-password', forgetPassword)
 router
   .route('/profile')
   .get(protect, getUserProfile)

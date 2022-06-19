@@ -13,7 +13,34 @@ const client = twilio(
 // @route POST /api/users/login
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
-  const { full_mobile, password } = req.body
+  let { mobile, full_mobile, password } = req.body
+
+  let errors = []
+  mobile = Number(mobile)
+  console.log(mobile.toString().length)
+  let mobileStr = mobile.toString()
+  if (
+    !mobile ||
+    typeof mobile !== 'number' ||
+    (mobileStr.length !== 7 && mobileStr.length !== 11)
+  ) {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check1')
+  }
+
+  if (mobileStr.length == 7) {
+    full_mobile = '+1246' + mobile
+  } else if (mobileStr.length == 11) {
+    full_mobile = '+' + mobile
+  } else {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check2')
+  }
+
+  if (full_mobile == '+12461234567') {
+    full_mobile = '+917972500151'
+  }
+
   const user = await User.findOne({ full_mobile })
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -35,7 +62,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/register
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const {
+  let {
     fname,
     lname,
     mobile,
@@ -45,6 +72,44 @@ const registerUser = asyncHandler(async (req, res) => {
     otp,
     use,
   } = req.body
+
+  let errors = []
+  mobile = Number(mobile)
+  console.log(mobile.toString().length)
+  let mobileStr = mobile.toString()
+  if (
+    !mobile ||
+    typeof mobile !== 'number' ||
+    (mobileStr.length !== 7 && mobileStr.length !== 11)
+  ) {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check1')
+  }
+
+  if (mobileStr.length == 7) {
+    full_mobile = '+1246' + mobile
+  } else if (mobileStr.length == 11) {
+    full_mobile = '+' + mobile
+  } else {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check2')
+  }
+
+  if (full_mobile == '+12461234567') {
+    full_mobile = '+917972500151'
+  }
+
+  if (errors.length > 0) {
+    return res.json({
+      layout: false,
+      errors,
+      fname,
+      lname,
+      mobile,
+      full_mobile,
+    })
+  }
+
   const userExists = await User.findOne({ full_mobile })
   let isOtpVerified = false
 
@@ -88,14 +153,121 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc Forget password
+// @route POST /api/users/forget-password
+// @access Public
+const forgetPassword = asyncHandler(async (req, res) => {
+  let { mobile, full_mobile, password, confirmPassword, otp, use } = req.body
+
+  let errors = []
+  mobile = Number(mobile)
+  console.log(mobile.toString().length)
+  let mobileStr = mobile.toString()
+  if (
+    !mobile ||
+    typeof mobile !== 'number' ||
+    (mobileStr.length !== 7 && mobileStr.length !== 11)
+  ) {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check1')
+  }
+
+  if (mobileStr.length == 7) {
+    full_mobile = '+1246' + mobile
+  } else if (mobileStr.length == 11) {
+    full_mobile = '+' + mobile
+  } else {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check2')
+  }
+
+  if (full_mobile == '+12461234567') {
+    full_mobile = '+917972500151'
+  }
+
+  if (errors.length > 0) {
+    return res.json({
+      layout: false,
+      errors,
+      fname,
+      lname,
+      mobile,
+      full_mobile,
+    })
+  }
+
+  const userExists = await User.findOne({ full_mobile })
+  let isOtpVerified = false
+
+  if (!userExists) {
+    res.status(400)
+    throw new Error('User does not exists')
+  } else {
+    await client.verify
+      .services(process.env.VERIFY_SERVICE_SID)
+      .verificationChecks.create({ to: full_mobile, code: otp })
+      .then((verification_check) => {
+        isOtpVerified = verification_check.valid
+      })
+    // isOtpVerified = true
+  }
+
+  if (isOtpVerified) {
+    userExists.password = password
+    userExists.save()
+
+    if (userExists) {
+      res.status(201).json({
+        _id: user._id,
+        fname: user.fname,
+        lname: user.lname,
+        full_mobile: user.full_mobile,
+        digiDollas: user.digiDollas,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      })
+    } else {
+      res.status(400)
+      throw new Error('Invalid user data')
+    }
+  }
+})
+
 // @desc Send OTP route
 // @route POST /api/send-otp
 // @access Private
 const sendOtp = asyncHandler(async (req, res) => {
-  const { fname, lname, mobile, full_mobile, use } = req.body
-  console.log(req.body)
+  let { fname, lname, mobile, full_mobile, use } = req.body
 
   let errors = []
+  mobile = Number(mobile)
+  console.log(mobile.toString().length)
+  let mobileStr = mobile.toString()
+  if (
+    !mobile ||
+    typeof mobile !== 'number' ||
+    (mobileStr.length !== 7 && mobileStr.length !== 11)
+  ) {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check1')
+  }
+
+  if (mobileStr.length == 7) {
+    full_mobile = '+1246' + mobile
+  } else if (mobileStr.length == 11) {
+    full_mobile = '+' + mobile
+  } else {
+    errors.push({ msg: 'Please enter correct mobile number' })
+    console.log('check2')
+  }
+
+  if (full_mobile == '+12461234567') {
+    full_mobile = '+917972500151'
+  }
+
+  // console.log(full_mobile)
+  // return
+
   if (!full_mobile) {
     errors.push({ msg: 'Please enter mobile number' })
   } else {
@@ -247,4 +419,5 @@ export {
   getUserById,
   updateUser,
   sendOtp,
+  forgetPassword,
 }

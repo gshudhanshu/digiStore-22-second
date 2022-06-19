@@ -42,7 +42,8 @@ function LoginScreen() {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(login(full_mobile, password))
+    let mobile = full_mobile
+    dispatch(login(mobile, full_mobile, password))
   }
 
   return (

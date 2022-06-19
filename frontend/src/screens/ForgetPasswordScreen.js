@@ -18,9 +18,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { register, sendOtp } from '../actions/userActions'
+import { register, sendOtp, forget } from '../actions/userActions'
 
-function RegisterScreen() {
+function ForgetPasswordScreen() {
   const { id } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   let location = useLocation()
@@ -75,15 +75,13 @@ function RegisterScreen() {
   }, [navigate, userInfo, redirect])
 
   const submitHandler = (e) => {
-    let use = 'register'
+    let use = 'forget'
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
       dispatch(
-        register({
-          fname,
-          lname,
+        forget({
           mobile,
           full_mobile,
           otp,
@@ -96,9 +94,7 @@ function RegisterScreen() {
   }
 
   const sendOtpHandler = () => {
-    let use = 'register'
-    let fname = document.querySelector('#fname').value
-    let lname = document.querySelector('#lname').value
+    let use = 'forget'
     let mobile = document.querySelector('#mobile').value
     // let full_mobile = document.querySelector('[name="full_mobile"]').value
     // let full_mobile = mobile_intTel.getNumber(
@@ -110,31 +106,11 @@ function RegisterScreen() {
   return (
     <>
       <FormContainer>
-        <h1>Sign Up</h1>
+        <h1>Forget Password</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
         <Form className='registration-form' onSubmit={submitHandler}>
-          <Form.Group controlId='fname'>
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type='fname'
-              placeholder='Enter First Name'
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='lname'>
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type='lname'
-              placeholder='Enter Last Name'
-              value={lname}
-              onChange={(e) => {
-                setLname(e.target.value)
-              }}
-            ></Form.Control>
-          </Form.Group>
           {/* <Form.Group controlId='full_mobile'> */}
           {/* <label className='form-label' htmlFor='full_mobile'>
               Mobile Number
@@ -249,7 +225,7 @@ function RegisterScreen() {
             ></Form.Control>
           </Form.Group>
           <Button type='submit' variant='primary'>
-            Register
+            Submit
           </Button>
         </Form>
         <Row className='py-3'>
@@ -263,4 +239,4 @@ function RegisterScreen() {
   )
 }
 
-export default RegisterScreen
+export default ForgetPasswordScreen

@@ -39,7 +39,7 @@ function intTel() {
       })
     },
 
-    utilsScript: '/js/utils.js', // just for formatting/placeholders etc
+    utilsScript: 'assets/js/utils.js', // just for formatting/placeholders etc
   })
 }
 

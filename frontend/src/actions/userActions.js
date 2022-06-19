@@ -31,7 +31,7 @@ import {
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 
-export const login = (full_mobile, password) => async (dispatch) => {
+export const login = (mobile, full_mobile, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -43,6 +43,7 @@ export const login = (full_mobile, password) => async (dispatch) => {
       },
     }
     const { data } = await axios.post('/api/users/login', {
+      mobile,
       full_mobile,
       password,
       config,
@@ -133,6 +134,51 @@ export const register =
       const { data } = await axios.post('/api/users', {
         fname,
         lname,
+        mobile,
+        full_mobile,
+        otp,
+        password,
+        confirmPassword,
+        use,
+        config,
+      })
+
+      dispatch({
+        type: USER_REGISTER_SUCCESS,
+        payload: data,
+      })
+
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: data,
+      })
+
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    } catch (error) {
+      dispatch({
+        type: USER_REGISTER_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
+
+export const forget =
+  ({ mobile, full_mobile, otp, password, confirmPassword, use }) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: USER_REGISTER_REQUEST,
+      })
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const { data } = await axios.post('/api/users/forget-password', {
         mobile,
         full_mobile,
         otp,
