@@ -32,7 +32,7 @@ function App() {
     <BreadcrumbsProvider>
       <Router>
         <Header />
-        <ToastContainer autoClose={2000} position='bottom-left' />
+        <ToastContainer autoClose={2000} position='top-left' />
         <main>
           {/* <Container> */}
           <Routes>

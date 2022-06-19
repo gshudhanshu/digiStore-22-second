@@ -114,7 +114,7 @@ function LoginScreen() {
                   </span>
                   <a href='/forget-password'>Forgot Password?</a>
                 </div>
-                <Button type='submit' variant='primary' className='mb-4'>
+                <Button type='submit' className='digicel-button'>
                   Login
                 </Button>
               </div>

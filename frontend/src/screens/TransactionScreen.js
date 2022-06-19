@@ -93,63 +93,63 @@ function TransactionScreen() {
       </BreadcrumbsItem>
       <Breadcrumb />
       <Container>
-        <h2>Product Orders</h2>
+        <h2 className='transaction-title'>Product Orders</h2>
         {loadingOrders && loadingCards ? (
           <Loader />
         ) : error || !orders ? (
           <Message variant='danger'>{error}</Message>
         ) : (
           orders.map((order) => (
-            <Row className='order-container' key={order._id}>
-              <Col className='order orderId'>Order ID: {order.orderId}</Col>
-              <Col className='order order-date'>
-                Date: {order.createdAt.substring(0, 10)}
-              </Col>
-              {order.orderItems.map((product) => (
-                <Row key={product._id} className='product-container'>
-                  <Col xs={2} className='order img-container'>
-                    <Image className=' img-fluid' src={product.image} alt='' />
+            <div className='order-container' key={order._id}>
+              <div className='order-sub-container'>
+                <Row className='orderid-date-container'>
+                  <Col className='order orderId'>Order ID: {order.orderId}</Col>
+                  <Col className='order order-date'>
+                    Date: {order.createdAt.substring(0, 10)}
                   </Col>
-                  <Col className=' order-product-price-qty'>
-                    <Row className=' product-name'>{product.name}</Row>
-                    <Row className=' product-price-qty'>
-                      <Col>Quantity: {product.qty}</Col>
-                      <Col>
-                        <Row className=' order-product-price'>
-                          <Col>
+                </Row>
+                {order.orderItems.map((product) => (
+                  <Row key={product._id} className='product-container'>
+                    <Col className='order img-container'>
+                      <Image
+                        className=' img-fluid'
+                        src={product.image}
+                        alt=''
+                      />
+                    </Col>
+                    <Col className=' order-product-price-qty'>
+                      <Row className=' product-name'>{product.name}</Row>
+                      <Row className=' product-price-qty'>
+                        <Col className='qty'>Quantity: {product.qty}</Col>
+                        <Col>
+                          <Row className='order-product-price'>
                             <Image
                               className='order img-fluid'
                               src='/assets/img/digi_dollar.png'
                             />
                             {product.qty * product.price}
-                          </Col>
-                          {/* <Col xs={6}>{product.qty * product.price}</Col> */}
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              ))}
-              <Row className='justify-content-end'>
-                {/* <Col xs={2}>Total: </Col> */}
-                <Col xs={4}>
-                  <Row>
-                    <Col xs={6}>
-                      Total:{' '}
-                      <Image
-                        className='img-fluid'
-                        src='/assets/img/digi_dollar.png'
-                      />
-                      {order.totalPrice}
+                            {/* <Col xs={6}>{product.qty * product.price}</Col> */}
+                          </Row>
+                        </Col>
+                      </Row>
                     </Col>
-                    {/* <Col xs={6}>{order.totalPrice}</Col> */}
                   </Row>
+                ))}
+              </div>
+              <Row className='order-total-price justify-content-end'>
+                <Col>
+                  Total:{' '}
+                  <Image
+                    className='img-fluid'
+                    src='/assets/img/digi_dollar.png'
+                  />
+                  {order.totalPrice}
                 </Col>
               </Row>
-            </Row>
+            </div>
           ))
         )}
-        <h2>Scrached Cards</h2>
+        <h2 className='transaction-title'>Scrached Cards</h2>
 
         {loadingCards ? (
           <>{/* <Loader /> */}</>
@@ -157,34 +157,25 @@ function TransactionScreen() {
           <Message variant='danger'>{error}</Message>
         ) : (
           cards.map((card) => (
-            <Row key={card._id}>
-              <Col xs={6}>Card ID: {card.cardId}</Col>
-              <Col xs={6}>Date: {card.createdAt.substring(0, 10)}</Col>
-              <Row>
-                <Col xs={3}>
-                  <Image
-                    className='img-fluid'
-                    src='/assets/img/digi_dollar.png'
-                    alt=''
-                  />
-                </Col>
-                <Col xs={6}>
-                  {/* <Row>{product.name}</Row> */}
-                  {/* <Row>Quantity: {product.qty}</Row> */}
-                </Col>
-                <Col xs={3} className='align-self-end'>
-                  <Row>
-                    <Col>
-                      <Image
-                        className='img-fluid'
-                        src='/assets/img/digi_dollar.png'
-                      />
-                    </Col>
-                    <Col>{card.digiDollas}</Col>
-                  </Row>
-                </Col>
-              </Row>
-            </Row>
+            <>
+              <div className='scrached-cards-container' key={card._id}>
+                <div className='scrached-cards-subcontainer'>
+                  Card ID: {card.cardId}
+                </div>
+                <div className='scrached-cards-subcontainer'>
+                  Date: {card.createdAt.substring(0, 10)}
+                </div>
+                <div className='scratchcard-price'>
+                  <div>
+                    <Image
+                      className='img-fluid'
+                      src='/assets/img/digi_dollar.png'
+                    />
+                  </div>
+                  <div>{card.digiDollas}</div>
+                </div>
+              </div>
+            </>
           ))
         )}
       </Container>

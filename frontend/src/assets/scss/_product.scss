@@ -1,4 +1,4 @@
-.btn-circle.btn-lg {
+.btn-circle.btn-lg.emoji-button {
   display: flex;
   align-items: center;
   z-index: 100;
@@ -389,4 +389,115 @@
       color: #8e8e8e;
     }
   }
+}
+
+.offcanvas-body {
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  margin: 0 auto;
+  height: 100%;
+
+  h2 {
+    padding: 0;
+    margin: 0;
+  }
+  .ScratchCard__Container {
+    display: flex;
+    .ScratchCard__Result {
+      .scratch-card-bg {
+        width: 400px;
+        border: 3px solid transparent;
+        border-image: linear-gradient(to bottom, $dgRed, $dgPurple);
+        border-image-slice: 1;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .heading {
+          display: block;
+          text-align: center;
+          margin: auto;
+          font-size: 25px;
+          font-weight: bold;
+          height: 20%;
+          margin: auto;
+        }
+        .digiDollas {
+          display: flex;
+          align-content: center;
+          font-size: 30px;
+          padding: 5px 30px;
+          margin: 15px 0 10px 0;
+          border: dashed 2px black;
+          height: 30%;
+        }
+        .message {
+          height: 20%;
+          display: block;
+          text-align: center;
+          font-size: 18px;
+        }
+        .note {
+          display: flex;
+          text-align: center;
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+.product-search {
+  margin-left: 10px;
+}
+
+// Buttons
+.digicel-button {
+  border-radius: 100rem;
+  color: #161f60;
+  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+  background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
+    linear-gradient(101deg, #f5402a, #9801ff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #fff inset;
+  min-width: 7rem;
+  font-weight: 600;
+}
+
+.btn.btn-primary {
+  border: solid 3px transparent;
+  background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
+    linear-gradient(101deg, #f5402a, #9801ff);
+}
+
+.btn.btn-secondary {
+  border: solid 3px transparent;
+  background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
+    linear-gradient(101deg, #f5402a, #9801ff);
+}
+
+.btn:hover {
+  box-shadow: none;
+  color: white;
+}
+
+.link {
+  color: #161f60;
+}
+.link:hover {
+  color: #161f60;
+  text-decoration: underline;
+}
+
+.page-item.active .page-link {
+  background-color: #9801ff;
+  border-color: #9801ff;
 }
