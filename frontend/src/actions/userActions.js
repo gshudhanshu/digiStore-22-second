@@ -27,6 +27,9 @@ import {
   USER_DELETE_FAIL,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
+  USER_GET_PROFILE_REQUEST,
+  USER_GET_PROFILE_SUCCESS,
+  USER_GET_PROFILE_FAIL,
 } from '../constants/userConstants'
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
@@ -259,6 +262,8 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
     const { data } = await axios.put(`/api/users/profile`, user, config)
 
+    console.log(data)
+
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -273,6 +278,42 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+export const getUserProfile = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_GET_PROFILE_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const { data } = await axios.get(`/api/users/profile`, config)
+
+    dispatch({
+      type: USER_GET_PROFILE_SUCCESS,
+      payload: data,
+    })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_GET_PROFILE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

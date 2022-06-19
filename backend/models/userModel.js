@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema(
     digiDollas: { type: Number, default: 0 },
     lastScratchDate: {
       type: Date,
+      default: new Date(+new Date() - 7 * 24 * 60 * 60 * 1000),
     },
   },
   {

@@ -15,21 +15,22 @@ dayjs.tz.setDefault('America/Barbados')
 // @route POST /api/users/:id/cards
 // @access Private
 const generateScratchCard = asyncHandler(async (req, res) => {
-  let user = await User.findOne({
-    user: req.body._id,
-  })
+  let user = await User.findById(req.body._id)
 
   if (!user) {
     res.status(404)
     throw new Error('User not found')
   }
 
-  const todayDate = Date.now()
-  const lastScratchDate = dayjs(user.lastScratchDate).format('YYYYMMDD')
-  if (
-    lastScratchDate ===
-    dayjs(todayDate).tz('America/Barbados').format('YYYYMMDD')
-  ) {
+  console.log(user)
+  // const todayDate = dayjs(Date.now())
+  // const lastScratchDate = user.lastScratchDate
+  const todayDate = dayjs.tz(Date.now()).format('YYYYMMDD')
+  const lastScratchDate = dayjs.tz(user.lastScratchDate).format('YYYYMMDD')
+  console.log(todayDate)
+  console.log(lastScratchDate)
+
+  if (lastScratchDate === todayDate) {
     res.status(400).json({
       message: "You have already used your today's scratch card",
       lastScratchDate,

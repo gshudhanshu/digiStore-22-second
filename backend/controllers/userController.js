@@ -127,7 +127,6 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   console.log(isOtpVerified)
-
   if (isOtpVerified) {
     const user = await User.create({
       fname,
@@ -135,21 +134,18 @@ const registerUser = asyncHandler(async (req, res) => {
       full_mobile,
       password,
     })
-
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        fname: user.fname,
-        lname: user.lname,
-        full_mobile: user.full_mobile,
-        digiDollas: user.digiDollas,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-      })
-    } else {
-      res.status(400)
-      throw new Error('Invalid user data')
-    }
+    res.status(201).json({
+      _id: user._id,
+      fname: user.fname,
+      lname: user.lname,
+      full_mobile: user.full_mobile,
+      digiDollas: user.digiDollas,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid user data')
   }
 })
 
@@ -215,21 +211,24 @@ const forgetPassword = asyncHandler(async (req, res) => {
   if (isOtpVerified) {
     userExists.password = password
     userExists.save()
+  } else {
+    res.status(400)
+    throw new Error('SMS Code is incorrect')
+  }
 
-    if (userExists) {
-      res.status(201).json({
-        _id: user._id,
-        fname: user.fname,
-        lname: user.lname,
-        full_mobile: user.full_mobile,
-        digiDollas: user.digiDollas,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-      })
-    } else {
-      res.status(400)
-      throw new Error('Invalid user data')
-    }
+  if (userExists) {
+    res.status(201).json({
+      _id: userExists._id,
+      fname: userExists.fname,
+      lname: userExists.lname,
+      full_mobile: userExists.full_mobile,
+      digiDollas: userExists.digiDollas,
+      isAdmin: userExists.isAdmin,
+      token: generateToken(userExists._id),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid user data')
   }
 })
 
@@ -314,6 +313,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       full_mobile: user.full_mobile,
       digiDollas: user.digiDollas,
       isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     })
   } else {
     res.status(404)
@@ -325,7 +325,13 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @route PUT /api/users/profile
 // @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
+  if (req.body.password.length < 6) {
+    res.status(400)
+    throw new Error('Password length should be atleast 6 character')
+  }
+
   const user = await User.findById(req.user._id)
+
   if (user) {
     user.fname = req.body.fname || user.fname
     user.lname = req.body.lname || user.lname
@@ -339,6 +345,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       fname: updatedUser.fname,
       lname: updatedUser.lname,
       isAdmin: updatedUser.isAdmin,
+      digiDollas: user.digiDollas,
       token: generateToken(updatedUser._id),
     })
   } else {

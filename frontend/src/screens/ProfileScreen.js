@@ -6,7 +6,7 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom'
-import { Form, Button, Row, Col, Table } from 'react-bootstrap'
+import { Form, Button, Row, Col, Table, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -63,15 +63,19 @@ function ProfileScreen() {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Password do not match')
+    } else if (password.length < 6) {
+      setMessage('Password length should be atleast 6 character')
     } else {
       dispatch(
         updateUserProfile({ id: user._id, fname, lname, full_mobile, password })
       )
     }
   }
+
   return (
-    <Row>
-      <Col md={3}>
+    <Container>
+      {/* <Row> */}
+      <Col md={4} className='mx-auto'>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
@@ -128,7 +132,7 @@ function ProfileScreen() {
           </Button>
         </Form>
       </Col>
-      <Col md={9}>
+      {/* <Col md={9}>
         <h2>My Orders</h2>
         {loadingOrders ? (
           <Loader />
@@ -169,8 +173,9 @@ function ProfileScreen() {
             </tbody>
           </Table>
         )}
-      </Col>
-    </Row>
+      </Col> 
+    </Row>*/}
+    </Container>
   )
 }
 

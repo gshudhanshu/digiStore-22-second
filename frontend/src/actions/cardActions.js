@@ -8,7 +8,11 @@ import {
   CARD_LIST_SCRATCH_MY_SUCCESS,
   CARD_LIST_SCRATCH_MY_FAIL,
 } from '../constants/cardConstants'
-import { USER_LOGIN_ADD_DOLLAS } from '../constants/userConstants'
+import {
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_LOGIN_ADD_DOLLAS,
+} from '../constants/userConstants'
 
 // SCRATCH CARD
 export const getScrachCardDetails = (user) => async (dispatch, getState) => {

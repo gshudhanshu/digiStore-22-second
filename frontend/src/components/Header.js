@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Button,
@@ -15,11 +15,19 @@ import * as Icon from 'react-feather'
 import SearchBox from '../components/SearchBox'
 import { logout } from '../actions/userActions'
 import { Link } from 'react-router-dom'
+import { getUserProfile } from '../actions/userActions'
 
 const Header = ({}) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(getUserProfile(userInfo._id))
+    }
+  }, [])
+
   const logoutHandler = () => {
     dispatch(logout())
   }

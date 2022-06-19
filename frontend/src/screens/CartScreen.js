@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
+import Loader from '../components/Loader'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import { createNewOrder } from '../actions/orderActions'
 
@@ -17,6 +18,13 @@ const CartScreen = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
+
+  const orderNewCreate = useSelector((state) => state.orderNewCreate)
+  const {
+    loading: loadingNewOrder,
+    error: errorNewOrder,
+    userInfo,
+  } = orderNewCreate
 
   //   Calculate prices
   cart.itemsPrice = cart.cartItems.reduce(
@@ -143,14 +151,22 @@ const CartScreen = () => {
               )}
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button
-                type='button'
-                className='btn-block'
-                disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Place Order
-              </Button>
+              {loadingNewOrder ? (
+                <Loader />
+              ) : (
+                <Button
+                  type='button'
+                  className='btn-block'
+                  disabled={cartItems.length === 0}
+                  onClick={checkoutHandler}
+                >
+                  Place Order
+                </Button>
+              )}
+
+              {errorNewOrder && (
+                <Message variant='danger'>{errorNewOrder}</Message>
+              )}
             </ListGroup.Item>
           </ListGroup>
         </Card>
