@@ -4,14 +4,15 @@
   "description": "",
   "main": "server.js",
   "type": "module",
+  "private": true,
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "yarn start --prefix frontend",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "data:import": "node backend/seeder ",
     "data:destroy": "node backend/seeder -d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn add --prefix frontend && yarn run build --prefix frontend"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix frontend && yarn run build --prefix frontend"
   },
   "author": "Shudhanshu Gunjal",
   "license": "ISC",
