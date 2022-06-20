@@ -118,7 +118,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('User already exists')
   } else {
     await client.verify
-      .services(process.env.VERIFY_SERVICE_SID)
+      .services('VAd84d38cc34180be4006696e9eab921ff')
       .verificationChecks.create({ to: full_mobile, code: otp })
       .then((verification_check) => {
         isOtpVerified = verification_check.valid
@@ -237,10 +237,8 @@ const forgetPassword = asyncHandler(async (req, res) => {
 // @access Private
 const sendOtp = asyncHandler(async (req, res) => {
   let { fname, lname, mobile, full_mobile, use } = req.body
-
   let errors = []
   mobile = Number(mobile)
-  console.log(mobile.toString().length)
   let mobileStr = mobile.toString()
   if (
     !mobile ||
@@ -285,16 +283,17 @@ const sendOtp = asyncHandler(async (req, res) => {
         })
       } else {
         client.verify
-          .services(process.env.VERIFY_SERVICE_SID)
+          .services('VAd84d38cc34180be4006696e9eab921ff')
           .verifications.create({ to: full_mobile, channel: 'sms' })
           .then((verification) => {
             res.status(200).json({ verification })
           })
           .catch((error) => {
             res.status(400).json({ error })
+            console.log('verification')
           })
 
-        res.send({ opt: 'sent' })
+        // res.send({ opt: 'sent' })
       }
     })
   }

@@ -8,6 +8,9 @@ import {
 } from 'react-router-dom'
 import { Form, Button, Row, Col, Table, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+import Breadcrumb from '../wrappers/Breadcrumb'
+
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -73,66 +76,73 @@ function ProfileScreen() {
   }
 
   return (
-    <Container>
-      {/* <Row> */}
-      <Col md={4} className='mx-auto'>
-        <h2>User Profile</h2>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile Updated</Message>}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='fname'>
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type='fname'
-              placeholder='Enter First Name'
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='lname'>
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type='lname'
-              placeholder='Enter Last Name'
-              value={lname}
-              onChange={(e) => setLname(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='full_mobile'>
-            <Form.Label>Mobile Number</Form.Label>
-            <Form.Control
-              type='text'
-              placeholder='Enter Mobile Number'
-              value={full_mobile}
-              onChange={(e) => setFull_mobile(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='confirmPassword'>
-            <Form.Label>confirmPassword</Form.Label>
-            <Form.Control
-              type='confirmPassword'
-              placeholder='Enter confirmPassword'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type='submit' variant='primary'>
-            Update
-          </Button>
-        </Form>
-      </Col>
-      {/* <Col md={9}>
+    <>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + location}>
+        Profile
+      </BreadcrumbsItem>
+      <Breadcrumb />
+
+      <Container>
+        {/* <Row> */}
+        <Col md={4} className='mx-auto'>
+          <h2>User Profile</h2>
+          {message && <Message variant='danger'>{message}</Message>}
+          {error && <Message variant='danger'>{error}</Message>}
+          {success && <Message variant='success'>Profile Updated</Message>}
+          {loading && <Loader />}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='fname'>
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                type='fname'
+                placeholder='Enter First Name'
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='lname'>
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                type='lname'
+                placeholder='Enter Last Name'
+                value={lname}
+                onChange={(e) => setLname(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='full_mobile'>
+              <Form.Label>Mobile Number</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter Mobile Number'
+                value={full_mobile}
+                onChange={(e) => setFull_mobile(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='password'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Enter password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='confirmPassword'>
+              <Form.Label>confirmPassword</Form.Label>
+              <Form.Control
+                type='confirmPassword'
+                placeholder='Enter confirmPassword'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Button type='submit' className='digicel-button' variant='primary'>
+              Update
+            </Button>
+          </Form>
+        </Col>
+        {/* <Col md={9}>
         <h2>My Orders</h2>
         {loadingOrders ? (
           <Loader />
@@ -175,7 +185,8 @@ function ProfileScreen() {
         )}
       </Col> 
     </Row>*/}
-    </Container>
+      </Container>
+    </>
   )
 }
 

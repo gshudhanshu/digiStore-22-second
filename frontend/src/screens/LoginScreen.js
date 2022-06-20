@@ -86,7 +86,7 @@ function LoginScreen() {
                   // onChange={(e) => setFull_mobile(e.target.value)}
                 />
               </Form.Group> */}
-              <Form.Group controlId='full_mobile' className='mb-4'>
+              <Form.Group controlId='full_mobile' className='mb-2'>
                 <Form.Label>Mobile Number</Form.Label>
                 <Form.Control
                   type='full_mobile'
@@ -96,7 +96,7 @@ function LoginScreen() {
                 ></Form.Control>
               </Form.Group>
 
-              <Form.Group controlId='password' className='mb-4'>
+              <Form.Group controlId='password' className='mb-2'>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type='password'
@@ -114,7 +114,7 @@ function LoginScreen() {
                   </span>
                   <a href='/forget-password'>Forgot Password?</a>
                 </div>
-                <Button type='submit' variant='primary' className='mb-4'>
+                <Button type='submit' className='digicel-button mb-3'>
                   Login
                 </Button>
               </div>

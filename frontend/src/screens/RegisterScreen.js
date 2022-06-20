@@ -200,7 +200,7 @@ function RegisterScreen() {
               />
               <div className='input-group-append'>
                 <Button
-                  className='btn btn-outline-secondary'
+                  className='btn btn-outline-secondary digicel-button'
                   type='button'
                   id='otpBtn'
                   onClick={sendOtpHandler}
@@ -217,7 +217,7 @@ function RegisterScreen() {
               <span id='error-mob-msg' className='d-none'></span>
             </div>
             <div id='mobileHelp' className='form-text'>
-              Format: +12461234567
+              Format: 1234567
             </div>
           </div>
 
@@ -248,7 +248,11 @@ function RegisterScreen() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type='submit' variant='primary'>
+          <Button
+            type='submit'
+            className='digicel-button mt-3'
+            variant='primary'
+          >
             Register
           </Button>
         </Form>

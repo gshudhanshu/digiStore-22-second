@@ -176,7 +176,7 @@ function ForgetPasswordScreen() {
               />
               <div className='input-group-append'>
                 <Button
-                  className='btn btn-outline-secondary'
+                  className='btn btn-outline-secondary digicel-button'
                   type='button'
                   id='otpBtn'
                   onClick={sendOtpHandler}
@@ -193,7 +193,7 @@ function ForgetPasswordScreen() {
               <span id='error-mob-msg' className='d-none'></span>
             </div>
             <div id='mobileHelp' className='form-text'>
-              Format: +12461234567
+              Format: 1234567
             </div>
           </div>
 
@@ -224,7 +224,11 @@ function ForgetPasswordScreen() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type='submit' variant='primary'>
+          <Button
+            className='digicel-button mt-3'
+            type='submit'
+            variant='primary'
+          >
             Submit
           </Button>
         </Form>

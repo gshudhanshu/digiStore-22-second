@@ -72,7 +72,7 @@
           color: #333;
           font-size: 14px;
           height: 45px;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           padding: 0 15px;
           @media #{$xs-layout} {
             margin-bottom: 20px;
@@ -89,7 +89,7 @@
         .button-box {
           .login-toggle-btn {
             display: flex;
-            padding: 0 0 25px;
+            padding: 0 0 10px;
             flex-wrap: wrap;
             justify-content: space-between;
             label {
@@ -119,28 +119,28 @@
               }
             }
           }
-          button {
-            background-color: #f2f2f2;
-            border: medium none;
-            color: #333;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1;
-            padding: 11px 30px;
-            text-transform: uppercase;
-            transition: all 0.3s ease 0s;
-            a {
-              transition: all 0.9s ease 0s;
-            }
-            &:hover {
-              background-color: $theme-color;
-              color: #fff;
-              a {
-                color: #fff;
-              }
-            }
-          }
+          // button {
+          //   background-color: #f2f2f2;
+          //   border: medium none;
+          //   color: #333;
+          //   cursor: pointer;
+          //   font-size: 14px;
+          //   font-weight: 500;
+          //   line-height: 1;
+          //   padding: 11px 30px;
+          //   text-transform: uppercase;
+          //   transition: all 0.3s ease 0s;
+          //   a {
+          //     transition: all 0.9s ease 0s;
+          //   }
+          //   &:hover {
+          //     background-color: $theme-color;
+          //     color: #fff;
+          //     a {
+          //       color: #fff;
+          //     }
+          //   }
+          // }
         }
       }
 
