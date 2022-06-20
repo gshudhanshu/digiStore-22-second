@@ -9,10 +9,13 @@ import {
 import { Helmet } from 'react-helmet'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 
-import PhoneInput from 'react-phone-input-2'
+// import PhoneInput from 'react-phone-input-2'
 // import 'react-phone-input-2/lib/style.css'
-import intlTelInput from 'intl-tel-input'
-import 'intl-tel-input/build/css/intlTelInput.css'
+// import intlTelInput from 'intl-tel-input'
+// import 'intl-tel-input/build/css/intlTelInput.css'
+
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+import Breadcrumb from '../wrappers/Breadcrumb'
 
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -105,8 +108,14 @@ function ForgetPasswordScreen() {
 
   return (
     <>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + location}>
+        Forget Password
+      </BreadcrumbsItem>
+      <Breadcrumb />
+
       <FormContainer>
-        <h1>Forget Password</h1>
+        <h1 className='text-center'>Forget Password</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
@@ -157,7 +166,7 @@ function ForgetPasswordScreen() {
           /> */}
           {/* </Form.Group> */}
 
-          <div className='mb-3'>
+          <div className='mb-2'>
             <label htmlFor='mobile' className='form-label'>
               Mobile
             </label>
@@ -174,7 +183,7 @@ function ForgetPasswordScreen() {
                   setMobile(e.target.value)
                 }}
               />
-              <div className='input-group-append'>
+              <div className='input-group-append mb-2'>
                 <Button
                   className='btn btn-outline-secondary digicel-button'
                   type='button'
@@ -197,7 +206,7 @@ function ForgetPasswordScreen() {
             </div>
           </div>
 
-          <Form.Group controlId='otp'>
+          <Form.Group controlId='otp' className='mb-2'>
             <Form.Label>SMS Code</Form.Label>
             <Form.Control
               type='otp'
@@ -206,7 +215,7 @@ function ForgetPasswordScreen() {
               onChange={(e) => setOtp(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='password'>
+          <Form.Group controlId='password' className='mb-2'>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type='password'
@@ -215,29 +224,29 @@ function ForgetPasswordScreen() {
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='confirmPassword'>
+          <Form.Group controlId='confirmPassword' className='mb-2'>
             <Form.Label>confirmPassword</Form.Label>
             <Form.Control
               type='confirmPassword'
-              placeholder='Enter confirmPassword'
+              placeholder='Confirm Password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Button
-            className='digicel-button mt-3'
+            className='digicel-button mt-2'
             type='submit'
             variant='primary'
           >
             Submit
           </Button>
         </Form>
-        <Row className='py-3'>
+        <div className='py-3'>
           Have an account?{' '}
           <Link to={redirect ? `/login?redirect=${redirect}` : '/register'}>
             Login
           </Link>
-        </Row>
+        </div>
       </FormContainer>
     </>
   )

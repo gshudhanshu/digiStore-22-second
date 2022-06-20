@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { logout } from '../actions/userActions'
 
 import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
@@ -73,6 +74,10 @@ function ProfileScreen() {
         updateUserProfile({ id: user._id, fname, lname, full_mobile, password })
       )
     }
+  }
+
+  const logoutHandler = () => {
+    dispatch(logout())
   }
 
   return (
@@ -139,6 +144,13 @@ function ProfileScreen() {
             </Form.Group>
             <Button type='submit' className='digicel-button' variant='primary'>
               Update
+            </Button>
+            <Button
+              className='digicel-button'
+              variant='secondary'
+              onClick={logoutHandler}
+            >
+              Logout
             </Button>
           </Form>
         </Col>

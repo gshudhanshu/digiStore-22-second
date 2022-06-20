@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+import Breadcrumb from '../wrappers/Breadcrumb'
 
 import PhoneInput from 'react-phone-input-2'
 // import 'react-phone-input-2/lib/style.css'
@@ -109,13 +111,19 @@ function RegisterScreen() {
 
   return (
     <>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + location}>
+        Register
+      </BreadcrumbsItem>
+      <Breadcrumb />
+
       <FormContainer>
-        <h1>Sign Up</h1>
+        <h1 className='text-center'>Create New Account</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
         <Form className='registration-form' onSubmit={submitHandler}>
-          <Form.Group controlId='fname'>
+          <Form.Group controlId='fname' className='mb-2'>
             <Form.Label>First Name</Form.Label>
             <Form.Control
               type='fname'
@@ -124,7 +132,7 @@ function RegisterScreen() {
               onChange={(e) => setFname(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='lname'>
+          <Form.Group controlId='lname' className='mb-2'>
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               type='lname'
@@ -181,7 +189,7 @@ function RegisterScreen() {
           /> */}
           {/* </Form.Group> */}
 
-          <div className='mb-3'>
+          <div className='mb-2'>
             <label htmlFor='mobile' className='form-label'>
               Mobile
             </label>
@@ -221,7 +229,7 @@ function RegisterScreen() {
             </div>
           </div>
 
-          <Form.Group controlId='otp'>
+          <Form.Group controlId='otp' className='mb-2'>
             <Form.Label>SMS Code</Form.Label>
             <Form.Control
               type='otp'
@@ -230,7 +238,7 @@ function RegisterScreen() {
               onChange={(e) => setOtp(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='password'>
+          <Form.Group className='mb-2' controlId='password'>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type='password'
@@ -240,10 +248,10 @@ function RegisterScreen() {
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId='confirmPassword'>
-            <Form.Label>confirmPassword</Form.Label>
+            <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type='confirmPassword'
-              placeholder='Enter confirmPassword'
+              placeholder='Confirm Password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
@@ -256,12 +264,12 @@ function RegisterScreen() {
             Register
           </Button>
         </Form>
-        <Row className='py-3'>
+        <div className='py-3'>
           Have an account?{' '}
           <Link to={redirect ? `/login?redirect=${redirect}` : '/register'}>
             Login
           </Link>
-        </Row>
+        </div>
       </FormContainer>
     </>
   )

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+import Breadcrumb from '../wrappers/Breadcrumb'
+
 import {
   Container,
   Row,
@@ -22,6 +25,8 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productContants'
 
 function ProductScreen() {
+  let location = useLocation()
+
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -61,6 +66,12 @@ function ProductScreen() {
 
   return (
     <>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + location}>
+        Product Details
+      </BreadcrumbsItem>
+      <Breadcrumb />
+
       <Container>
         <Link className='btn btn-dark my-3' to='/'>
           Go Back
@@ -138,10 +149,10 @@ function ProductScreen() {
                         </Row>
                       </ListGroup.Item>
                     )}
-                    <ListGroup.Item>
+                    <ListGroup.Item className='d-flex justify-content-center'>
                       <Button
                         onClick={addToCartHandler}
-                        className='btn-block'
+                        className='btn-block digicel-button'
                         type='button'
                         disabled={product.countInStock === 0}
                       >

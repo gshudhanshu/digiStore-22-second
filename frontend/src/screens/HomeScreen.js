@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -13,12 +13,10 @@ import {
 // import { Icon } from 'react-materialize'
 import ScratchCard from 'react-scratchcard-v2'
 
-import foregroundImageSrc from '../assets/img/placeimg_400_300_people.jpg'
 import backgroundImageSrc from '../assets/img/card-img.jpg'
 
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
-import ShopTopbar from '../wrappers/ShopTopbar'
 
 import Product from '../components/Product'
 import Message from '../components/Message'
@@ -26,6 +24,7 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listProducts } from '../actions/productActions'
 import { getScrachCardDetails, addDigiDollas } from '../actions/cardActions'
+
 // import ProductsCarousel from '../components/ProductsCarousel'
 import Meta from '../components/Meta'
 import SearchBox from '../components/SearchBox'
@@ -59,7 +58,6 @@ const HomeScreen = () => {
   }, [dispatch, keyword, pageNumber])
 
   const addDigiDollasHandler = async (e) => {
-    e.preventDefault()
     dispatch(addDigiDollas(userInfo, cardDetails))
   }
 
@@ -123,9 +121,8 @@ const HomeScreen = () => {
         <Offcanvas.Body>
           <h2>Reveal your card</h2>
           <div>
-            {/* <button onClick={onClickReset}>Reset</button> */}
-            {cardDetails ? (
-              <ScratchCard
+            {cardDetails.status === 'success' ? (
+              (<ScratchCard
                 width={300}
                 height={300}
                 image={backgroundImageSrc}
@@ -144,7 +141,7 @@ const HomeScreen = () => {
                     // background: '#E8E8E8',
                   }}
                 >
-                  {cardDetails && (
+                  {cardDetails(
                     <>
                       <Row className='no-gutters heading'>Congrats!</Row>
                       <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
@@ -155,7 +152,7 @@ const HomeScreen = () => {
                     </>
                   )}
                 </div>
-              </ScratchCard>
+              </ScratchCard>)(cardDetails.status === 'fail')
             ) : (
               <h1>Sorry! You have already scratched today's card</h1>
             )}
@@ -197,9 +194,17 @@ const HomeScreen = () => {
             // sortedProductCount={currentData.length}
             // />*/}
 
-            <Row>
+            <Row className='all-products-container'>
               {products.map((product) => (
-                <Col key={product._id} xs={6} sm={6} md={6} lg={4} xl={3}>
+                <Col
+                  className='single-product-container'
+                  key={product._id}
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                >
                   <h3>
                     <Product product={product} />
                   </h3>

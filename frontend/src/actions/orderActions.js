@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { CART_RESET_ITEM } from '../constants/cartConstants'
 
 import {
   ORDER_CREATE_REQUEST,
@@ -84,6 +85,12 @@ export const createNewOrder = (order) => async (dispatch, getState) => {
       type: USER_LOGIN_ADD_DOLLAS,
       payload: data.user.digiDollas,
     })
+
+    dispatch({
+      type: CART_RESET_ITEM,
+    })
+    localStorage.removeItem('cartItems')
+
     localStorage.setItem(
       'userInfo',
       JSON.stringify(getState().userLogin.userInfo)

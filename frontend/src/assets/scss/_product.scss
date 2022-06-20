@@ -501,3 +501,18 @@
   background-color: #9801ff;
   border-color: #9801ff;
 }
+
+.all-products-container {
+  @media #{$xs-layout} {
+    // column-gap: 10px;
+    display: flex;
+    flex: 1 1;
+    justify-content: space-evenly;
+  }
+}
+.single-product-container {
+  @media #{$xs-layout} {
+    padding: 0;
+    width: 45%;
+  }
+}

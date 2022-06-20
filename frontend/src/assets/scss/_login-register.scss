@@ -46,9 +46,9 @@
     }
   }
 
-  .form-container {
+  .login-form {
     background: transparent none repeat scroll 0 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     padding: 40px;
     text-align: left;
     @media #{$lg-layout} {
@@ -70,7 +70,7 @@
           background-color: transparent;
           border: 1px solid #ebebeb;
           color: #333;
-          font-size: 14px;
+          // font-size: 14px;
           height: 45px;
           margin-bottom: 20px;
           padding: 0 15px;
@@ -166,6 +166,10 @@
       padding-bottom: 60px;
     }
   }
+}
+
+.input-group-append {
+  margin-left: 8px !important;
 }
 
 // .form-container {

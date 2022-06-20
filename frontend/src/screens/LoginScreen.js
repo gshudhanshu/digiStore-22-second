@@ -55,7 +55,7 @@ function LoginScreen() {
       <Breadcrumb />
 
       <FormContainer>
-        <div className='form-container'>
+        <div className='login-form'>
           <h1 className='text-center'>Welcome back!</h1>
           <h5 className='text-center'>
             Please enter your account details here

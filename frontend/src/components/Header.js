@@ -47,10 +47,15 @@ const Header = ({}) => {
           collapseOnSelect
           // className='stick sticky-bar header-res-padding clearfix'
         >
-          <Container>
+          <Container className='justify-content-center justify-content-sm-around justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between'>
             <LinkContainer to='/'>
               <Navbar.Brand>
-                <img alt='' className='logo' src={'/assets/img/logo.png'} />
+                <img
+                  alt=''
+                  className='logo'
+                  // style={userInfo && 'justify-content: center'}
+                  src={'/assets/img/logo.png'}
+                />
               </Navbar.Brand>
             </LinkContainer>
             {/* <Button
@@ -65,8 +70,8 @@ const Header = ({}) => {
               aria-controls='basic-navbar-nav'
               className='d-none d-md-block'
             /> */}
-            <div className='d-none d-md-block'>
-              <Navbar.Collapse id='basic-navbar-nav'>
+            <div className='navbar-container d-none d-md-block'>
+              <Navbar id='basic-navbar-nav '>
                 <Nav className='mx-auto'>
                   <NavLink to='/' end>
                     Home
@@ -113,7 +118,7 @@ const Header = ({}) => {
                     </NavDropdown>
                   )}
                 </Nav>
-              </Navbar.Collapse>
+              </Navbar>
             </div>
             {userInfo && (
               <div className='customer-points'>

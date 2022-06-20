@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
+import Breadcrumb from '../wrappers/Breadcrumb'
+
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
@@ -14,6 +17,8 @@ import {
 import { PRODUCT_CREATE_RESET } from '../constants/productContants'
 
 const ProductListScreen = () => {
+  let location = useLocation()
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -70,6 +75,12 @@ const ProductListScreen = () => {
   }
   return (
     <>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + location}>
+        Cart
+      </BreadcrumbsItem>
+      <Breadcrumb />
+
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>

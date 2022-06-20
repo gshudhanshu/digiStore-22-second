@@ -4,11 +4,22 @@
   // background-color: #eeeeee;
   padding: 18px 0;
   font-size: 18px;
-
   width: 100%;
 
   transition: all 0.3s ease 0s;
   animation: 700ms ease-in-out 0s normal none 1 running fadeInDown;
+  div.container {
+    // justify-content: center;
+    width: 100%;
+    a.navbar-brand {
+      // width: 100%;
+      // display: flex;
+      // justify-content: center;
+    }
+    .navbar-container {
+      // width: 100%;
+    }
+  }
 }
 
 .navbar-nav {

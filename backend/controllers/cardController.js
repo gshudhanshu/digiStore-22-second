@@ -22,17 +22,14 @@ const generateScratchCard = asyncHandler(async (req, res) => {
     throw new Error('User not found')
   }
 
-  console.log(user)
   // const todayDate = dayjs(Date.now())
   // const lastScratchDate = user.lastScratchDate
   const todayDate = dayjs.tz(Date.now()).format('YYYYMMDD')
   const lastScratchDate = dayjs.tz(user.lastScratchDate).format('YYYYMMDD')
-  console.log(todayDate)
-  console.log(lastScratchDate)
 
   if (lastScratchDate === todayDate) {
-    res.status(400).json({
-      message: "You have already used your today's scratch card",
+    return res.status(200).json({
+      status: 'fail',
       lastScratchDate,
     })
   }
@@ -72,7 +69,7 @@ const generateScratchCard = asyncHandler(async (req, res) => {
     'day'
   )
 
-  res.json({ digiDollas: randomNum, expiryDate, todayDate })
+  res.json({ status: 'success', digiDollas: randomNum, expiryDate, todayDate })
 })
 
 // @desc Generate scratch card points

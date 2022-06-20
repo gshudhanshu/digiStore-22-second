@@ -183,7 +183,7 @@ const CartScreen = () => {
                   ) : (
                     <Button
                       type='button'
-                      className='btn-block digicel-button'
+                      className='btn-block cart-place-order digicel-button'
                       disabled={cartItems.length === 0}
                       onClick={checkoutHandler}
                     >
