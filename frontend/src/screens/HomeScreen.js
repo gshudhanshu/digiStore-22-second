@@ -11,7 +11,7 @@ import {
   Col,
 } from 'react-bootstrap'
 // import { Icon } from 'react-materialize'
-import ScratchCard from 'react-scratchcard-v2'
+import ScratchCard from 'react-scratchcard-v4'
 
 import backgroundImageSrc from '../assets/img/card-img.jpg'
 
