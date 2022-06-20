@@ -11,6 +11,7 @@
   div.container {
     // justify-content: center;
     width: 100%;
+    gap: 10px;
     a.navbar-brand {
       // width: 100%;
       // display: flex;
@@ -62,15 +63,16 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  max-width: 170px;
-  min-width: 140px;
+  max-width: 180px;
+  min-width: 150px;
 
   @media #{$md-layout} {
     margin-top: 0;
+    max-width: 160px;
   }
   @media #{$xs-layout} {
     margin-top: 0;
-    max-width: 140px;
+    max-width: 150px;
   }
 }
 
@@ -85,3 +87,7 @@
 // #basic-navbar-nav {
 //   max-width: 250px;
 // }
+
+.profile-logout-button {
+  margin-left: 8px !important;
+}

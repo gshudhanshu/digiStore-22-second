@@ -46,7 +46,7 @@ const Header = ({}) => {
           collapseOnSelect
           // className='stick sticky-bar header-res-padding clearfix'
         >
-          <Container className='justify-content-center justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between'>
+          <Container className='justify-content-center gx-5 justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between'>
             <LinkContainer to='/'>
               <Navbar.Brand>
                 <img

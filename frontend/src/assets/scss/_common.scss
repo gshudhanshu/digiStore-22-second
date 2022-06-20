@@ -240,7 +240,8 @@ body {
   font-style: normal;
   line-height: 24px;
 
-  color: #000;
+  // color: #000;
+  color: $dBlue;
   background-color: $white;
 }
 
@@ -255,7 +256,8 @@ h6 {
 
   margin-top: 0;
 
-  color: $heading-color;
+  // color: $heading-color;
+  color: $dBlue;
 }
 
 p {
@@ -266,7 +268,8 @@ p {
 
   margin-bottom: 15px;
 
-  color: #333;
+  // color: #333;
+  color: $dBlue;
 }
 
 h1 {
@@ -310,7 +313,8 @@ button {
   cursor: pointer;
   text-decoration: none;
 
-  color: #000;
+  // color: #000;
+  color: $dBlue;
 }
 
 a,

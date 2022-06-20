@@ -91,13 +91,13 @@ function ProfileScreen() {
       <Container>
         {/* <Row> */}
         <Col md={4} className='mx-auto'>
-          <h2>User Profile</h2>
+          <h2 className='text-center'>User Profile</h2>
           {message && <Message variant='danger'>{message}</Message>}
           {error && <Message variant='danger'>{error}</Message>}
           {success && <Message variant='success'>Profile Updated</Message>}
           {loading && <Loader />}
           <Form onSubmit={submitHandler}>
-            <Form.Group controlId='fname'>
+            <Form.Group controlId='fname' className='mb-2'>
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type='fname'
@@ -106,7 +106,7 @@ function ProfileScreen() {
                 onChange={(e) => setFname(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='lname'>
+            <Form.Group controlId='lname' className='mb-2'>
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type='lname'
@@ -115,7 +115,7 @@ function ProfileScreen() {
                 onChange={(e) => setLname(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='full_mobile'>
+            <Form.Group controlId='full_mobile' className='mb-2'>
               <Form.Label>Mobile Number</Form.Label>
               <Form.Control
                 type='text'
@@ -124,7 +124,7 @@ function ProfileScreen() {
                 onChange={(e) => setFull_mobile(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='password'>
+            <Form.Group controlId='password' className='mb-2'>
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type='password'
@@ -133,20 +133,24 @@ function ProfileScreen() {
                 onChange={(e) => setPassword(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='confirmPassword'>
-              <Form.Label>confirmPassword</Form.Label>
+            <Form.Group controlId='confirmPassword' className='mb-2'>
+              <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type='confirmPassword'
-                placeholder='Enter confirmPassword'
+                placeholder='Confirm Password'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Button type='submit' className='digicel-button' variant='primary'>
+            <Button
+              type='submit'
+              className='digicel-button mt-2'
+              variant='primary'
+            >
               Update
             </Button>
             <Button
-              className='digicel-button'
+              className='digicel-button profile-logout-button mt-2'
               variant='secondary'
               onClick={logoutHandler}
             >
