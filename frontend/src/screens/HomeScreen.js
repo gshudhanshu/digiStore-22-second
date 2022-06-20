@@ -121,7 +121,7 @@ const HomeScreen = () => {
         <Offcanvas.Body>
           <h2>Reveal your card</h2>
           <div>
-            {cardDetails.status === 'success' ? (
+            {/* {cardDetails.status === 'success' ? (
               (<ScratchCard
                 width={300}
                 height={300}
@@ -141,7 +141,7 @@ const HomeScreen = () => {
                     // background: '#E8E8E8',
                   }}
                 >
-                  {cardDetails(
+                  {cardDetails && (
                     <>
                       <Row className='no-gutters heading'>Congrats!</Row>
                       <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
@@ -155,6 +155,44 @@ const HomeScreen = () => {
               </ScratchCard>)(cardDetails.status === 'fail')
             ) : (
               <h1>Sorry! You have already scratched today's card</h1>
+            )} */}
+
+            {cardDetails && cardDetails.status === 'success' ? (
+              <ScratchCard
+                width={300}
+                height={300}
+                image={backgroundImageSrc}
+                finishPercent={30}
+                fadeOutOnComplete
+                // onComplete={!isCompleted && !cardScratchCompleted && addDigiDollasHandler}
+                onComplete={(e) => addDigiDollasHandler(e)}
+              >
+                <div
+                  className='scratch-card-bg'
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                    // background: '#E8E8E8',
+                  }}
+                >
+                  {cardDetails && (
+                    <>
+                      <Row className='no-gutters heading'>Congrats!</Row>
+                      <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
+                      <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
+                      <Row className='note'>
+                        <p>{`This will be credited to your DigiDollas`}</p>
+                      </Row>
+                    </>
+                  )}
+                </div>
+              </ScratchCard>
+            ) : cardDetails && cardDetails.status === 'fail' ? (
+              <h1>Sorry! You have already scratched today's card</h1>
+            ) : (
+              <h1>Please login</h1>
             )}
           </div>
           <Row>
