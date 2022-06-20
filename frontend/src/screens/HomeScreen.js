@@ -177,16 +177,14 @@ const HomeScreen = () => {
                     // background: '#E8E8E8',
                   }}
                 >
-                  {cardDetails && (
-                    <>
-                      <Row className='no-gutters heading'>Congrats!</Row>
-                      <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
-                      <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
-                      <Row className='note'>
-                        <p>{`This will be credited to your DigiDollas`}</p>
-                      </Row>
-                    </>
-                  )}
+                  <>
+                    <Row className='no-gutters heading'>Congrats!</Row>
+                    <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
+                    <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
+                    <Row className='note'>
+                      <p>{`This will be credited to your DigiDollas`}</p>
+                    </Row>
+                  </>
                 </div>
               </ScratchCard>
             ) : cardDetails && cardDetails.status === 'fail' ? (

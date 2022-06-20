@@ -71,15 +71,18 @@ export const addDigiDollas =
         config
       )
 
-      dispatch({
-        type: CARD_SCRATCH_SUCCESS,
-        payload: {
-          digiDollas: data.cardDetails.digiDollas,
-          expiryDate: data.cardDetails.expiryDate,
-          todayDate: data.cardDetails.todayDate,
-          message: data.message,
-        },
-      })
+      // dispatch({
+      //   type: CARD_SCRATCH_SUCCESS,
+      //   payload: { data },
+
+      //   // payload: {
+      //   //   digiDollas: data.cardDetails.digiDollas,
+      //   //   expiryDate: data.cardDetails.expiryDate,
+      //   //   todayDate: data.cardDetails.todayDate,
+      //   //   message: data.message,
+      //   //   status: data.status,
+      //   // },
+      // })
 
       toast(`${data.cardDetails.digiDollas} DigiDollas Added`)
       dispatch({

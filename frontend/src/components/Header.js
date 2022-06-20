@@ -35,7 +35,6 @@ const Header = ({}) => {
   // OffCanvas nav
   // const [show, setShow] = useState(false)
   // const handleClose = () => setShow(false)
-  // const handleShow = () => setShow(true)
 
   return (
     <>
@@ -47,7 +46,7 @@ const Header = ({}) => {
           collapseOnSelect
           // className='stick sticky-bar header-res-padding clearfix'
         >
-          <Container className='justify-content-center justify-content-sm-around justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between'>
+          <Container className='justify-content-center justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between'>
             <LinkContainer to='/'>
               <Navbar.Brand>
                 <img
@@ -70,7 +69,7 @@ const Header = ({}) => {
               aria-controls='basic-navbar-nav'
               className='d-none d-md-block'
             /> */}
-            <div className='navbar-container d-none d-md-block'>
+            <div className='navbar-container d-none d-sd-block '>
               <Navbar id='basic-navbar-nav '>
                 <Nav className='mx-auto'>
                   <NavLink to='/' end>

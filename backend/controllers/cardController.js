@@ -106,6 +106,7 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
       user,
       cardDetails,
       message: 'DigiDollas is added to total',
+      status: 'success',
     })
   }
 
