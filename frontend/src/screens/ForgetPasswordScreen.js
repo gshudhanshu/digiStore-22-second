@@ -7,7 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { InputGroup, Form, Button, Row, Col } from 'react-bootstrap'
 
 // import PhoneInput from 'react-phone-input-2'
 // import 'react-phone-input-2/lib/style.css'
@@ -33,6 +33,9 @@ function ForgetPasswordScreen() {
   const [lname, setLname] = useState('')
   const [full_mobile, setFull_mobile] = useState('')
   const [mobile, setMobile] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
   const input = useRef(null)
 
   const [otp, setOtp] = useState('')
@@ -182,6 +185,7 @@ function ForgetPasswordScreen() {
                 onChange={(e) => {
                   setMobile(e.target.value)
                 }}
+                required
               />
               <div className='input-group-append mb-2'>
                 <Button
@@ -213,28 +217,51 @@ function ForgetPasswordScreen() {
               placeholder='SMS Code'
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
+              required
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='password' className='mb-2'>
+          <Form.Group className='mb-2' controlId='password'>
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
+            <InputGroup>
+              <Form.Control
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Enter password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              ></Form.Control>
+              <i
+                onClick={(e) => setShowPassword(!showPassword)}
+                className={
+                  showPassword
+                    ? 'fas fa-eye-slash passwod-icon'
+                    : 'fas fa-eye passwod-icon'
+                }
+              ></i>
+            </InputGroup>
           </Form.Group>
-          <Form.Group controlId='confirmPassword' className='mb-2'>
-            <Form.Label>confirmPassword</Form.Label>
-            <Form.Control
-              type='confirmPassword'
-              placeholder='Confirm Password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
+          <Form.Group controlId='confirmPassword'>
+            <Form.Label>Confirm Password</Form.Label>
+            <InputGroup>
+              <Form.Control
+                type={showConfirmPassword ? 'text' : 'password'}
+                placeholder='Confirm Password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              ></Form.Control>
+              <i
+                onClick={(e) => setShowConfirmPassword(!showConfirmPassword)}
+                className={
+                  showConfirmPassword
+                    ? 'fas fa-eye-slash passwod-icon'
+                    : 'fas fa-eye passwod-icon'
+                }
+              ></i>
+            </InputGroup>
           </Form.Group>
           <Button
-            className='digicel-button mt-2'
+            className='digicel-button mt-3'
             type='submit'
             variant='primary'
           >

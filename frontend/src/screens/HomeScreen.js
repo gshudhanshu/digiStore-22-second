@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Countdown from 'react-countdown'
 
 import {
   ListGroup,
@@ -119,7 +120,7 @@ const HomeScreen = () => {
           <Offcanvas.Title>Scratch card</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <h2>Reveal your card</h2>
+          <h2>SCRATCH N’ WIN</h2>
           <div>
             {/* {cardDetails.status === 'success' ? (
               (<ScratchCard
@@ -188,16 +189,23 @@ const HomeScreen = () => {
                 </div>
               </ScratchCard>
             ) : cardDetails && cardDetails.status === 'fail' ? (
-              <h1>Sorry! You have already scratched today's card</h1>
+              <>
+                <h1>Sorry! Come back &#38; scratch again later</h1>
+                <h2>
+                  <Countdown
+                    date={Date.now() + Number(cardDetails.lastScratchDate)}
+                  />
+                </h2>
+              </>
             ) : (
               <h1>Please login</h1>
             )}
           </div>
           <Row>
-            <h4>How does it work?</h4>
+            <h4>How To Scratch N Win?</h4>
             <ListGroup as='ol' numbered variant='flush'>
               <ListGroup.Item as='li'>
-                Scratch to see your winning amount
+                Be on an eligible Prime Bundle to Scratch N’ Win daily.
               </ListGroup.Item>
               {/* <ListGroup.Item as='li'>
                 Scratch card is available only for Digicel customers
@@ -206,7 +214,7 @@ const HomeScreen = () => {
                 You should have any active plan
               </ListGroup.Item> */}
               <ListGroup.Item as='li'>
-                You can use DigiDollas to purchase listed product
+                Glide your finger across scratch card to reveal your prize.
               </ListGroup.Item>
             </ListGroup>
           </Row>

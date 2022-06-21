@@ -104,6 +104,7 @@ function ProfileScreen() {
                 placeholder='Enter First Name'
                 value={fname}
                 onChange={(e) => setFname(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='lname' className='mb-2'>
@@ -113,6 +114,7 @@ function ProfileScreen() {
                 placeholder='Enter Last Name'
                 value={lname}
                 onChange={(e) => setLname(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='full_mobile' className='mb-2'>
@@ -122,6 +124,8 @@ function ProfileScreen() {
                 placeholder='Enter Mobile Number'
                 value={full_mobile}
                 onChange={(e) => setFull_mobile(e.target.value)}
+                required
+                disabled
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='password' className='mb-2'>
@@ -131,6 +135,7 @@ function ProfileScreen() {
                 placeholder='Enter password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='confirmPassword' className='mb-2'>
@@ -140,6 +145,7 @@ function ProfileScreen() {
                 placeholder='Confirm Password'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
             <Button

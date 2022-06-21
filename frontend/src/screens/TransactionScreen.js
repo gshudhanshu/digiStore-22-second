@@ -149,7 +149,7 @@ function TransactionScreen() {
             </div>
           ))
         )}
-        <h2 className='transaction-title'>Scrached Cards</h2>
+        <h2 className='transaction-title'>Scratch Cards</h2>
 
         {loadingCards ? (
           <>{/* <Loader /> */}</>

@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import cardRoutes from './routes/cardRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import adminBro from './routes/adminBroRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 connectDB()
@@ -20,17 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json())
 
 // // ==================
-// import AdminJS from 'adminjs'
-// import AdminJSExpress from '@adminjs/express'
-// // import AdminJSSequelize from '@adminjs/sequelize'
-
-// const adminJs = new AdminJS({
-//   databases: [],
-//   rootPath: '/adminbro',
-// })
-
-// const router = AdminJSExpress.buildRouter(adminJs)
-// app.use(adminJs.options.rootPath, router)
+app.use('/adminBro', adminBro)
 
 // // ==================
 
