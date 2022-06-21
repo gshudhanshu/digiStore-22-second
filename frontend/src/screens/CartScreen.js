@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Link,
   useParams,
@@ -19,6 +19,7 @@ import {
 } from 'react-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -29,6 +30,8 @@ const CartScreen = () => {
   let location = useLocation()
   const { id } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
+  const [sweetAlert, setSweetAlert] = useState(false)
+
   const navigate = useNavigate()
 
   const productId = id
@@ -41,6 +44,8 @@ const CartScreen = () => {
   const orderNewCreate = useSelector((state) => state.orderNewCreate)
   const {
     loading: loadingNewOrder,
+    order: orderNewOrder,
+    success: successNewOrder,
     error: errorNewOrder,
     userInfo,
   } = orderNewCreate
@@ -62,18 +67,18 @@ const CartScreen = () => {
     // Number(cart.taxPrice)
     .toFixed()
 
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, success, error } = orderCreate
+  // const orderCreate = useSelector((state) => state.orderCreate)
+  // const { order, success, error } = orderCreate
 
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))
     }
 
-    if (success) {
-      navigate(`/order/${order._id}`)
-    }
-  }, [dispatch, navigate, order, productId, qty, success])
+    // if (successNewOrder) {
+    //   navigate(`/order/${orderNewOrder._id}`)
+    // }
+  }, [dispatch, navigate, orderNewOrder, productId, qty, successNewOrder])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -92,6 +97,10 @@ const CartScreen = () => {
         totalPrice: cart.totalPrice,
       })
     )
+
+    if (successNewOrder) {
+      setSweetAlert(true)
+    }
   }
 
   return (
@@ -101,6 +110,24 @@ const CartScreen = () => {
         Cart
       </BreadcrumbsItem>
       <Breadcrumb />
+      <div className='sweetAlert-container'>
+        {sweetAlert && (
+          <SweetAlert
+            success
+            className='digicel-button'
+            title='Order Confirmed!'
+            onConfirm={() => {
+              setSweetAlert(false)
+            }}
+            // onCancel={() => setSweetAlert(false)}
+            // timeout={2000}
+          >
+            Thank you for shopping in the DigiStore. Your order has been placed.
+            A representative from the DigiStore will contact you within 48 hours
+            to collect your purchases.
+          </SweetAlert>
+        )}
+      </div>
 
       <Container>
         <Row>

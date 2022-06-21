@@ -45,9 +45,18 @@ const OrderScreen = () => {
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
+  const orderNewCreate = useSelector((state) => state.orderNewCreate)
+  const {
+    loading: loadingNewOrder,
+    order: orderNewOrder,
+    success: successNewOrder,
+    error: errorNewOrder,
+    userInfo: userInfoNewOrder,
+  } = orderNewCreate
+
   if (!loading) {
     //   Calculate prices
-    order.itemsPrice = order.orderItems.reduce(
+    orderNewOrder.itemsPrice = orderNewOrder.orderItems.reduce(
       (acc, item) => acc + item.price * item.qty,
       0
     )
@@ -80,7 +89,7 @@ const OrderScreen = () => {
         setsdkReady(true)
       }
     }
-  }, [dispatch, order, orderId, successDeliver, successPay])
+  }, [dispatch, navigate, order, orderId, successDeliver, successPay, userInfo])
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult)

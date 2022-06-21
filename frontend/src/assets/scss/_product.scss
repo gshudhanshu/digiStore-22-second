@@ -410,6 +410,9 @@
     padding: 0;
     margin: 0;
   }
+  div.row {
+    margin-top: auto;
+  }
   .ScratchCard__Container {
     display: flex;
     .ScratchCard__Result {
@@ -463,6 +466,7 @@
 }
 
 // Buttons
+.sweetAlert-container > div > div > div > p > a,
 .digicel-button {
   border-radius: 100rem;
   color: #161f60;
@@ -474,6 +478,16 @@
   box-shadow: 2px 1000px 1px #fff inset;
   min-width: 7rem;
   font-weight: 600;
+}
+
+.sweetAlert-container {
+  font-weight: 600 !important;
+}
+
+.sweetAlert-container > div > div > div > p > a.btn.btn-primary {
+  border: 0;
+  color: white;
+  box-shadow: none !important;
 }
 
 .btn.btn-primary {

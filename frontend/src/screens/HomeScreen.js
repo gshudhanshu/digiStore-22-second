@@ -117,7 +117,10 @@ const HomeScreen = () => {
         placement='end'
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Scratch card</Offcanvas.Title>
+          <Offcanvas.Title className='mx-auto'>
+            {/* Scratch card */}
+            <img alt='' className='logo' src={'/assets/img/logo.png'} />
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <h2>SCRATCH N’ WIN</h2>
@@ -193,7 +196,16 @@ const HomeScreen = () => {
                 <h1>Sorry! Come back &#38; scratch again later</h1>
                 <h2>
                   <Countdown
-                    date={Date.now() + Number(cardDetails.lastScratchDate)}
+                    date={
+                      Date.now() -
+                      (Date.now() -
+                        new Date(
+                          cardDetails.lastScratchDate.substring(0, 4),
+                          Number(cardDetails.lastScratchDate.substring(4, 6)),
+                          Number(cardDetails.lastScratchDate.substring(6, 8)) -
+                            28
+                        ).getTime())
+                    }
                   />
                 </h2>
               </>
@@ -207,12 +219,6 @@ const HomeScreen = () => {
               <ListGroup.Item as='li'>
                 Be on an eligible Prime Bundle to Scratch N’ Win daily.
               </ListGroup.Item>
-              {/* <ListGroup.Item as='li'>
-                Scratch card is available only for Digicel customers
-              </ListGroup.Item> */}
-              {/* <ListGroup.Item as='li'>
-                You should have any active plan
-              </ListGroup.Item> */}
               <ListGroup.Item as='li'>
                 Glide your finger across scratch card to reveal your prize.
               </ListGroup.Item>
