@@ -69,7 +69,7 @@ const Header = ({}) => {
               aria-controls='basic-navbar-nav'
               className='d-none d-md-block'
             /> */}
-            <div className='navbar-container d-none d-sd-block '>
+            <div className='navbar-container d-none d-lg-block '>
               <Navbar id='basic-navbar-nav '>
                 <Nav className='mx-auto'>
                   <NavLink to='/' end>
