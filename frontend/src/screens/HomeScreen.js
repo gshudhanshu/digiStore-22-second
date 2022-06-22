@@ -15,6 +15,7 @@ import {
 import ScratchCard from 'react-scratchcard-v4'
 
 import backgroundImageSrc from '../assets/img/card-img.jpg'
+import scratchButtonGif from '../assets/img/scratch-button-100.gif'
 
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
@@ -91,10 +92,12 @@ const HomeScreen = () => {
         type='button'
         onClick={handleCardShow}
       >
-        <img
-          src='./assets/img/emoji.png'
+        {/* <img
+          src='../assets/img/scratch-button.gif'
           alt='scratch window launch button'
-        ></img>
+          style={{ width: '50px' }}
+        ></img> */}
+        <img src={scratchButtonGif} alt='scratch window launch button'></img>
       </Button>
 
       {/* <Button

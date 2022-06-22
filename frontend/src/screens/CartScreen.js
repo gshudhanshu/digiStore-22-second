@@ -21,6 +21,9 @@ import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
 import SweetAlert from 'react-bootstrap-sweetalert'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { addToCart, removeFromCart } from '../actions/cartActions'
@@ -50,6 +53,8 @@ const CartScreen = () => {
     userInfo,
   } = orderNewCreate
 
+  const MySwal = withReactContent(Swal)
+
   //   Calculate prices
   cart.itemsPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -78,7 +83,7 @@ const CartScreen = () => {
     // if (successNewOrder) {
     //   navigate(`/order/${orderNewOrder._id}`)
     // }
-  }, [dispatch, navigate, orderNewOrder, productId, qty, successNewOrder])
+  }, [dispatch, navigate, orderNewOrder, productId, qty])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -98,8 +103,20 @@ const CartScreen = () => {
       })
     )
 
+    console.log(successNewOrder)
+
     if (successNewOrder) {
       setSweetAlert(true)
+      MySwal.fire({
+        title: 'Order Confirmed!',
+        text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
+        icon: 'success',
+        focusConfirm: false,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-primary digicel-button',
+        },
+      })
     }
   }
 
@@ -110,7 +127,7 @@ const CartScreen = () => {
         Cart
       </BreadcrumbsItem>
       <Breadcrumb />
-      <div className='sweetAlert-container'>
+      {/* <div className='sweetAlert-container'>
         {sweetAlert && (
           <SweetAlert
             success
@@ -127,7 +144,7 @@ const CartScreen = () => {
             to collect your purchases.
           </SweetAlert>
         )}
-      </div>
+      </div> */}
 
       <Container>
         <Row>

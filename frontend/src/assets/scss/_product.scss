@@ -7,9 +7,10 @@
   border: 0;
   bottom: 30px;
   right: 30px;
-  width: 50px;
-  height: 50px;
-  padding: 10px 10px;
+  width: 60px;
+  height: 60px;
+  // padding: 10px 10px;
+  padding: 0;
   font-size: 18px;
   line-height: 1.33;
   background: linear-gradient(
@@ -156,6 +157,10 @@
           width: 100%;
 
           height: 48px;
+          @media #{$md-layout,
+            $xs-layout} {
+            height: 39px;
+          }
 
           svg {
             margin-right: 10px;
@@ -466,7 +471,8 @@
 }
 
 // Buttons
-.sweetAlert-container > div > div > div > p > a,
+
+.swal2-styled.swal2-confirm.digicel-button,
 .digicel-button {
   border-radius: 100rem;
   color: #161f60;
@@ -480,30 +486,30 @@
   font-weight: 600;
 }
 
-.sweetAlert-container {
-  font-weight: 600 !important;
-}
-
-.sweetAlert-container > div > div > div > p > a.btn.btn-primary {
-  border: 0;
-  color: white;
-  box-shadow: none !important;
-}
-
+.swal2-styled.swal2-confirm.digicel-button,
 .btn.btn-primary {
   border: solid 3px transparent;
   background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
     linear-gradient(101deg, #f5402a, #9801ff);
 }
 
+.swal2-styled.swal2-confirm.digicel-button,
 .btn.btn-secondary {
   border: solid 3px transparent;
   background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
     linear-gradient(101deg, #f5402a, #9801ff);
 }
 
+.swal2-styled.swal2-confirm.digicel-button:hover,
 .btn:hover {
   box-shadow: none;
+  color: white;
+}
+
+.swal2-actions:not(.swal2-loading) .swal2-styled:focus,
+.swal2-styled.swal2-confirm:focus {
+  background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
+    linear-gradient(101deg, #f5402a, #9801ff) !important;
   color: white;
 }
 
