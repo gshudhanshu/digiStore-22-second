@@ -102,22 +102,19 @@ const CartScreen = () => {
         totalPrice: cart.totalPrice,
       })
     )
+  }
 
-    console.log(successNewOrder)
-
-    if (successNewOrder) {
-      setSweetAlert(true)
-      MySwal.fire({
-        title: 'Order Confirmed!',
-        text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
-        icon: 'success',
-        focusConfirm: false,
-        confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'btn btn-primary digicel-button',
-        },
-      })
-    }
+  if (successNewOrder) {
+    MySwal.fire({
+      title: 'Order Confirmed!',
+      text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
+      icon: 'success',
+      focusConfirm: false,
+      confirmButtonText: 'OK',
+      customClass: {
+        confirmButton: 'btn btn-primary digicel-button',
+      },
+    })
   }
 
   return (
@@ -148,8 +145,8 @@ const CartScreen = () => {
 
       <Container>
         <Row>
-          <Col md={8}>
-            <h1>Shopping Cart</h1>
+          <Col className='cart-main-container'>
+            <h1 className='text-center text-md-start'>Shopping Cart</h1>
             {cartItems.length === 0 ? (
               <Message>
                 Your Cart is empty <Link to='/'>Go Back</Link>
@@ -157,47 +154,69 @@ const CartScreen = () => {
             ) : (
               <ListGroup variant='flush'>
                 {cartItems.map((item) => (
-                  <ListGroup.Item key={item.product}>
-                    <Row>
-                      <Col md={2}>
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fluid
-                          rounded
-                        ></Image>
-                      </Col>
-                      <Col md={3}>
+                  <ListGroup.Item
+                    className='product-container'
+                    key={item.product}
+                  >
+                    <div className='img-container'>
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fluid
+                        rounded
+                      ></Image>
+                    </div>
+                    <div className='cart-details-container'>
+                      <div>
                         <Link to={`/product/${item.product}`}>{item.name}</Link>
-                      </Col>
-                      <Col md={2}>$ {item.price}</Col>
-                      <Col md={2}>
-                        <Form.Control
-                          as='select'
-                          value={item.qty}
-                          onChange={(e) =>
-                            dispatch(
-                              addToCart(item.product, Number(e.target.value))
-                            )
-                          }
-                        >
-                          {[...Array(item.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
-                      </Col>
-                      <Col>
-                        <Button
-                          type='button'
-                          variant='light'
-                          onClick={() => removeFromCartHandler(item.product)}
-                        >
-                          <i className='fas fa-trash'></i>
-                        </Button>
-                      </Col>
-                    </Row>
+                      </div>
+
+                      {/* <Col md={2}>${item.price}</Col> */}
+                      <div className='cart-qty-price-container'>
+                        <div className='product-price-delete-container'>
+                          <div>
+                            <Form.Control
+                              as='select'
+                              value={item.qty}
+                              onChange={(e) =>
+                                dispatch(
+                                  addToCart(
+                                    item.product,
+                                    Number(e.target.value)
+                                  )
+                                )
+                              }
+                            >
+                              {[...Array(item.countInStock).keys()].map((x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              ))}
+                            </Form.Control>
+                          </div>
+
+                          <div className='cart-price'>
+                            <Image
+                              className='img-fluid'
+                              src='/assets/img/digi_dollar.png'
+                            />
+                            {item.price}
+                          </div>
+                          <div>
+                            <Button
+                              type='button'
+                              // variant='dark'
+                              className='trash-button digicel-button'
+                              onClick={() =>
+                                removeFromCartHandler(item.product)
+                              }
+                            >
+                              <i className='fas fa-trash'></i>
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
