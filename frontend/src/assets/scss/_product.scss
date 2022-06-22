@@ -507,6 +507,7 @@
 }
 
 .swal2-actions:not(.swal2-loading) .swal2-styled:focus,
+.swal2-actions:not(.swal2-loading) .swal2-styled:hover,
 .swal2-styled.swal2-confirm:focus {
   background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
     linear-gradient(101deg, #f5402a, #9801ff) !important;

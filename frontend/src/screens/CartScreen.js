@@ -45,7 +45,7 @@ const CartScreen = () => {
   const { cartItems } = cart
 
   const orderNewCreate = useSelector((state) => state.orderNewCreate)
-  const {
+  let {
     loading: loadingNewOrder,
     order: orderNewOrder,
     success: successNewOrder,
@@ -88,10 +88,10 @@ const CartScreen = () => {
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
-  const checkoutHandler = (id) => {
+  const checkoutHandler = async () => {
     // navigate('/login?redirect=/shipping')
     // navigate('/login?redirect=/orders/neworder')
-    dispatch(
+    await dispatch(
       createNewOrder({
         orderItems: cart.cartItems,
         // shippingAddress: cart.shippingAddress,
@@ -102,19 +102,26 @@ const CartScreen = () => {
         totalPrice: cart.totalPrice,
       })
     )
-  }
 
-  if (successNewOrder) {
-    MySwal.fire({
-      title: 'Order Confirmed!',
-      text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
-      icon: 'success',
-      focusConfirm: false,
-      confirmButtonText: 'OK',
-      customClass: {
-        confirmButton: 'btn btn-primary digicel-button',
-      },
-    })
+    if (successNewOrder) {
+      MySwal.fire({
+        title: 'Order Confirmed!',
+        text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
+        icon: 'success',
+        focusConfirm: false,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-primary digicel-button',
+        },
+        // didOpen: () => {
+        //   successNewOrder = false
+        // },
+        // willClose: () => {
+        //   successNewOrder = false
+        // },
+      })
+      // successNewOrder = false
+    }
   }
 
   return (
