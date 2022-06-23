@@ -241,11 +241,17 @@ const CartScreen = () => {
                     )}
                     ) items
                   </h2>
-                  ${' '}
-                  {cartItems.reduce(
-                    (acc, item) => acc + Number(item.qty) * Number(item.price),
-                    0
-                  )}
+                  <h4 className='cart-price'>
+                    <Image
+                      className='img-fluid'
+                      src='/assets/img/digi_dollar.png'
+                    />
+                    {cartItems.reduce(
+                      (acc, item) =>
+                        acc + Number(item.qty) * Number(item.price),
+                      0
+                    )}
+                  </h4>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   {loadingNewOrder ? (
