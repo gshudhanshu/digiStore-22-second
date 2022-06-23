@@ -401,7 +401,10 @@
 }
 
 .offcanvas-body {
-  padding: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -423,6 +426,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     padding: 0;
+    margin: 0;
   }
 
   div.row {
@@ -431,8 +435,18 @@
   .ScratchCard__Container {
     display: flex;
     margin: auto;
+    max-width: 300px;
+    max-height: 330px;
+    width: 100%;
+    height: 300px;
     // height: 50vh;
     // max-height: 360px;
+    .ScratchCard__Canvas {
+      max-width: 300px;
+      max-height: 330px;
+      width: 100%;
+      height: 100%;
+    }
     display: flex;
     .ScratchCard__Result {
       .scratch-card-bg {
@@ -554,4 +568,8 @@
     padding: 0;
     width: 45%;
   }
+}
+
+.scratch-user-guide-list {
+  padding: 0;
 }

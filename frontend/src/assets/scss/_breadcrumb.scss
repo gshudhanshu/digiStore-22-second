@@ -25,9 +25,11 @@
         display: none;
       }
       a {
-        color: #5b5858;
+        // color: #5b5858;
+        color: white;
         &:hover {
-          color: $theme-color;
+          // color: $theme-color;
+          color: white;
         }
       }
     }
@@ -36,15 +38,18 @@
   span {
     & > span {
       display: inline-block;
-      font-size: 15px;
+      // font-size: 15px;
       font-weight: 600;
       text-transform: uppercase;
 
       & > a {
         font-weight: 600;
-        color: #5b5858;
+        // color: #5b5858;
+        color: white;
+
         &:hover {
           color: $theme-color;
+          // color: white;
         }
       }
 
@@ -54,4 +59,12 @@
       }
     }
   }
+}
+
+.breadcrumb-area {
+  background-image: url('../img/breadcrumb.jpg');
+  background-color: #f7f7f7;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 18px;
 }

@@ -60,8 +60,8 @@ const generateScratchCard = asyncHandler(async (req, res) => {
       break
     default:
       days = 0
-      min = 0
-      max = 1
+      min = 1
+      max = 2
   }
   randomNum = Math.floor(Math.random() * (max - min + 1)) + min
   expiryDate = await dayjs(user.planDetails.purchaseDate, 'YYYYMMDD').add(

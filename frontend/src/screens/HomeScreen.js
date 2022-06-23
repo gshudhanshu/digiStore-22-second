@@ -207,7 +207,7 @@ const HomeScreen = () => {
               <>
                 <div
                   className='ScratchCard__Container'
-                  style={{ width: '300px', height: '330px' }}
+                  // style={{ width: '300px', height: '330px' }}
                 >
                   <img
                     className='img-fluid'
@@ -215,7 +215,9 @@ const HomeScreen = () => {
                     alt=''
                   ></img>
                 </div>
-                <h1>Sorry! Come back &#38; scratch again later</h1>
+                <h2 className='my-3'>
+                  Sorry! Come back &#38; scratch again later
+                </h2>
                 <h2>
                   <Countdown
                     date={dayjs() + dayjs().endOf('day').diff(dayjs())}
@@ -233,7 +235,12 @@ const HomeScreen = () => {
           </div>
           <Row>
             <h4>How To Scratch N Win?</h4>
-            <ListGroup as='ol' numbered variant='flush'>
+            <ListGroup
+              className='scratch-user-guide-list'
+              as='ol'
+              numbered
+              variant='flush'
+            >
               <ListGroup.Item as='li'>
                 Be on an eligible Prime Bundle to Scratch N’ Win daily.
               </ListGroup.Item>
