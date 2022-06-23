@@ -9,6 +9,8 @@ import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
 
 import {
   ListGroup,
+  Image,
+  Accordion,
   Button,
   Offcanvas,
   Container,
@@ -21,6 +23,21 @@ import ScratchCard from 'react-scratchcard-v4'
 import backgroundImageSrc from '../assets/img/card-img.jpg'
 import backgroundImageAlreadyScratched from '../assets/img/already-scratched.jpg'
 import scratchButtonGif from '../assets/img/scratch-button-100.gif'
+import coin1 from '../assets/img/coins/1.png'
+import coin2 from '../assets/img/coins/2.png'
+import coin3 from '../assets/img/coins/3.png'
+import coin4 from '../assets/img/coins/4.png'
+import coin5 from '../assets/img/coins/5.png'
+import coin6 from '../assets/img/coins/6.png'
+import coin7 from '../assets/img/coins/7.png'
+import coin8 from '../assets/img/coins/8.png'
+import coin9 from '../assets/img/coins/9.png'
+import coin10 from '../assets/img/coins/10.png'
+import coin11 from '../assets/img/coins/11.png'
+import coin12 from '../assets/img/coins/12.png'
+import coin13 from '../assets/img/coins/13.png'
+import coin14 from '../assets/img/coins/14.png'
+import coin15 from '../assets/img/coins/15.png'
 
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
@@ -176,7 +193,7 @@ const HomeScreen = () => {
             {cardDetails && cardDetails.status === 'success' ? (
               <ScratchCard
                 width={300}
-                height={330}
+                height={400}
                 image={backgroundImageSrc}
                 finishPercent={30}
                 fadeOutOnComplete
@@ -195,7 +212,49 @@ const HomeScreen = () => {
                 >
                   <>
                     <Row className='no-gutters heading'>Congrats!</Row>
-                    <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row>
+                    {/* <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row> */}
+                    <Row className='no-gutters coinDigiDollas'>
+                      <Image
+                        className='scratch-coin'
+                        fluild
+                        src={
+                          cardDetails.digiDollas == 1
+                            ? coin1
+                            : cardDetails.digiDollas == 2
+                            ? coin2
+                            : cardDetails.digiDollas == 3
+                            ? coin3
+                            : cardDetails.digiDollas == 4
+                            ? coin4
+                            : cardDetails.digiDollas == 5
+                            ? coin5
+                            : cardDetails.digiDollas == 6
+                            ? coin6
+                            : cardDetails.digiDollas == 7
+                            ? coin7
+                            : cardDetails.digiDollas == 8
+                            ? coin8
+                            : cardDetails.digiDollas == 9
+                            ? coin9
+                            : cardDetails.digiDollas == 10
+                            ? coin10
+                            : cardDetails.digiDollas == 11
+                            ? coin11
+                            : cardDetails.digiDollas == 12
+                            ? coin12
+                            : cardDetails.digiDollas == 13
+                            ? coin13
+                            : cardDetails.digiDollas == 14
+                            ? coin14
+                            : cardDetails.digiDollas == 15
+                            ? coin15
+                            : coin1
+                        }
+                        alt={''}
+                        fluid
+                        rounded
+                      ></Image>
+                    </Row>
                     <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
                     <Row className='note'>
                       <p>{`This will be credited to your DigiDollas`}</p>
@@ -210,16 +269,17 @@ const HomeScreen = () => {
                   // style={{ width: '300px', height: '330px' }}
                 >
                   <img
-                    className='img-fluid'
+                    className='img-fluid mx-auto'
                     src={backgroundImageAlreadyScratched}
                     alt=''
                   ></img>
                 </div>
                 <h2 className='my-3'>
-                  Sorry! Come back &#38; scratch again later
+                  Sorry! <br /> Come back later
                 </h2>
                 <h2>
                   <Countdown
+                    className='digicel-gradient-text'
                     date={dayjs() + dayjs().endOf('day').diff(dayjs())}
                   />
                 </h2>
@@ -233,8 +293,8 @@ const HomeScreen = () => {
               </>
             )}
           </div>
-          <Row>
-            <h4>How To Scratch N Win?</h4>
+          {/* <Row> */}
+          {/* <h4>How To Scratch N Win?</h4>
             <ListGroup
               className='scratch-user-guide-list'
               as='ol'
@@ -242,13 +302,36 @@ const HomeScreen = () => {
               variant='flush'
             >
               <ListGroup.Item as='li'>
-                Be on an eligible Prime Bundle to Scratch N’ Win daily.
+                Be on an eligible Prime Bundle to <br /> Scratch N’ Win daily.
               </ListGroup.Item>
               <ListGroup.Item as='li'>
-                Glide your finger across scratch card to reveal your prize.
+                Glide your finger across scratch card <br /> to reveal your
+                prize.
               </ListGroup.Item>
-            </ListGroup>
-          </Row>
+            </ListGroup> */}
+          <Accordion className='w-100 scratch-user-guide'>
+            <Accordion.Item eventKey='0'>
+              <Accordion.Header>How To Scratch N Win?</Accordion.Header>
+              <Accordion.Body>
+                <ListGroup
+                  className='scratch-user-guide-list'
+                  as='ol'
+                  numbered
+                  variant='flush'
+                >
+                  <ListGroup.Item as='li'>
+                    Be on an eligible Prime Bundle to <br /> Scratch N’ Win
+                    daily.
+                  </ListGroup.Item>
+                  <ListGroup.Item as='li'>
+                    Glide your finger across scratch card <br /> to reveal your
+                    prize.
+                  </ListGroup.Item>
+                </ListGroup>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          {/* </Row> */}
         </Offcanvas.Body>
       </Offcanvas>
 

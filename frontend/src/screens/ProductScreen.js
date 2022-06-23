@@ -72,8 +72,8 @@ function ProductScreen() {
       </BreadcrumbsItem>
       <Breadcrumb />
 
-      <Container>
-        <Link className='btn btn-dark my-3' to='/'>
+      <Container className='product-details-container'>
+        <Link className='btn btn-primary digicel-button my-3' to='/'>
           Go Back
         </Link>
         {loading ? (
@@ -84,13 +84,13 @@ function ProductScreen() {
           <>
             <Meta title={product.name} />
             <Row>
-              <Col md={6}>
+              <Col md={5}>
                 <Image src={product.image} alt={product.name} fluid></Image>
               </Col>
-              <Col md={3}>
+              <Col md={4}>
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
-                    <h3>{product.name}</h3>
+                    <h3 className='product-details-title'>{product.name}</h3>
                   </ListGroup.Item>
                   {/* <ListGroup.Item>
                     <Rating
@@ -98,20 +98,27 @@ function ProductScreen() {
                       text={`${product.numReviews} reviews`}
                     />
                   </ListGroup.Item> */}
-                  <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>Price: ${product.price}</ListGroup.Item> */}
+                  <ListGroup.Item className='mt-2'>
                     Description: {product.description}
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
-              <Col md={3}>
+              <Col md={3} className='my-3'>
                 <Card>
                   <ListGroup variant='flush'>
                     <ListGroup.Item>
                       <Row>
                         <Col>Price: </Col>
                         <Col>
-                          <strong>$ {product.price}</strong>
+                          <div className='product-details-price'>
+                            <Image
+                              className='img-fluid'
+                              src='/assets/img/digi_dollar.png'
+                            />
+                            {product.price}
+                          </div>
+                          {/* <strong>$ {product.price}</strong> */}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -130,7 +137,7 @@ function ProductScreen() {
                     {product.countInStock > 0 && (
                       <ListGroup.Item>
                         <Row>
-                          <Col></Col>
+                          <Col>Quantity: </Col>
                           <Col>
                             <Form.Control
                               as='select'
