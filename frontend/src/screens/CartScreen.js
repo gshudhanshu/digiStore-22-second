@@ -162,7 +162,7 @@ const CartScreen = () => {
               <ListGroup variant='flush'>
                 {cartItems.map((item) => (
                   <ListGroup.Item
-                    className='product-container'
+                    className='cart product-container'
                     key={item.product}
                   >
                     <div className='img-container'>
