@@ -415,10 +415,24 @@
     padding: 0;
     margin: 0;
   }
+
+  .scratch-card-title {
+    background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
+      linear-gradient(101deg, #f5402a, #9801ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0;
+  }
+
   div.row {
     margin-top: auto;
   }
   .ScratchCard__Container {
+    display: flex;
+    margin: auto;
+    // height: 50vh;
+    // max-height: 360px;
     display: flex;
     .ScratchCard__Result {
       .scratch-card-bg {

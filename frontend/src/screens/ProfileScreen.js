@@ -6,7 +6,15 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom'
-import { Form, Button, Row, Col, Table, Container } from 'react-bootstrap'
+import {
+  InputGroup,
+  Form,
+  Button,
+  Row,
+  Col,
+  Table,
+  Container,
+} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
@@ -32,6 +40,9 @@ function ProfileScreen() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
+
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -128,35 +139,57 @@ function ProfileScreen() {
                 disabled
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='password' className='mb-2'>
+
+            <Form.Group className='mb-2' controlId='password'>
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='Enter password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              ></Form.Control>
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Enter password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                ></Form.Control>
+                <i
+                  onClick={(e) => setShowPassword(!showPassword)}
+                  className={
+                    showPassword
+                      ? 'fas fa-eye-slash passwod-icon'
+                      : 'fas fa-eye passwod-icon'
+                  }
+                ></i>
+              </InputGroup>
             </Form.Group>
-            <Form.Group controlId='confirmPassword' className='mb-2'>
+            <Form.Group controlId='confirmPassword'>
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type='confirmPassword'
-                placeholder='Confirm Password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              ></Form.Control>
+              <InputGroup>
+                <Form.Control
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder='Confirm Password'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                ></Form.Control>
+                <i
+                  onClick={(e) => setShowConfirmPassword(!showConfirmPassword)}
+                  className={
+                    showConfirmPassword
+                      ? 'fas fa-eye-slash passwod-icon'
+                      : 'fas fa-eye passwod-icon'
+                  }
+                ></i>
+              </InputGroup>
             </Form.Group>
+
             <Button
               type='submit'
-              className='digicel-button mt-2'
+              className='digicel-button mt-3'
               variant='primary'
             >
               Update
             </Button>
             <Button
-              className='digicel-button profile-logout-button mt-2'
+              className='digicel-button profile-logout-button mt-3'
               variant='secondary'
               onClick={logoutHandler}
             >

@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+
 import Countdown from 'react-countdown'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
 
 import {
   ListGroup,
@@ -15,6 +19,7 @@ import {
 import ScratchCard from 'react-scratchcard-v4'
 
 import backgroundImageSrc from '../assets/img/card-img.jpg'
+import backgroundImageAlreadyScratched from '../assets/img/already-scratched.jpg'
 import scratchButtonGif from '../assets/img/scratch-button-100.gif'
 
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
@@ -39,6 +44,10 @@ const HomeScreen = () => {
   const [showCard, setShowCard] = useState(false)
   // const [cardScratch, setCardScratch] = useState(false)
   // const [cardScratchCompleted, setCardScratchCompleted] = useState(false)
+
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
+  dayjs.tz.setDefault('America/Barbados')
 
   const ref = useRef < ScratchCard > null
   const onClickReset = () => {
@@ -126,7 +135,7 @@ const HomeScreen = () => {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <h2>SCRATCH N’ WIN</h2>
+          <h1 className='scratch-card-title'>SCRATCH N’ WIN</h1>
           <div>
             {/* {cardDetails.status === 'success' ? (
               (<ScratchCard
@@ -167,7 +176,7 @@ const HomeScreen = () => {
             {cardDetails && cardDetails.status === 'success' ? (
               <ScratchCard
                 width={300}
-                height={300}
+                height={330}
                 image={backgroundImageSrc}
                 finishPercent={30}
                 fadeOutOnComplete
@@ -196,24 +205,30 @@ const HomeScreen = () => {
               </ScratchCard>
             ) : cardDetails && cardDetails.status === 'fail' ? (
               <>
+                <div
+                  className='ScratchCard__Container'
+                  style={{ width: '300px', height: '330px' }}
+                >
+                  <img
+                    className='img-fluid'
+                    src={backgroundImageAlreadyScratched}
+                    alt=''
+                  ></img>
+                </div>
                 <h1>Sorry! Come back &#38; scratch again later</h1>
                 <h2>
                   <Countdown
-                    date={
-                      Date.now() -
-                      (Date.now() -
-                        new Date(
-                          cardDetails.lastScratchDate.substring(0, 4),
-                          Number(cardDetails.lastScratchDate.substring(4, 6)),
-                          Number(cardDetails.lastScratchDate.substring(6, 8)) -
-                            28
-                        ).getTime())
-                    }
+                    date={dayjs() + dayjs().endOf('day').diff(dayjs())}
                   />
                 </h2>
               </>
             ) : (
-              <h1>Please login</h1>
+              <>
+                <h1>Please login to scratch the card</h1>
+                <Link to='/login' className='btn btn-primary digicel-button'>
+                  Login
+                </Link>
+              </>
             )}
           </div>
           <Row>

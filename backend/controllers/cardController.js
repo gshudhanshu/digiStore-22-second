@@ -49,14 +49,14 @@ const generateScratchCard = asyncHandler(async (req, res) => {
     case 'Prime MDA 14D':
     case 'Prime MDA 14D Data Only':
       days = 14
-      min = 10
-      max = 20
+      min = 6
+      max = 10
       break
     case 'Prime MDA 30D':
     case 'Prime MDA 30D 6.5GB Data Only':
       days = 30
-      min = 20
-      max = 40
+      min = 8
+      max = 12
       break
     default:
       days = 0

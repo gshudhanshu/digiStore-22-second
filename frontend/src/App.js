@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 // import { ToastProvider } from 'react-toast-notifications'
 import { BreadcrumbsProvider } from 'react-breadcrumbs-dynamic'
@@ -28,6 +33,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
+  let firstLoad = true
   return (
     <BreadcrumbsProvider>
       <Router>
@@ -68,6 +74,13 @@ function App() {
               element={<HomeScreens />}
             />
             <Route path='/' element={<HomeScreens />} />
+
+            {/* <Route
+              path='/'
+              element={
+                firstLoad ? <Navigate replace to='/login' /> : <HomeScreens />
+              }
+            /> */}
           </Routes>
           {/* </Container> */}
         </main>
