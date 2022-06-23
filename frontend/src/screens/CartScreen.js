@@ -32,6 +32,8 @@ import { createNewOrder } from '../actions/orderActions'
 const CartScreen = () => {
   let location = useLocation()
   const { id } = useParams()
+  const MySwal = withReactContent(Swal)
+
   const [searchParams, setSearchParams] = useSearchParams()
   const [sweetAlert, setSweetAlert] = useState(false)
 
@@ -52,8 +54,6 @@ const CartScreen = () => {
     error: errorNewOrder,
     userInfo,
   } = orderNewCreate
-
-  const MySwal = withReactContent(Swal)
 
   //   Calculate prices
   cart.itemsPrice = cart.cartItems.reduce(
@@ -102,26 +102,19 @@ const CartScreen = () => {
         totalPrice: cart.totalPrice,
       })
     )
+  }
 
-    if (successNewOrder) {
-      MySwal.fire({
-        title: 'Order Confirmed!',
-        text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
-        icon: 'success',
-        focusConfirm: false,
-        confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'btn btn-primary digicel-button',
-        },
-        // didOpen: () => {
-        //   successNewOrder = false
-        // },
-        // willClose: () => {
-        //   successNewOrder = false
-        // },
-      })
-      // successNewOrder = false
-    }
+  if (successNewOrder) {
+    MySwal.fire({
+      title: 'Order Confirmed!',
+      text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
+      icon: 'success',
+      focusConfirm: false,
+      confirmButtonText: 'OK',
+      customClass: {
+        confirmButton: 'btn btn-primary digicel-button',
+      },
+    })
   }
 
   return (
