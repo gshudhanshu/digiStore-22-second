@@ -9,7 +9,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import cardRoutes from './routes/cardRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-import adminBro from './routes/adminBroRoutes.js'
+// import adminBro from './routes/adminBroRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 connectDB()
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json())
 
 // // ==================
-app.use('/adminBro', adminBro)
+// app.use('/adminBro', adminBro)
 
 // // ==================
 
