@@ -13,7 +13,7 @@
     "data:import": "node backend/seeder ",
     "data:destroy": "node backend/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix frontend && npm run build --prefix frontend",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false YARN_PRODUCTION=false yarn install --force --prefix frontend && yarn build --prefix frontend"
+    "render-postbuild": "yarn install --force --prefix frontend && yarn build --prefix frontend"
   },
   "author": "Shudhanshu Gunjal",
   "license": "ISC",
