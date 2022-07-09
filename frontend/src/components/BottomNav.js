@@ -19,10 +19,12 @@ const BottomNav = () => {
           <Icon.List />
           <p> Transactions</p>
         </NavLink>
-        <NavLink className='tab' to='/cart'>
-          <Icon.ShoppingCart />
-          <p> Cart</p>
-        </NavLink>
+        {userInfo && !userInfo.isStaff && (
+          <NavLink className='tab' to='/cart'>
+            <Icon.ShoppingCart />
+            <p> Cart</p>
+          </NavLink>
+        )}
         {userInfo ? (
           <NavLink className='tab' to='/profile'>
             <Icon.User />

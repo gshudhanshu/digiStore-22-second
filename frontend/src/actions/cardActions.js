@@ -71,19 +71,6 @@ export const addDigiDollas =
         config
       )
 
-      // dispatch({
-      //   type: CARD_SCRATCH_SUCCESS,
-      //   payload: { data },
-
-      //   // payload: {
-      //   //   digiDollas: data.cardDetails.digiDollas,
-      //   //   expiryDate: data.cardDetails.expiryDate,
-      //   //   todayDate: data.cardDetails.todayDate,
-      //   //   message: data.message,
-      //   //   status: data.status,
-      //   // },
-      // })
-
       toast(`${data.cardDetails.digiDollas} DigiDollas Added`)
       dispatch({
         type: USER_LOGIN_ADD_DOLLAS,
@@ -135,3 +122,38 @@ export const listMyCards = () => async (dispatch, getState) => {
     })
   }
 }
+
+// STAFF section
+export const getStaffScrachCardDetails =
+  (user) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: CARD_SCRATCH_REQUEST,
+      })
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+
+      const { data } = await axios.post(`/api/cards`, user, config)
+
+      dispatch({
+        type: CARD_SCRATCH_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: CARD_SCRATCH_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }

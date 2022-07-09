@@ -243,22 +243,6 @@ const HomeScreen = () => {
               </>
             )}
           </div>
-          {/* <Row> */}
-          {/* <h4>How To Scratch N Win?</h4>
-            <ListGroup
-              className='scratch-user-guide-list'
-              as='ol'
-              numbered
-              variant='flush'
-            >
-              <ListGroup.Item as='li'>
-                Be on an eligible Prime Bundle to <br /> Scratch N’ Win daily.
-              </ListGroup.Item>
-              <ListGroup.Item as='li'>
-                Glide your finger across scratch card <br /> to reveal your
-                prize.
-              </ListGroup.Item>
-            </ListGroup> */}
           <Accordion className='w-100 scratch-user-guide'>
             <Accordion.Item eventKey='0'>
               <Accordion.Header>How To Scratch N Win?</Accordion.Header>
@@ -281,7 +265,6 @@ const HomeScreen = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          {/* </Row> */}
         </Offcanvas.Body>
       </Offcanvas>
 
