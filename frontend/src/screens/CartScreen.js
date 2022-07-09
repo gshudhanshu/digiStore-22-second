@@ -19,7 +19,8 @@ import {
 } from 'react-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
-import SweetAlert from 'react-bootstrap-sweetalert'
+
+// import SweetAlert from 'react-bootstrap-sweetalert'
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'

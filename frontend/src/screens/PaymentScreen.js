@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {
-  Link,
   useParams,
   useSearchParams,
   useNavigate,
@@ -14,9 +13,9 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { savePaymentMethod } from '../actions/cartActions'
 
 function PaymentScreen() {
-  const { id } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
-  let location = useLocation()
+  // const { id } = useParams()
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // let location = useLocation()
   const navigate = useNavigate()
 
   const cart = useSelector((state) => state.cart)

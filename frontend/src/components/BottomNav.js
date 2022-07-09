@@ -1,20 +1,12 @@
-import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Nav } from 'react-bootstrap'
 import { NavLink, useLocation } from 'react-router-dom'
-import { LinkContainer } from 'react-router-bootstrap'
 import * as Icon from 'react-feather'
-
-import { logout } from '../actions/userActions'
 
 const BottomNav = () => {
   let location = useLocation()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const dispatch = useDispatch()
-  const logoutHandler = () => {
-    dispatch(logout())
-  }
 
   return (
     <div className='tab-nav-container fixed-bottom d-md-block d-lg-none'>

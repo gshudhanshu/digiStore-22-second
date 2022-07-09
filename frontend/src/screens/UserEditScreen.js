@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import {
   Link,
   useParams,
-  useSearchParams,
+  // useSearchParams,
   useNavigate,
-  useLocation,
+  // useLocation,
 } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,8 +16,8 @@ import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 function UserEditScreen() {
   const { id: userId } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
-  let location = useLocation()
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // let location = useLocation()
   const navigate = useNavigate()
 
   const [fname, setFname] = useState('')

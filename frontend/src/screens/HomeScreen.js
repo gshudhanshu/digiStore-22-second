@@ -218,35 +218,35 @@ const HomeScreen = () => {
                         className='scratch-coin'
                         fluild
                         src={
-                          cardDetails.digiDollas == 1
+                          cardDetails.digiDollas === 1
                             ? coin1
-                            : cardDetails.digiDollas == 2
+                            : cardDetails.digiDollas === 2
                             ? coin2
-                            : cardDetails.digiDollas == 3
+                            : cardDetails.digiDollas === 3
                             ? coin3
-                            : cardDetails.digiDollas == 4
+                            : cardDetails.digiDollas === 4
                             ? coin4
-                            : cardDetails.digiDollas == 5
+                            : cardDetails.digiDollas === 5
                             ? coin5
-                            : cardDetails.digiDollas == 6
+                            : cardDetails.digiDollas === 6
                             ? coin6
-                            : cardDetails.digiDollas == 7
+                            : cardDetails.digiDollas === 7
                             ? coin7
-                            : cardDetails.digiDollas == 8
+                            : cardDetails.digiDollas === 8
                             ? coin8
-                            : cardDetails.digiDollas == 9
+                            : cardDetails.digiDollas === 9
                             ? coin9
-                            : cardDetails.digiDollas == 10
+                            : cardDetails.digiDollas === 10
                             ? coin10
-                            : cardDetails.digiDollas == 11
+                            : cardDetails.digiDollas === 11
                             ? coin11
-                            : cardDetails.digiDollas == 12
+                            : cardDetails.digiDollas === 12
                             ? coin12
-                            : cardDetails.digiDollas == 13
+                            : cardDetails.digiDollas === 13
                             ? coin13
-                            : cardDetails.digiDollas == 14
+                            : cardDetails.digiDollas === 14
                             ? coin14
-                            : cardDetails.digiDollas == 15
+                            : cardDetails.digiDollas === 15
                             ? coin15
                             : coin1
                         }

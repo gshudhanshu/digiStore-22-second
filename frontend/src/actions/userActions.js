@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { toast } from 'react-toastify'
 import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,

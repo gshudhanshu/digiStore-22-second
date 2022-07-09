@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Link,
-  useParams,
-  useSearchParams,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom'
-import {
-  Container,
-  Badge,
-  Image,
-  Button,
-  Row,
-  Col,
-  Table,
-} from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Container, Image, Row, Col } from 'react-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
 
@@ -29,17 +14,17 @@ import { listMyCards } from '../actions/cardActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 function TransactionScreen() {
-  const { id } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
+  // const { id } = useParams()
+  // const [searchParams, setSearchParams] = useSearchParams()
   let location = useLocation()
   const navigate = useNavigate()
 
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
   const [full_mobile, setFull_mobile] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState(null)
+  // const [password, setPassword] = useState('')
+  // const [confirmPassword, setConfirmPassword] = useState('')
+  // const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -75,16 +60,16 @@ function TransactionScreen() {
     }
   }, [dispatch, navigate, userInfo, user, success])
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    if (password !== confirmPassword) {
-      setMessage('Password do not match')
-    } else {
-      dispatch(
-        updateUserProfile({ id: user._id, fname, lname, full_mobile, password })
-      )
-    }
-  }
+  // const submitHandler = (e) => {
+  //   e.preventDefault()
+  //   if (password !== confirmPassword) {
+  //     setMessage('Password do not match')
+  //   } else {
+  //     dispatch(
+  //       updateUserProfile({ id: user._id, fname, lname, full_mobile, password })
+  //     )
+  //   }
+  // }
   return (
     <>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>

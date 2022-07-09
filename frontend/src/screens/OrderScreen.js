@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Link,
-  useParams,
-  useSearchParams,
-  useNavigate,
-  useLocation,
-  Navigate,
-} from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
 
@@ -47,11 +40,11 @@ const OrderScreen = () => {
 
   const orderNewCreate = useSelector((state) => state.orderNewCreate)
   const {
-    loading: loadingNewOrder,
+    // loading: loadingNewOrder,
     order: orderNewOrder,
-    success: successNewOrder,
-    error: errorNewOrder,
-    userInfo: userInfoNewOrder,
+    // success: successNewOrder,
+    // error: errorNewOrder,
+    // userInfo: userInfoNewOrder,
   } = orderNewCreate
 
   if (!loading) {

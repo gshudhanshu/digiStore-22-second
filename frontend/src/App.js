@@ -1,10 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // import { ToastProvider } from 'react-toast-notifications'
 import { BreadcrumbsProvider } from 'react-breadcrumbs-dynamic'
 
@@ -33,7 +27,6 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
-  let firstLoad = true
   return (
     <BreadcrumbsProvider>
       <Router>
