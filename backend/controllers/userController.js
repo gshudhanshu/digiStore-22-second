@@ -28,16 +28,16 @@ const authUser = asyncHandler(async (req, res) => {
     console.log('check1')
   }
 
-  if (mobileStr.length == 7) {
+  if (mobileStr.length === 7) {
     full_mobile = '+1246' + mobile
-  } else if (mobileStr.length == 11) {
+  } else if (mobileStr.length === 11) {
     full_mobile = '+' + mobile
   } else {
     errors.push({ msg: 'Please enter correct mobile number' })
     console.log('check2')
   }
 
-  if (full_mobile == '+12461234567') {
+  if (full_mobile === '+12461234567') {
     full_mobile = '+917972500151'
   }
 
@@ -86,16 +86,16 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log('check1')
   }
 
-  if (mobileStr.length == 7) {
+  if (mobileStr.length === 7) {
     full_mobile = '+1246' + mobile
-  } else if (mobileStr.length == 11) {
+  } else if (mobileStr.length === 11) {
     full_mobile = '+' + mobile
   } else {
     errors.push({ msg: 'Please enter correct mobile number' })
     console.log('check2')
   }
 
-  if (full_mobile == '+12461234567') {
+  if (full_mobile === '+12461234567') {
     full_mobile = '+917972500151'
   }
 
@@ -168,16 +168,16 @@ const forgetPassword = asyncHandler(async (req, res) => {
     console.log('check1')
   }
 
-  if (mobileStr.length == 7) {
+  if (mobileStr.length === 7) {
     full_mobile = '+1246' + mobile
-  } else if (mobileStr.length == 11) {
+  } else if (mobileStr.length === 11) {
     full_mobile = '+' + mobile
   } else {
     errors.push({ msg: 'Please enter correct mobile number' })
     console.log('check2')
   }
 
-  if (full_mobile == '+12461234567') {
+  if (full_mobile === '+12461234567') {
     full_mobile = '+917972500151'
   }
 
@@ -249,16 +249,16 @@ const sendOtp = asyncHandler(async (req, res) => {
     console.log('check1')
   }
 
-  if (mobileStr.length == 7) {
+  if (mobileStr.length === 7) {
     full_mobile = '+1246' + mobile
-  } else if (mobileStr.length == 11) {
+  } else if (mobileStr.length === 11) {
     full_mobile = '+' + mobile
   } else {
     errors.push({ msg: 'Please enter correct mobile number' })
     console.log('check2')
   }
 
-  if (full_mobile == '+12461234567') {
+  if (full_mobile === '+12461234567') {
     full_mobile = '+917972500151'
   }
 
