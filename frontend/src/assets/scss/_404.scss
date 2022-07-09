@@ -26,6 +26,10 @@
     font-size: 25px;
     font-weight: 600;
   }
+
+  p {
+    font-size: 16px;
+  }
 }
 
 .error-btn {
@@ -44,7 +48,7 @@
   display: inline-block;
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     left: 0;
     bottom: -6px;
     height: 3px;

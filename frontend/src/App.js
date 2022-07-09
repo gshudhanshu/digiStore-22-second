@@ -22,6 +22,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import TransactionScreen from './screens/TransactionScreen'
 import ScratchCardScreen from './screens/ScratchCardScreen'
+import NotFoundScreen from './screens/NotFoundScreen'
 import BottomNav from './components/BottomNav'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -67,6 +68,7 @@ function App() {
               element={<HomeScreens />}
             />
             <Route path='/' element={<HomeScreens />} />
+            <Route path='*' element={<NotFoundScreen />} />
 
             {/* <Route
               path='/'
