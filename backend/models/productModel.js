@@ -36,6 +36,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    isStaff: {
+      type: Boolean,
+      default: false,
+    },
     category: {
       type: String,
       required: true,

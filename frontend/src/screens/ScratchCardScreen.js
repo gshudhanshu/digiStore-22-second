@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import {
   Link,
@@ -12,17 +13,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
 
-import {
-  ListGroup,
-  Image,
-  Accordion,
-  Button,
-  Offcanvas,
-  Container,
-  Row,
-  Col,
-  Card,
-} from 'react-bootstrap'
+import { Form, Image, Button, Container, Row, Card } from 'react-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
 
@@ -69,6 +60,9 @@ function ScratchCardScreen() {
   const navigate = useNavigate()
 
   const [showCard, setShowCard] = useState(false)
+  const [full_mobile, setFull_mobile] = useState('')
+  const [image, setImage] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -82,14 +76,35 @@ function ScratchCardScreen() {
   const { cardDetails } = cardScratch
 
   const handleCardClose = () => setShowCard(false)
-  const handleCardShow = () => {
-    dispatch(getStaffScrachCardDetails(userInfo))
+  const handleCardShow = (e) => {
+    e.preventDefault()
+    dispatch(getStaffScrachCardDetails(userInfo, full_mobile, image))
     setShowCard(true)
   }
 
   const addDigiDollasHandler = async (e) => {
     // confettiRef.current.fire()
     dispatch(addDigiDollas(userInfo, cardDetails))
+  }
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload', formData, config)
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
   }
 
   return (
@@ -127,44 +142,12 @@ function ScratchCardScreen() {
                           <Image
                             className='scratch-coin'
                             fluid
-                            src={
-                              cardDetails.digiDollas === 1
-                                ? coin1
-                                : cardDetails.digiDollas === 2
-                                ? coin2
-                                : cardDetails.digiDollas === 3
-                                ? coin3
-                                : cardDetails.digiDollas === 4
-                                ? coin4
-                                : cardDetails.digiDollas === 5
-                                ? coin5
-                                : cardDetails.digiDollas === 6
-                                ? coin6
-                                : cardDetails.digiDollas === 7
-                                ? coin7
-                                : cardDetails.digiDollas === 8
-                                ? coin8
-                                : cardDetails.digiDollas === 9
-                                ? coin9
-                                : cardDetails.digiDollas === 10
-                                ? coin10
-                                : cardDetails.digiDollas === 11
-                                ? coin11
-                                : cardDetails.digiDollas === 12
-                                ? coin12
-                                : cardDetails.digiDollas === 13
-                                ? coin13
-                                : cardDetails.digiDollas === 14
-                                ? coin14
-                                : cardDetails.digiDollas === 15
-                                ? coin15
-                                : coin1
-                            }
+                            src={cardDetails.product.image}
                             alt={''}
                             rounded
                           ></Image>
                         </Row>
-                        <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
+                        <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.product.name}`}</Row>
                         <Row className='note'>
                           <p>{`This will be credited to your DigiDollas`}</p>
                         </Row>
@@ -202,13 +185,52 @@ function ScratchCardScreen() {
                 </>
               ) : (
                 <>
-                  <h1>Please login to scratch the card</h1>
-                  <Button
-                    className='btn btn-primary digicel-button'
-                    onClick={handleCardShow}
-                  >
-                    Show Card
-                  </Button>
+                  <Form>
+                    <Form.Group
+                      className='mb-3'
+                      controlId='full_mobile'
+                      onSubmit={handleCardShow}
+                    >
+                      <Form.Label>Mobile Number</Form.Label>
+                      <Form.Control
+                        type='full_mobile'
+                        placeholder='Enter Mobile'
+                        value={full_mobile}
+                        onChange={(e) => setFull_mobile(e.target.value)}
+                        required
+                      />
+                      <Form.Text className='text-muted'>
+                        Format: 1234567
+                      </Form.Text>
+                    </Form.Group>
+
+                    <Form.Group controlId='image'>
+                      <Form.Label>Image</Form.Label>
+                      <Form.Control
+                        className='mb-3'
+                        type='file'
+                        onChange={uploadFileHandler}
+                        label='Choose File'
+                        required
+                      />
+                      {uploading && <Loader />}
+                      <Form.Control
+                        className='mb-3'
+                        type='text'
+                        placeholder='Image URL'
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                        disabled
+                      ></Form.Control>
+                    </Form.Group>
+                    <Button
+                      variant='primary'
+                      type='submit'
+                      className='btn btn-primary digicel-button'
+                    >
+                      Show Card
+                    </Button>
+                  </Form>
                 </>
               )}
             </div>

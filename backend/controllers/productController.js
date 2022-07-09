@@ -16,7 +16,11 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {}
   const count = await Product.countDocuments({ ...keyword })
+    .where('isStaff')
+    .equals(false)
   const products = await Product.find({ ...keyword })
+    .where('isStaff')
+    .equals(false)
     .limit(pageSize)
     .skip(pageSize * (page - 1))
   res.json({ products, page, pages: Math.ceil(count / pageSize) })

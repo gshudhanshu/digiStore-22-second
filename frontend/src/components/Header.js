@@ -127,7 +127,6 @@ const Header = ({}) => {
                   alt='Digi dollas'
                 />
                 <div>{userInfo.digiDollas}</div>
-                <div>Staff Area</div>
                 <span className='d-none d-md-block'>Digi Dollas</span>
               </div>
             ) : (

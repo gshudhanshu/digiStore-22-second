@@ -5,6 +5,7 @@ import asyncHandler from 'express-async-handler'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc.js'
 import timezone from 'dayjs/plugin/timezone.js'
+import Product from '../models/productModel.js'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault('America/Barbados')
@@ -27,7 +28,7 @@ const generateScratchCard = asyncHandler(async (req, res) => {
   const todayDate = dayjs.tz(Date.now()).format('YYYYMMDD')
   const lastScratchDate = dayjs.tz(user.lastScratchDate).format('YYYYMMDD')
 
-  if (lastScratchDate === todayDate) {
+  if (lastScratchDate === todayDate && !user.isStaff) {
     return res.status(200).json({
       status: 'fail',
       lastScratchDate,
@@ -39,40 +40,61 @@ const generateScratchCard = asyncHandler(async (req, res) => {
     max,
     randomNum,
     expiryDate = 0
-  switch (user.planDetails.plan) {
-    case 'Prime 7D':
-    case 'Prime 7D Data Only':
-      days = 7
-      min = 4
-      max = 8
-      break
-    case 'Prime MDA 14D':
-    case 'Prime MDA 14D Data Only':
-      days = 14
-      min = 6
-      max = 10
-      break
-    case 'Prime MDA 30D':
-    case 'Prime MDA 30D 6.5GB Data Only':
-      days = 30
-      min = 8
-      max = 12
-      break
-    default:
-      days = 0
-      min = 1
-      max = 2
-  }
-  randomNum = Math.floor(Math.random() * (max - min + 1)) + min
-  expiryDate = await dayjs(user.planDetails.purchaseDate, 'YYYYMMDD').add(
-    days,
-    'day'
-  )
 
-  res.json({ status: 'success', digiDollas: randomNum, expiryDate, todayDate })
+  if (user.isStaff) {
+    const filter = { isStaff: true, countInStock: { $gt: 0 } }
+    const randomProduct = await Product.aggregate().match(filter).sample(1)
+
+    return res.json({
+      status: 'success',
+      product: randomProduct[0],
+      todayDate,
+    })
+  } else {
+    switch (user.planDetails.plan) {
+      case 'Prime 7D':
+      case 'Prime 7D Data Only':
+        days = 7
+        min = 4
+        max = 8
+        break
+      case 'Prime MDA 14D':
+      case 'Prime MDA 14D Data Only':
+        days = 14
+        min = 6
+        max = 10
+        break
+      case 'Prime MDA 30D':
+      case 'Prime MDA 30D 6.5GB Data Only':
+        days = 30
+        min = 8
+        max = 12
+        break
+      default:
+        days = 0
+        min = 1
+        max = 2
+    }
+    randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+    expiryDate = await dayjs(user.planDetails.purchaseDate, 'YYYYMMDD').add(
+      days,
+      'day'
+    )
+    return res.json({
+      status: 'success',
+      digiDollas: randomNum,
+      expiryDate,
+      todayDate,
+    })
+  }
+
+  return res.status(200).json({
+    status: 'fail',
+    lastScratchDate,
+  })
 })
 
-// @desc Generate scratch card points
+// @desc Save scratch card points
 // @route PUT /api/users/:id/cards
 // @access Private
 const saveScratchedCard = asyncHandler(async (req, res) => {
@@ -129,8 +151,8 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
   // }
 })
 
-// @desc Get logged in user orders
-// @route GET /api/orders/myorders
+// @desc Get logged in user cards
+// @route GET /api/users/mycards
 // @access Private
 const getMyCards = asyncHandler(async (req, res) => {
   let cards = await ScrachCard.find({ user: req.user._id }).select('-user')
