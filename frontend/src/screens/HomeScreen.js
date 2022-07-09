@@ -363,9 +363,9 @@ const HomeScreen = () => {
                   lg={4}
                   xl={3}
                 >
-                  <h3>
+                  <div>
                     <Product product={product} />
-                  </h3>
+                  </div>
                 </Col>
               ))}
             </Row>

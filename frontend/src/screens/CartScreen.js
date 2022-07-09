@@ -203,7 +203,7 @@ const CartScreen = () => {
                             />
                             {item.price}
                           </div>
-                          <div>
+                          <div className='trash-button-container'>
                             <Button
                               type='button'
                               // variant='dark'

@@ -94,14 +94,16 @@
       z-index: 9;
       bottom: 0;
       left: 50%;
-
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-
       width: 100%;
-
       transform: translateX(-50%);
+
+      @media #{$xs-layout} {
+        position: unset;
+        transform: unset;
+      }
 
       > div {
         display: flex;
