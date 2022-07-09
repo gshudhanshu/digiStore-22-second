@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isStaff: {
+      type: Boolean,
+      default: false,
+    },
     planDetails: {
       purchaseDate: { type: Date },
       plan: { type: String },

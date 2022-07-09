@@ -50,6 +50,7 @@ const authUser = asyncHandler(async (req, res) => {
       full_mobile: user.full_mobile,
       digiDollas: user.digiDollas,
       isAdmin: user.isAdmin,
+      isStaff: user.isStaff,
       token: generateToken(user._id),
     })
   } else {
@@ -141,6 +142,7 @@ const registerUser = asyncHandler(async (req, res) => {
       full_mobile: user.full_mobile,
       digiDollas: user.digiDollas,
       isAdmin: user.isAdmin,
+      isStaff: user.isStaff,
       token: generateToken(user._id),
     })
   } else {
@@ -224,6 +226,7 @@ const forgetPassword = asyncHandler(async (req, res) => {
       full_mobile: userExists.full_mobile,
       digiDollas: userExists.digiDollas,
       isAdmin: userExists.isAdmin,
+      isStaff: user.isStaff,
       token: generateToken(userExists._id),
     })
   } else {
@@ -312,6 +315,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       full_mobile: user.full_mobile,
       digiDollas: user.digiDollas,
       isAdmin: user.isAdmin,
+      isStaff: user.isStaff,
       token: generateToken(user._id),
     })
   } else {
@@ -344,6 +348,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       fname: updatedUser.fname,
       lname: updatedUser.lname,
       isAdmin: updatedUser.isAdmin,
+      isStaff: user.isStaff,
       digiDollas: user.digiDollas,
       token: generateToken(updatedUser._id),
     })
@@ -399,6 +404,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.lname = req.body.lname || user.lname
     user.full_mobile = req.body.full_mobile || user.full_mobile
     user.isAdmin = req.body.isAdmin
+    user.isStaff = req.body.isStaff
 
     const updatedUser = await user.save()
     res.json({
@@ -408,6 +414,7 @@ const updateUser = asyncHandler(async (req, res) => {
       digiDollas: user.digiDollas,
       full_mobile: updatedUser.full_mobile,
       isAdmin: updatedUser.isAdmin,
+      isStaff: updatedUser.isStaff,
     })
   } else {
     res.status(404)

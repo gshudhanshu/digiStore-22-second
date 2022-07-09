@@ -119,15 +119,20 @@ const Header = ({}) => {
                 </Nav>
               </Navbar>
             </div>
-            {userInfo && (
+            {userInfo && !userInfo.isStaff ? (
               <div className='customer-points'>
                 <img
                   className='price-dollas-icon'
                   src={'/assets/img/digi_dollar.png'}
                   alt='Digi dollas'
                 />
-                <div className=''>{userInfo.digiDollas}</div>
+                <div>{userInfo.digiDollas}</div>
+                <div>Staff Area</div>
                 <span className='d-none d-md-block'>Digi Dollas</span>
+              </div>
+            ) : (
+              <div className='customer-points'>
+                <div className='mx-4 my-2'>Staff</div>
               </div>
             )}
           </Container>

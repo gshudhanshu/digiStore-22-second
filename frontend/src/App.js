@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-// import { ToastProvider } from 'react-toast-notifications'
+import { useDispatch, useSelector } from 'react-redux'
 import { BreadcrumbsProvider } from 'react-breadcrumbs-dynamic'
 
 import Header from './components/Header'
@@ -28,13 +28,16 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  console.log(userInfo)
+
   return (
     <BreadcrumbsProvider>
       <Router>
         <Header />
         <ToastContainer autoClose={2000} position='top-center' theme='dark' />
         <main>
-          {/* <Container> */}
           <Routes>
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />
@@ -45,7 +48,9 @@ function App() {
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/transactions' element={<TransactionScreen />} />
-            <Route path='/scratchcard' element={<ScratchCardScreen />} />
+            {userInfo && userInfo.isStaff && (
+              <Route path='/' element={<ScratchCardScreen />} />
+            )}
             <Route path='/product/:id' element={<ProductScreen />} />
             <Route path='/cart/:id' element={<CartScreen />} />
             <Route path='/cart/' element={<CartScreen />} />
@@ -77,7 +82,6 @@ function App() {
               }
             /> */}
           </Routes>
-          {/* </Container> */}
         </main>
         <Footer />
         <BottomNav />
