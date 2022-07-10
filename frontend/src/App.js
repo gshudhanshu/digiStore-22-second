@@ -26,6 +26,7 @@ import NotFoundScreen from './screens/NotFoundScreen'
 import BottomNav from './components/BottomNav'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import StaffLogin from './screens/StaffLogin'
 
 function App() {
   const userLogin = useSelector((state) => state.userLogin)
@@ -43,6 +44,7 @@ function App() {
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/login' element={<LoginScreen />} />
+            <Route path='/staff-login' element={<StaffLogin />} />
             <Route path='/forget-password' element={<ForgetPasswordScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />

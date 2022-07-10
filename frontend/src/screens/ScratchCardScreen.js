@@ -248,7 +248,7 @@ function ScratchCardScreen() {
                   <Form.Control
                     type='name'
                     placeholder='Enter Name'
-                    value={mobile}
+                    // value={mobile}
                     // onChange={(e) => setMobile(e.target.value)}
                     required
                   />
