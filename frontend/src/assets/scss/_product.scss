@@ -406,6 +406,18 @@
   }
 }
 
+.staff-ScratchCard.offcanvas.offcanvas-end {
+  width: 100%;
+  .offcanvas-body {
+    padding: 0;
+  }
+  .offcanvas-header {
+    position: absolute;
+    right: 0px;
+    z-index: 1060;
+  }
+}
+
 .offcanvas.offcanvas-end {
   @media #{$xs-layout} {
     width: 100%;
@@ -451,13 +463,13 @@
 .ScratchCard__Container {
   display: flex;
   margin: auto;
-  max-width: 300px;
+  // max-width: 300px;
   // max-height: 330px;
   width: 100%;
   // height: 50vh;
   // max-height: 360px;
   .ScratchCard__Canvas {
-    max-width: 300px;
+    // max-width: 300px;
     // max-height: 330px;
     width: 100%;
     height: 100%;
