@@ -143,7 +143,7 @@ function ScratchCardScreen() {
           <div>
             {cardDetails && cardDetails.status === 'success' ? (
               <ScratchCard
-                width={width}
+                width={width > 1024 ? 1024 : width}
                 height={height}
                 image={backgroundImageSrc}
                 finishPercent={30}

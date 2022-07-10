@@ -479,8 +479,8 @@
   .ScratchCard__Result {
     .scratch-card-bg.staff-scratch-card-bg {
       padding: 1em;
-      font-size: 5vw;
-      // line-height: normal;
+      font-size: 2rem;
+      line-height: normal;
       .heading {
         height: unset;
         margin: 0;
@@ -498,6 +498,9 @@
 
       .won-product-img-container {
         margin: 0;
+        .won-product-img {
+          max-width: 450px;
+        }
       }
     }
 
@@ -512,6 +515,7 @@
     .staff-scratch-card-logo {
       margin: 0;
       width: 40vw;
+      max-width: 250px;
     }
     .scratch-card-bg {
       width: 400px;
@@ -548,9 +552,6 @@
           max-width: 200px;
           width: 100%;
           margin-bottom: 15px;
-        }
-        .won-product-img {
-          max-width: unset;
         }
       }
 
