@@ -60,7 +60,7 @@ function ScratchCardScreen() {
   const navigate = useNavigate()
 
   const [showCard, setShowCard] = useState(false)
-  const [full_mobile, setFull_mobile] = useState('')
+  const [mobile, setMobile] = useState('')
   const [image, setImage] = useState('')
   const [uploading, setUploading] = useState(false)
 
@@ -78,7 +78,7 @@ function ScratchCardScreen() {
   const handleCardClose = () => setShowCard(false)
   const handleCardShow = (e) => {
     e.preventDefault()
-    dispatch(getStaffScrachCardDetails(userInfo, full_mobile, image))
+    dispatch(getStaffScrachCardDetails(userInfo, mobile, image))
     setShowCard(true)
   }
 
@@ -185,18 +185,14 @@ function ScratchCardScreen() {
                 </>
               ) : (
                 <>
-                  <Form>
-                    <Form.Group
-                      className='mb-3'
-                      controlId='full_mobile'
-                      onSubmit={handleCardShow}
-                    >
+                  <Form onSubmit={handleCardShow}>
+                    <Form.Group className='mb-3' controlId='mobile'>
                       <Form.Label>Mobile Number</Form.Label>
                       <Form.Control
-                        type='full_mobile'
+                        type='mobile'
                         placeholder='Enter Mobile'
-                        value={full_mobile}
-                        onChange={(e) => setFull_mobile(e.target.value)}
+                        value={mobile}
+                        onChange={(e) => setMobile(e.target.value)}
                         required
                       />
                       <Form.Text className='text-muted'>

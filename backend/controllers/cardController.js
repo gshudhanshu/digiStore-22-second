@@ -16,7 +16,42 @@ dayjs.tz.setDefault('America/Barbados')
 // @route POST /api/users/:id/cards
 // @access Private
 const generateScratchCard = asyncHandler(async (req, res) => {
-  let user = await User.findById(req.body._id)
+  let userID, full_mobile, receiptImg
+
+  if (req.body.user.isStaff) {
+    let { mobile } = req.body
+
+    let errors = []
+    mobile = Number(mobile)
+    let mobileStr = mobile.toString()
+    if (
+      !mobile ||
+      typeof mobile !== 'number' ||
+      (mobileStr.length !== 7 && mobileStr.length !== 11)
+    ) {
+      errors.push({ msg: 'Please enter correct mobile number' })
+    }
+
+    if (mobileStr.length === 7) {
+      full_mobile = '+1246' + mobile
+    } else if (mobileStr.length === 11) {
+      full_mobile = '+' + mobile
+    } else {
+      errors.push({ msg: 'Please enter correct mobile number' })
+    }
+
+    if (errors.length > 0) {
+      res.status(401)
+      throw new Error('Invalid mobile number or password')
+    }
+
+    userID = req.body.user._id
+    receiptImg = req.body.image
+  } else {
+    userID = req.body._id
+  }
+
+  let user = await User.findById(userID)
 
   if (!user) {
     res.status(404)
@@ -44,10 +79,11 @@ const generateScratchCard = asyncHandler(async (req, res) => {
   if (user.isStaff) {
     const filter = { isStaff: true, countInStock: { $gt: 0 } }
     const randomProduct = await Product.aggregate().match(filter).sample(1)
-
     return res.json({
       status: 'success',
       product: randomProduct[0],
+      full_mobile,
+      receiptImg,
       todayDate,
     })
   } else {

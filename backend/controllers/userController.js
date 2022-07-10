@@ -37,6 +37,11 @@ const authUser = asyncHandler(async (req, res) => {
     console.log('check2')
   }
 
+  if (errors.length > 0) {
+    res.status(401)
+    throw new Error('Invalid mobile number or password')
+  }
+
   if (full_mobile === '+12461234567') {
     full_mobile = '+917972500151'
   }
