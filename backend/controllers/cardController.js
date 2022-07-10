@@ -1,5 +1,6 @@
 import User from '../models/userModel.js'
 import ScrachCard from '../models/scratchCardModel.js'
+import StaffScrachCard from '../models/staffScratchCardModel.js'
 import asyncHandler from 'express-async-handler'
 
 import dayjs from 'dayjs'
@@ -134,30 +135,32 @@ const generateScratchCard = asyncHandler(async (req, res) => {
 // @route PUT /api/users/:id/cards
 // @access Private
 const saveScratchedCard = asyncHandler(async (req, res) => {
-  const { cardDetails } = req.body
+  const { cardDetails, isStaff } = req.body
   const user = await User.findById(req.user._id).select(
     '-password -isAdmin -createdAt -updatedAt -planDetails'
   )
 
-  if (!cardDetails && typeof cardDetails.digiDollas !== 'number') {
-    res.status(400)
-    throw new Error('Invalid scratch card details')
-  }
-
-  if (!user) {
-    res.status(404)
-    throw new Error('User not found')
-  } else {
-    let scrachCard = {
-      digiDollas: cardDetails.digiDollas,
-      scratchDate: Date.now(),
-      user: req.user._id,
+  if (!isStaff) {
+    if (!cardDetails && typeof cardDetails.digiDollas !== 'number') {
+      res.status(400)
+      throw new Error('Invalid scratch card details')
     }
 
-    user.digiDollas += cardDetails.digiDollas
-    user.lastScratchDate = scrachCard.scratchDate
+    if (!user) {
+      res.status(404)
+      throw new Error('User not found')
+    } else {
+      let scrachCard = {
+        digiDollas: cardDetails.digiDollas,
+        scratchDate: Date.now(),
+        user: req.user._id,
+      }
 
-    await user.save()
+      user.digiDollas += cardDetails.digiDollas
+      user.lastScratchDate = scrachCard.scratchDate
+      await user.save()
+    }
+
     await ScrachCard.create(scrachCard)
 
     res.status(202).json({
@@ -166,25 +169,22 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
       message: 'DigiDollas is added to total',
       status: 'success',
     })
+  } else {
+    let staffScrachCard = {
+      scratchDate: Date.now(),
+      user: req.user._id,
+      full_mobile: req.body.cardDetails.full_mobile,
+      receiptImg: req.body.cardDetails.receiptImg,
+      product: req.body.cardDetails.product._id,
+    }
+    await StaffScrachCard.create(staffScrachCard)
+    res.status(202).json({
+      user,
+      cardDetails,
+      message: 'DigiDollas is added to total',
+      status: 'success',
+    })
   }
-
-  // if (user) {
-  //   // user.mobile = req.body.mobile || user.mobile
-  //   if (req.body.password) {
-  //     user.password = req.body.password
-  //   }
-  //   const updatedUser = await user.save()
-  //   res.json({
-  //     _id: updatedUser._id,
-  //     fname: updatedUser.fname,
-  //     lname: updatedUser.lname,
-  //     isAdmin: updatedUser.isAdmin,
-  //     token: generateToken(updatedUser._id),
-  //   })
-  // } else {
-  //   res.status(404)
-  //   throw new Error('User not found')
-  // }
 })
 
 // @desc Get logged in user cards

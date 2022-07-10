@@ -186,7 +186,7 @@ export const saveStaffScratchCard =
       }
       const { data } = await axios.put(
         `/api/cards`,
-        { _id: user._id, cardDetails },
+        { _id: user._id, isStaff: user.isStaff, cardDetails },
         config
       )
 

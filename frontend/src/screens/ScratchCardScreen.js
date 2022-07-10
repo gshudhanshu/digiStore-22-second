@@ -50,7 +50,7 @@ import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import {
   getStaffScrachCardDetails,
-  addDigiDollas,
+  saveStaffScratchCard,
 } from '../actions/cardActions'
 
 function ScratchCardScreen() {
@@ -84,7 +84,7 @@ function ScratchCardScreen() {
 
   const addDigiDollasHandler = async (e) => {
     // confettiRef.current.fire()
-    dispatch(addDigiDollas(userInfo, cardDetails))
+    dispatch(saveStaffScratchCard(userInfo, cardDetails))
   }
 
   const uploadFileHandler = async (e) => {
@@ -114,10 +114,10 @@ function ScratchCardScreen() {
         Scratch Card
       </BreadcrumbsItem>
       <Breadcrumb />
-      <Container>
-        <Card style={{ width: '25rem' }}>
+      <Container className='d-flex justify-content-center'>
+        <Card className='mt-3' style={{ width: '25rem' }}>
           <Card.Body>
-            <h1 className='scratch-card-title'>SCRATCH N’ WIN</h1>
+            <h1 className='scratch-card-title text-center'>SCRATCH N’ WIN</h1>
             <div>
               {showCard && cardDetails && cardDetails.status === 'success' ? (
                 <>
@@ -154,12 +154,14 @@ function ScratchCardScreen() {
                       </>
                     </div>
                   </ScratchCard>
-                  <Button
-                    className='btn btn-primary digicel-button'
-                    onClick={handleCardClose}
-                  >
-                    New Card
-                  </Button>
+                  <div className='text-center'>
+                    <Button
+                      className='mt-4 btn btn-primary digicel-button'
+                      onClick={handleCardClose}
+                    >
+                      New Card
+                    </Button>
+                  </div>
                 </>
               ) : cardDetails && cardDetails.status === 'fail' ? (
                 <>
