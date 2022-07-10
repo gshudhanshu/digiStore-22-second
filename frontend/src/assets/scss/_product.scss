@@ -445,19 +445,47 @@
     margin: 0;
   }
 
-  .scratch-card-title,
-  .digicel-gradient-text {
-    background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
-      linear-gradient(101deg, #f5402a, #9801ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 0;
-    margin: 0;
-  }
-
   div.row {
     margin-top: auto;
+  }
+}
+
+.scratch-card-title,
+.digicel-gradient-text {
+  background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 255, 255, 0)),
+    linear-gradient(101deg, #f5402a, #9801ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+// .staff-upload-File-input::before {
+//   content: 'Upload';
+// }
+// #image::before {
+//   content: 'Upload';
+// }
+
+.custom-file-button {
+  input[type='file'] {
+    margin-left: -2px !important;
+
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+    &::file-selector-button {
+      display: none;
+    }
+  }
+
+  &:hover {
+    label {
+      background-color: #dde0e3;
+      cursor: pointer;
+    }
   }
 }
 
@@ -478,7 +506,10 @@
   display: flex;
   .ScratchCard__Result {
     .scratch-card-bg.staff-scratch-card-bg {
-      padding: 1em;
+      padding: 4em;
+      @media #{$xs-layout} {
+        padding: 1em;
+      }
       font-size: 2rem;
       line-height: normal;
       .heading {
@@ -514,8 +545,8 @@
 
     .staff-scratch-card-logo {
       margin: 0;
-      width: 40vw;
-      max-width: 250px;
+      width: 60vw;
+      max-width: 450px;
     }
     .scratch-card-bg {
       width: 400px;
@@ -567,6 +598,7 @@
         width: 80%;
         p {
           font-size: 0.8em;
+          line-height: normal;
         }
       }
     }

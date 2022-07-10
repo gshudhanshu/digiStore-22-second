@@ -53,7 +53,11 @@ const Header = ({}) => {
                   alt=''
                   className='logo'
                   // style={userInfo && 'justify-content: center'}
-                  src={'/assets/img/logo.png'}
+                  src={
+                    !userInfo || (userInfo && !userInfo.isStaff)
+                      ? '/assets/img/logo.png'
+                      : '/assets/img/digicel-logo.png'
+                  }
                 />
               </Navbar.Brand>
             </LinkContainer>
@@ -131,7 +135,7 @@ const Header = ({}) => {
             )}
             {userInfo && userInfo.isStaff && (
               <div className='customer-points'>
-                <div className='mx-4 my-2'>Staff</div>
+                <div className='mx-4 my-2'>Retail Store</div>
               </div>
             )}
           </Container>

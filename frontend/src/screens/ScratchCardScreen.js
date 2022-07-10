@@ -17,6 +17,7 @@ import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
 import {
   Offcanvas,
   Form,
+  InputGroup,
   Image,
   Button,
   Container,
@@ -165,8 +166,11 @@ function ScratchCardScreen() {
                     <img
                       alt=''
                       className='staff-scratch-card-logo'
-                      src={'/assets/img/logo.png'}
+                      src={'/assets/img/scratchNWin.png'}
                     />
+                    {/* <Row className='no-gutters heading digicel-gradient-text'>
+                      Scratch N Win
+                    </Row> */}
                     {/* <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row> */}
                     <div className='staff-scratch-content'>
                       <Row className='no-gutters heading'>Congrats!</Row>
@@ -183,10 +187,11 @@ function ScratchCardScreen() {
                     </div>
                     <Row className='note'>
                       <p>
-                        {`Enjoy scratching! `}{' '}
-                        <span role='img' aria-label='excited'>
+                        {`Thank you for your participation. `}{' '}
+                        <strong>#BetterTogether</strong>
+                        {/* <span role='img' aria-label='excited'>
                           🤩
-                        </span>
+                        </span> */}
                       </p>
                     </Row>
                   </>
@@ -229,9 +234,26 @@ function ScratchCardScreen() {
       <Container className='d-flex justify-content-center align-items-center'>
         <Card style={{ width: '25rem' }}>
           <Card.Body>
-            <h1 className='scratch-card-title text-center'>SCRATCH N’ WIN</h1>
+            {/* <h1 className='scratch-card-title text-center'>SCRATCH N’ WIN</h1> */}
+            <img
+              alt=''
+              className='scratch-card-title text-center mb-3'
+              src={'/assets/img/scratchNWin.png'}
+            />
+
             <>
               <Form onSubmit={handleCardShow}>
+                <Form.Group className='mb-3' controlId='name'>
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type='name'
+                    placeholder='Enter Name'
+                    value={mobile}
+                    // onChange={(e) => setMobile(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+
                 <Form.Group className='mb-3' controlId='mobile'>
                   <Form.Label>Mobile Number</Form.Label>
                   <Form.Control
@@ -244,15 +266,34 @@ function ScratchCardScreen() {
                   <Form.Text className='text-muted'>Format: 1234567</Form.Text>
                 </Form.Group>
 
+                <Form.Group className='mb-3' controlId='mobile'>
+                  <Form.Label>Transaction</Form.Label>
+                  <Form.Select aria-label='Default select example'>
+                    <option>Select Transaction</option>
+                    <option value='1'>Top $25 or More</option>
+                    <option value='2'>Sim with Prime Bundle</option>
+                    <option value='3'>Handset</option>
+                    <option value='3'>Postpaid Prime Bundle</option>
+                  </Form.Select>
+                </Form.Group>
+
                 <Form.Group controlId='image'>
-                  <Form.Label>Image</Form.Label>
-                  <Form.Control
-                    className='mb-3'
-                    type='file'
-                    onChange={uploadFileHandler}
-                    label='Choose File'
-                    required
-                  />
+                  <Form.Label>Proof of Transcatiom</Form.Label>
+                  <InputGroup
+                    className='mb-3 custom-file-button'
+                    controlId='image'
+                  >
+                    <InputGroup.Text className='input-group-text'>
+                      Upload
+                    </InputGroup.Text>
+                    <Form.Control
+                      // className='mb-3'
+                      type='file'
+                      onChange={uploadFileHandler}
+                      label='Choose file'
+                      required
+                    />
+                  </InputGroup>
                   {uploading && <Loader />}
                   <Form.Control
                     className='mb-3'
@@ -263,6 +304,7 @@ function ScratchCardScreen() {
                     disabled
                   ></Form.Control>
                 </Form.Group>
+
                 <Button
                   variant='primary'
                   type='submit'
