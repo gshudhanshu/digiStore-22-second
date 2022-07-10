@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className='bottom-footer'>
       <Container>
         <Row>
-          <Col className='copyright text-center my-4'>
+          <Col className='copyright text-center'>
             Copyright &copy; 2021 Digicel Group. All rights reserved.
           </Col>
         </Row>

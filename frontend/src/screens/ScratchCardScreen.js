@@ -150,7 +150,7 @@ function ScratchCardScreen() {
                 onComplete={(e) => addDigiDollasHandler(e)}
               >
                 <div
-                  className='scratch-card-bg'
+                  className='staff-scratch-card-bg scratch-card-bg'
                   style={{
                     width: '100%',
                     height: '100%',
@@ -160,20 +160,30 @@ function ScratchCardScreen() {
                   }}
                 >
                   <>
-                    <Row className='no-gutters heading'>Congrats!</Row>
+                    <img
+                      alt=''
+                      className='staff-scratch-card-logo'
+                      src={'/assets/img/logo.png'}
+                    />
                     {/* <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row> */}
+                    <Row className='no-gutters heading'>Congrats!</Row>
                     <Row className='no-gutters coinDigiDollas'>
                       <Image
-                        className='scratch-coin'
+                        className='scratch-coin won-product-img'
                         fluid
                         src={cardDetails.product.image}
                         alt={''}
                         rounded
                       ></Image>
                     </Row>
-                    <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.digiDollas}`}</Row>
+                    <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.product.name}`}</Row>
                     <Row className='note'>
-                      <p>{`This will be credited to your DigiDollas`}</p>
+                      <p>
+                        {`Enjoy scratching! `}{' '}
+                        <span role='img' aria-label='excited'>
+                          🤩
+                        </span>
+                      </p>
                     </Row>
                   </>
                 </div>

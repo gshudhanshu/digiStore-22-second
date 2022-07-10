@@ -18,8 +18,7 @@ dayjs.tz.setDefault('America/Barbados')
 // @access Private
 const generateScratchCard = asyncHandler(async (req, res) => {
   let userID, full_mobile, receiptImg
-
-  if (req.body.user.isStaff) {
+  if (req.body.hasOwnProperty('user') && req.body.user.isStaff) {
     let { mobile } = req.body
 
     let errors = []
@@ -139,18 +138,18 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select(
     '-password -isAdmin -createdAt -updatedAt -planDetails'
   )
-
   if (!isStaff) {
     if (!cardDetails && typeof cardDetails.digiDollas !== 'number') {
       res.status(400)
       throw new Error('Invalid scratch card details')
     }
 
+    let scrachCard
     if (!user) {
       res.status(404)
       throw new Error('User not found')
     } else {
-      let scrachCard = {
+      scrachCard = {
         digiDollas: cardDetails.digiDollas,
         scratchDate: Date.now(),
         user: req.user._id,

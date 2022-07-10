@@ -476,6 +476,12 @@
   }
   display: flex;
   .ScratchCard__Result {
+    .scratch-card-bg.staff-scratch-card-bg {
+      font-size: 5vw;
+    }
+    .staff-scratch-card-logo {
+      margin-bottom: 1em;
+    }
     .scratch-card-bg {
       width: 400px;
       border: 3px solid transparent;
@@ -486,12 +492,13 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      font-size: 18px;
 
       .heading {
         display: block;
         text-align: center;
         margin: auto;
-        font-size: 25px;
+        font-size: 1.4em;
         font-weight: bold;
         height: 20%;
       }
@@ -511,18 +518,24 @@
           width: 100%;
           margin-bottom: 15px;
         }
+        .won-product-img {
+          max-width: unset;
+        }
       }
 
       .message {
         height: 17%;
         display: block;
         text-align: center;
-        font-size: 18px;
+        font-size: 1em;
       }
       .note {
         display: flex;
         text-align: center;
         width: 80%;
+        p {
+          font-size: 0.8em;
+        }
       }
     }
   }
