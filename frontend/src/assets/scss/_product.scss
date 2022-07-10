@@ -414,6 +414,7 @@
   .offcanvas-header {
     position: absolute;
     right: 0px;
+    padding: 2em;
     z-index: 1060;
   }
 }
@@ -477,17 +478,47 @@
   display: flex;
   .ScratchCard__Result {
     .scratch-card-bg.staff-scratch-card-bg {
+      padding: 1em;
       font-size: 5vw;
+      // line-height: normal;
+      .heading {
+        height: unset;
+        margin: 0;
+        margin-bottom: 0.8em;
+      }
+      .message {
+        height: unset;
+        margin: 0;
+        margin-top: 0.8em;
+      }
+
+      // .note {
+      //   margin: flex;
+      // }
+
+      .won-product-img-container {
+        margin: 0;
+      }
     }
+
+    .staff-scratch-content {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
     .staff-scratch-card-logo {
-      margin-bottom: 1em;
+      margin: 0;
+      width: 40vw;
     }
     .scratch-card-bg {
       width: 400px;
       border: 3px solid transparent;
       border-image: linear-gradient(to bottom, $dgRed, $dgPurple);
       border-image-slice: 1;
-      padding: 25px;
+      padding: 1.5em;
       display: flex;
       flex-direction: column;
       align-items: center;

@@ -16,7 +16,7 @@ const canvasStyles = {
   zIndex: 1050,
 }
 
-const Confetti = forwardRef((props, ref) => {
+const Confetti = forwardRef(({ childFireFunc }) => {
   const refAnimationInstance = useRef(null)
 
   const getInstance = useCallback((instance) => {
@@ -60,6 +60,10 @@ const Confetti = forwardRef((props, ref) => {
       startVelocity: 45,
     })
   }, [makeShot])
+
+  React.useEffect(() => {
+    childFireFunc.current = fire
+  }, [])
 
   // useImperativeHandle(ref, () => {
   //   fire()

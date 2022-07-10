@@ -69,7 +69,7 @@ const HomeScreen = () => {
   dayjs.tz.setDefault('America/Barbados')
 
   const ref = useRef < ScratchCard > null
-  const confettiRef = useRef(null)
+  const childFireFunc = React.useRef(null)
 
   const onClickReset = () => {
     ref.current && ref.current.reset()
@@ -90,7 +90,7 @@ const HomeScreen = () => {
   }, [dispatch, keyword, pageNumber])
 
   const addDigiDollasHandler = async (e) => {
-    // confettiRef.current.fire()
+    childFireFunc.current()
     dispatch(addDigiDollas(userInfo, cardDetails))
   }
 
@@ -124,7 +124,7 @@ const HomeScreen = () => {
         <img src={scratchButtonGif} alt='scratch window launch button'></img>
       </Button>
 
-      <Confetti ref={confettiRef} />
+      <Confetti childFireFunc={childFireFunc} />
 
       <Offcanvas
         show={showCard}

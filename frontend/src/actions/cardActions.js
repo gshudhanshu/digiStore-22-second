@@ -190,7 +190,7 @@ export const saveStaffScratchCard =
         config
       )
 
-      toast(`${data.cardDetails.digiDollas} DigiDollas Added`)
+      toast(`Yay! You'have won a ${data.cardDetails.product.name}`)
       dispatch({
         type: USER_LOGIN_ADD_DOLLAS,
         payload: data.user.digiDollas,

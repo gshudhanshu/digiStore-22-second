@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useMeasure } from 'react-use'
 import {
   Link,
@@ -52,6 +52,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
+import Confetti from '../components/Confetti'
 
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
@@ -68,8 +69,9 @@ function ScratchCardScreen() {
   let location = useLocation()
   const navigate = useNavigate()
 
-  const [offCanvasRef, { offCanvasWidth, offCanvasHeight }] = useMeasure()
+  // const [offCanvasRef, { offCanvasWidth, offCanvasHeight }] = useMeasure()
   const [ref, { x, y, width, height, top, right, bottom, left }] = useMeasure()
+  const childFireFunc = React.useRef(null)
 
   const [showCard, setShowCard] = useState(false)
   const [mobile, setMobile] = useState('')
@@ -95,7 +97,7 @@ function ScratchCardScreen() {
   }
 
   const addDigiDollasHandler = async (e) => {
-    // confettiRef.current.fire()
+    childFireFunc.current()
     dispatch(saveStaffScratchCard(userInfo, cardDetails))
   }
 
@@ -126,7 +128,7 @@ function ScratchCardScreen() {
         Scratch Card
       </BreadcrumbsItem>
       <Breadcrumb />
-
+      <Confetti childFireFunc={childFireFunc} />
       <Offcanvas
         className='staff-ScratchCard'
         show={showCard}
@@ -166,17 +168,19 @@ function ScratchCardScreen() {
                       src={'/assets/img/logo.png'}
                     />
                     {/* <Row className='no-gutters digiDollas'>{`${cardDetails.digiDollas}`}</Row> */}
-                    <Row className='no-gutters heading'>Congrats!</Row>
-                    <Row className='no-gutters coinDigiDollas'>
-                      <Image
-                        className='scratch-coin won-product-img'
-                        fluid
-                        src={cardDetails.product.image}
-                        alt={''}
-                        rounded
-                      ></Image>
-                    </Row>
-                    <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.product.name}`}</Row>
+                    <div className='staff-scratch-content'>
+                      <Row className='no-gutters heading'>Congrats!</Row>
+                      <Row className='no-gutters won-product-img-container'>
+                        <Image
+                          className='scratch-coin won-product-img'
+                          fluid
+                          src={cardDetails.product.image}
+                          alt={''}
+                          rounded
+                        ></Image>
+                      </Row>
+                      <Row className='no-gutters message'>{`Yay! You've won ${cardDetails.product.name}`}</Row>
+                    </div>
                     <Row className='note'>
                       <p>
                         {`Enjoy scratching! `}{' '}
