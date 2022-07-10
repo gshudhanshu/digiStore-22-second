@@ -30,7 +30,6 @@ import 'react-toastify/dist/ReactToastify.css'
 function App() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  console.log(userInfo)
 
   return (
     <BreadcrumbsProvider>

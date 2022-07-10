@@ -114,8 +114,8 @@ function ScratchCardScreen() {
         Scratch Card
       </BreadcrumbsItem>
       <Breadcrumb />
-      <Container className='d-flex justify-content-center'>
-        <Card className='mt-3' style={{ width: '25rem' }}>
+      <Container className='d-flex justify-content-center align-items-center mt-3'>
+        <Card style={{ width: '25rem' }}>
           <Card.Body>
             <h1 className='scratch-card-title text-center'>SCRATCH N’ WIN</h1>
             <div>

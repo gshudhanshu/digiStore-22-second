@@ -19,7 +19,7 @@ const BottomNav = () => {
           <Icon.List />
           <p> Transactions</p>
         </NavLink>
-        {userInfo && !userInfo.isStaff && (
+        {(!userInfo || (userInfo && !userInfo.isStaff)) && (
           <NavLink className='tab' to='/cart'>
             <Icon.ShoppingCart />
             <p> Cart</p>

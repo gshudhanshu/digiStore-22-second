@@ -64,7 +64,6 @@ const Header = ({}) => {
             >
               Launch
             </Button> */}
-
             {/* <Navbar.Toggle
               aria-controls='basic-navbar-nav'
               className='d-none d-md-block'
@@ -119,7 +118,7 @@ const Header = ({}) => {
                 </Nav>
               </Navbar>
             </div>
-            {userInfo && !userInfo.isStaff ? (
+            {userInfo && !userInfo.isStaff && (
               <div className='customer-points'>
                 <img
                   className='price-dollas-icon'
@@ -129,7 +128,8 @@ const Header = ({}) => {
                 <div>{userInfo.digiDollas}</div>
                 <span className='d-none d-md-block'>Digi Dollas</span>
               </div>
-            ) : (
+            )}
+            {userInfo && userInfo.isStaff && (
               <div className='customer-points'>
                 <div className='mx-4 my-2'>Staff</div>
               </div>
