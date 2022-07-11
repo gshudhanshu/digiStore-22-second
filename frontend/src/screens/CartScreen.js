@@ -29,6 +29,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import { createNewOrder } from '../actions/orderActions'
+import { ORDER_NEW_CREATE_RESET } from '../constants/orderConstants'
 
 const CartScreen = () => {
   let location = useLocation()
@@ -122,8 +123,9 @@ const CartScreen = () => {
         confirmButton: 'btn btn-primary digicel-button',
       },
     }).then((result) => {
-      // setSweetAlert(false)
-      successNewOrder = false
+      dispatch({
+        type: ORDER_NEW_CREATE_RESET,
+      })
     })
   }
 

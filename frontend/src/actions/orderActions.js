@@ -24,6 +24,7 @@ import {
   ORDER_NEW_CREATE_REQUEST,
   ORDER_NEW_CREATE_SUCCESS,
   ORDER_NEW_CREATE_FAIL,
+  ORDER_NEW_CREATE_RESET,
 } from '../constants/orderConstants'
 import { USER_LOGIN_ADD_DOLLAS } from '../constants/userConstants'
 
