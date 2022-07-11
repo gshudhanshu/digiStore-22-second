@@ -38,6 +38,9 @@
   a.active {
     color: #a749ff !important;
   }
+  a:focus {
+    color: var(--bs-nav-link-hover-color);
+  }
 }
 
 .header-area {
@@ -90,4 +93,8 @@
 
 .profile-logout-button {
   margin-left: 8px !important;
+}
+
+.external-digicel-contact {
+  color: var(--bs-nav-link-color);
 }

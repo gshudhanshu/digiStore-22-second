@@ -9,7 +9,7 @@ import {
   NavDropdown,
 } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import * as Icon from 'react-feather'
 
 import SearchBox from '../components/SearchBox'
@@ -21,6 +21,7 @@ const Header = ({}) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
     if (userInfo) {
@@ -53,7 +54,8 @@ const Header = ({}) => {
                   alt=''
                   className='logo'
                   // style={userInfo && 'justify-content: center'}
-                  src={'/assets/img/digicel-logo.png'}
+                  // src={'/assets/img/digicel-logo.png'}
+                  src={'/assets/img/logo.png'}
                   // src={
                   //   !userInfo || (userInfo && !userInfo.isStaff)
                   //     ? '/assets/img/logo.png'
@@ -75,12 +77,15 @@ const Header = ({}) => {
             /> */}
             <div className='navbar-container d-none d-lg-block '>
               <Navbar id='basic-navbar-nav '>
-                <Nav className='mx-auto'>
-                  <NavLink to='/' end>
+                <Nav activeKey={location.pathname} className='mx-auto'>
+                  <Nav.Link as={Link} to='/' end>
                     Home
-                  </NavLink>
-                  <NavLink to='/transactions'>Transactions</NavLink>
+                  </Nav.Link>
+                  <Nav.Link as={Link} to='/transactions'>
+                    Transactions
+                  </Nav.Link>
                   <a
+                    className='external-digicel-contact'
                     href='https://www.digicelgroup.com/bb/en/contact-us.html'
                     target='_blank'
                     rel='noopener noreferrer'
@@ -88,36 +93,36 @@ const Header = ({}) => {
                     Contact
                   </a>
 
-                  <NavLink to='/cart' end>
+                  <Nav.Link as={Link} to='/cart' end>
                     <Icon.ShoppingCart />
                     Cart
-                  </NavLink>
+                  </Nav.Link>
                   {userInfo ? (
                     <NavDropdown title={userInfo.fname} id='username'>
-                      <LinkContainer to='/profile'>
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                      </LinkContainer>
+                      <NavDropdown.Item as={Link} to='/profile'>
+                        Profile
+                      </NavDropdown.Item>
                       <NavDropdown.Item onClick={logoutHandler}>
                         Logout
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
-                    <NavLink to='/login' end>
+                    <Nav.Link as={Link} to='/login' end>
                       <Icon.User />
                       Login
-                    </NavLink>
+                    </Nav.Link>
                   )}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title='Admin' id='adminmenu'>
-                      <LinkContainer to='/admin/userlist'>
-                        <NavDropdown.Item>Users</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to='/admin/productlist'>
-                        <NavDropdown.Item>Products</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to='/admin/orderlist'>
-                        <NavDropdown.Item>Orders</NavDropdown.Item>
-                      </LinkContainer>
+                      <NavDropdown.Item as={Link} to='/admin/userlist'>
+                        Users
+                      </NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to='/admin/productlist'>
+                        Products
+                      </NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to='/admin/productlist'>
+                        Orders
+                      </NavDropdown.Item>
                     </NavDropdown>
                   )}
                 </Nav>

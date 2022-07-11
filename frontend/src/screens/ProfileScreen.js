@@ -22,6 +22,7 @@ import Breadcrumb from '../wrappers/Breadcrumb'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { logout } from '../actions/userActions'
 
@@ -99,9 +100,9 @@ function ProfileScreen() {
       </BreadcrumbsItem>
       <Breadcrumb />
 
-      <Container>
+      <FormContainer>
         {/* <Row> */}
-        <Col md={4} className='mx-auto'>
+        <Col className='mx-auto'>
           <h2 className='text-center'>User Profile</h2>
           {message && <Message variant='danger'>{message}</Message>}
           {error && <Message variant='danger'>{error}</Message>}
@@ -240,7 +241,7 @@ function ProfileScreen() {
         )}
       </Col> 
     </Row>*/}
-      </Container>
+      </FormContainer>
     </>
   )
 }
