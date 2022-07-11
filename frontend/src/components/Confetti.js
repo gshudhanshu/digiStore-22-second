@@ -16,7 +16,7 @@ const canvasStyles = {
   zIndex: 1050,
 }
 
-const Confetti = forwardRef(({ childFireFunc }) => {
+const Confetti = ({ childFireFunc }) => {
   const refAnimationInstance = useRef(null)
 
   const getInstance = useCallback((instance) => {
@@ -75,6 +75,6 @@ const Confetti = forwardRef(({ childFireFunc }) => {
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
     </>
   )
-})
+}
 
 export default Confetti

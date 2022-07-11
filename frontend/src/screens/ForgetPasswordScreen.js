@@ -39,6 +39,8 @@ function ForgetPasswordScreen() {
   const input = useRef(null)
 
   const [otp, setOtp] = useState('')
+  const [otpTimeLeft, setOtpTimeLeft] = useState(0)
+
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -75,10 +77,12 @@ function ForgetPasswordScreen() {
     //   })
     // }
 
+    otpTimeLeft > 0 && setTimeout(() => setOtpTimeLeft(otpTimeLeft - 1), 1000)
+
     if (userInfo) {
       navigate(redirect)
     }
-  }, [navigate, userInfo, redirect])
+  }, [navigate, userInfo, redirect, otpTimeLeft])
 
   const submitHandler = (e) => {
     let use = 'forget'
@@ -100,6 +104,8 @@ function ForgetPasswordScreen() {
   }
 
   const sendOtpHandler = () => {
+    console.log('test')
+    setOtpTimeLeft(60)
     let use = 'forget'
     let mobile = document.querySelector('#mobile').value
     // let full_mobile = document.querySelector('[name="full_mobile"]').value
@@ -193,8 +199,9 @@ function ForgetPasswordScreen() {
                   type='button'
                   id='otpBtn'
                   onClick={sendOtpHandler}
+                  disabled={otpTimeLeft > 0 ? true : false}
                 >
-                  Send Code
+                  {otpTimeLeft > 0 ? otpTimeLeft : 'Send Code'}
                 </Button>
               </div>
             </div>

@@ -78,14 +78,14 @@ const Header = ({}) => {
             <div className='navbar-container d-none d-lg-block '>
               <Navbar id='basic-navbar-nav '>
                 <Nav activeKey={location.pathname} className='mx-auto'>
-                  <Nav.Link as={Link} to='/' end>
+                  <Nav.Link as={Link} to='/'>
                     Home
                   </Nav.Link>
                   <Nav.Link as={Link} to='/transactions'>
                     Transactions
                   </Nav.Link>
                   <a
-                    className='external-digicel-contact'
+                    className='external-digicel-contact nav-link'
                     href='https://www.digicelgroup.com/bb/en/contact-us.html'
                     target='_blank'
                     rel='noopener noreferrer'
@@ -93,7 +93,7 @@ const Header = ({}) => {
                     Contact
                   </a>
 
-                  <Nav.Link as={Link} to='/cart' end>
+                  <Nav.Link as={Link} to='/cart'>
                     <Icon.ShoppingCart />
                     Cart
                   </Nav.Link>
@@ -107,7 +107,7 @@ const Header = ({}) => {
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
-                    <Nav.Link as={Link} to='/login' end>
+                    <Nav.Link as={Link} to='/login'>
                       <Icon.User />
                       Login
                     </Nav.Link>

@@ -38,6 +38,7 @@ function RegisterScreen() {
   const input = useRef(null)
 
   const [otp, setOtp] = useState('')
+  const [otpTimeLeft, setOtpTimeLeft] = useState(0)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -73,11 +74,12 @@ function RegisterScreen() {
     //     utilsScript: 'assets/js/utils.js', // just for formatting/placeholders etc
     //   })
     // }
+    otpTimeLeft > 0 && setTimeout(() => setOtpTimeLeft(otpTimeLeft - 1), 1000)
 
     if (userInfo) {
       navigate(redirect)
     }
-  }, [navigate, userInfo, redirect])
+  }, [navigate, userInfo, redirect, otpTimeLeft])
 
   const submitHandler = (e) => {
     let use = 'register'
@@ -101,6 +103,7 @@ function RegisterScreen() {
   }
 
   const sendOtpHandler = () => {
+    setOtpTimeLeft(60)
     let use = 'register'
     let fname = document.querySelector('#fname').value
     let lname = document.querySelector('#lname').value
@@ -148,51 +151,6 @@ function RegisterScreen() {
               required
             ></Form.Control>
           </Form.Group>
-          {/* <Form.Group controlId='full_mobile'> */}
-          {/* <label className='form-label' htmlFor='full_mobile'>
-              Mobile Number
-            </label>
-            <Form.Control
-              type='full_mobile'
-              placeholder='Enter Mobile No'
-              value={full_mobile}
-              onChange={(e) => setFull_mobile(e.target.value)}
-            ></Form.Control>
-            <Button onClick={sendOtpHandler}>Send Code</Button> */}
-          {/* <Row>
-            <PhoneInput
-              country={'bb'}
-              onlyCountries={['bb', 'in']}
-              value={full_mobile}
-              onChange={(full_mobile) => setFull_mobile(full_mobile)}
-              autoFormat={false}
-              inputProps={{
-                name: 'full_mobile',
-                id: 'full_mobile',
-                required: true,
-                autoFocus: true,
-              }}
-            />
-            <Button onClick={sendOtpHandler}>Send Code</Button>
-          </Row> */}
-          {/* <IntlTelInput
-            containerClassName='intl-tel-input w-100'
-            inputClassName='form-control'
-            preferredCountries={[]}
-            onlyCountries={['bb', 'in']}
-            defaultCountry='bb'
-            type='full_mobile'
-            placeholder='Enter Mobile No'
-            // value
-            // onPhoneNumberChange={onChange(e) => setFull_mobile(e.target.value)}
-            onPhoneNumberBlur={() => {
-              let telVal = document.querySelector('#full_mobile').value
-              setFull_mobile(telVal)
-              console.log(telVal)
-            }}
-            fieldId='full_mobile'
-          /> */}
-          {/* </Form.Group> */}
 
           <div className='mb-2'>
             <label htmlFor='mobile' className='form-label'>
@@ -218,8 +176,9 @@ function RegisterScreen() {
                   type='button'
                   id='otpBtn'
                   onClick={sendOtpHandler}
+                  disabled={otpTimeLeft > 0 ? true : false}
                 >
-                  Send Code
+                  {otpTimeLeft > 0 ? otpTimeLeft : 'Send Code'}
                 </Button>
               </div>
             </div>
