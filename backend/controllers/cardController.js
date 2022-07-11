@@ -1,6 +1,6 @@
 import User from '../models/userModel.js'
-import ScrachCard from '../models/scratchCardModel.js'
-import StaffScrachCard from '../models/staffScratchCardModel.js'
+import ScratchCard from '../models/scratchCardModel.js'
+import StaffScratchCard from '../models/staffScratchCardModel.js'
 import asyncHandler from 'express-async-handler'
 
 import dayjs from 'dayjs'
@@ -144,23 +144,23 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
       throw new Error('Invalid scratch card details')
     }
 
-    let scrachCard
+    let scratchCard
     if (!user) {
       res.status(404)
       throw new Error('User not found')
     } else {
-      scrachCard = {
+      scratchCard = {
         digiDollas: cardDetails.digiDollas,
         scratchDate: Date.now(),
         user: req.user._id,
       }
 
       user.digiDollas += cardDetails.digiDollas
-      user.lastScratchDate = scrachCard.scratchDate
+      user.lastScratchDate = scratchCard.scratchDate
       await user.save()
     }
 
-    await ScrachCard.create(scrachCard)
+    await ScratchCard.create(scratchCard)
 
     res.status(202).json({
       user,
@@ -169,14 +169,14 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
       status: 'success',
     })
   } else {
-    let staffScrachCard = {
+    let staffScratchCard = {
       scratchDate: Date.now(),
       user: req.user._id,
       full_mobile: req.body.cardDetails.full_mobile,
       receiptImg: req.body.cardDetails.receiptImg,
       product: req.body.cardDetails.product._id,
     }
-    await StaffScrachCard.create(staffScrachCard)
+    await StaffScratchCard.create(staffScratchCard)
     res.status(202).json({
       user,
       cardDetails,
@@ -190,7 +190,7 @@ const saveScratchedCard = asyncHandler(async (req, res) => {
 // @route GET /api/users/mycards
 // @access Private
 const getMyCards = asyncHandler(async (req, res) => {
-  let cards = await ScrachCard.find({ user: req.user._id }).select('-user')
+  let cards = await ScratchCard.find({ user: req.user._id }).select('-user')
   cards.map((card) => dayjs(card.scratchDate))
   res.json(cards)
 })

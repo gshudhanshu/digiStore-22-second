@@ -1,5 +1,5 @@
 import User from '../models/userModel.js'
-import ScrachCard from '../models/scratchCardModel.js'
+import ScratchCard from '../models/scratchCardModel.js'
 import asyncHandler from 'express-async-handler'
 import generateToken from './utils/generateToken.js'
 

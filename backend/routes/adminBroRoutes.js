@@ -4,7 +4,7 @@ import AdminJSMongoose from '@adminjs/mongoose'
 AdminJS.registerAdapter(AdminJSMongoose)
 
 import User from '../models/userModel.js'
-import ScrachCard from '../models/scratchCardModel.js'
+import ScratchCard from '../models/scratchCardModel.js'
 import Product from '../models/productModel.js'
 import Order from '../models/orderModel.js'
 
@@ -46,10 +46,10 @@ const adminJs = new AdminJS({
         // },
       },
     },
-    //   ScrachCard,
+    ScratchCard,
   ],
 
-  rootPath: '/adminbro',
+  rootPath: '/admin',
 
   branding: {
     companyName: 'DigiStore',
@@ -58,8 +58,28 @@ const adminJs = new AdminJS({
   logo: false,
 })
 
-router = AdminJSExpress.buildRouter(adminJs)
+const ADMIN = {
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASSWORD,
+}
+router = AdminJSExpress.buildAuthenticatedRouter(
+  adminJs,
+  {
+    cookieName: process.env.ADMIN_COOKIE_NAME || 'adminjs',
+    cookiePassword: process.env.ADMIN_COOKIE_PASS || '#3AFZVzszQ+%kyE{',
+    authenticate: async (email, password) => {
+      if (email === ADMIN.email && password === ADMIN.password) {
+        return ADMIN
+      }
+      return null
+    },
+  },
+  null,
+  {
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET ?? 'sessionsecret',
+  }
+)
 
 export default router
-
-// export default router

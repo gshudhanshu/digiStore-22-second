@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json())
 
 // // ==================
-app.use('/adminBro', adminBro)
+app.use('/admin', adminBro)
 
 // // ==================
 

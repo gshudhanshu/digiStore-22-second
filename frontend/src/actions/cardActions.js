@@ -15,7 +15,7 @@ import {
 } from '../constants/userConstants'
 
 // SCRATCH CARD
-export const getScrachCardDetails = (user) => async (dispatch, getState) => {
+export const getScratchCardDetails = (user) => async (dispatch, getState) => {
   try {
     dispatch({
       type: CARD_SCRATCH_REQUEST,
@@ -124,7 +124,7 @@ export const listMyCards = () => async (dispatch, getState) => {
 }
 
 // STAFF section
-export const getStaffScrachCardDetails =
+export const getStaffScratchCardDetails =
   (user, mobile, image) => async (dispatch, getState) => {
     try {
       dispatch({

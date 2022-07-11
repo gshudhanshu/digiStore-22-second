@@ -49,7 +49,7 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import Confetti from '../components/Confetti'
 import { listProducts } from '../actions/productActions'
-import { getScrachCardDetails, addDigiDollas } from '../actions/cardActions'
+import { getScratchCardDetails, addDigiDollas } from '../actions/cardActions'
 
 // import ProductsCarousel from '../components/ProductsCarousel'
 import Meta from '../components/Meta'
@@ -102,7 +102,7 @@ const HomeScreen = () => {
   // Card Offcanvas handlers
   const handleCardClose = () => setShowCard(false)
   const handleCardShow = () => {
-    dispatch(getScrachCardDetails(userInfo))
+    dispatch(getScratchCardDetails(userInfo))
     setShowCard(true)
   }
 

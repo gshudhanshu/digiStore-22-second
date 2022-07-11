@@ -60,7 +60,7 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import {
-  getStaffScrachCardDetails,
+  getStaffScratchCardDetails,
   saveStaffScratchCard,
 } from '../actions/cardActions'
 
@@ -93,7 +93,7 @@ function ScratchCardScreen() {
   const handleCardClose = () => setShowCard(false)
   const handleCardShow = (e) => {
     e.preventDefault()
-    dispatch(getStaffScrachCardDetails(userInfo, mobile, image))
+    dispatch(getStaffScratchCardDetails(userInfo, mobile, image))
     setShowCard(true)
   }
 

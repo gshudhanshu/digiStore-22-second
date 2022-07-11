@@ -22,6 +22,6 @@ const scratchCardSchema = mongoose.Schema(
   }
 )
 
-const ScrachCard = mongoose.model('ScrachCard', scratchCardSchema)
+const ScratchCard = mongoose.model('ScratchCard', scratchCardSchema)
 
-export default ScrachCard
+export default ScratchCard

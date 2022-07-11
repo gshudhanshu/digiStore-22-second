@@ -32,9 +32,9 @@ const staffScratchCardSchema = mongoose.Schema(
   }
 )
 
-const StaffScrachCard = mongoose.model(
-  'StaffScrachCard',
+const StaffScratchCard = mongoose.model(
+  'StaffScratchCard',
   staffScratchCardSchema
 )
 
-export default StaffScrachCard
+export default StaffScratchCard
