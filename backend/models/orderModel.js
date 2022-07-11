@@ -13,7 +13,7 @@ const orderSchema = mongoose.Schema(
     orderId: {
       type: String,
       default: nanoid(),
-      unique: true,
+      // unique: true,
     },
     orderItems: [
       {
