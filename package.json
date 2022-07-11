@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "type": "module",
-  "private": true,
   "homepage": ".",
+  "private": true,
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
