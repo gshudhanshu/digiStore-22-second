@@ -11,10 +11,10 @@ import { InputGroup, Form, Button, Row, Col } from 'react-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
 
-import PhoneInput from 'react-phone-input-2'
+// import PhoneInput from 'react-phone-input-2'
 // import 'react-phone-input-2/lib/style.css'
-import intlTelInput from 'intl-tel-input'
-import 'intl-tel-input/build/css/intlTelInput.css'
+// import intlTelInput from 'intl-tel-input'
+// import 'intl-tel-input/build/css/intlTelInput.css'
 
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
