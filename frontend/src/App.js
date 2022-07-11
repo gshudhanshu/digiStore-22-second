@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BreadcrumbsProvider } from 'react-breadcrumbs-dynamic'
 
+import { ClearCacheProvider, useClearCacheCtx } from 'react-clear-cache'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreens from './screens/HomeScreen'
@@ -29,9 +31,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import StaffLogin from './screens/StaffLogin'
 
 function App() {
+  const { isLatestVersion, emptyCacheStorage } = useClearCacheCtx()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-
   return (
     <BreadcrumbsProvider>
       <Router>

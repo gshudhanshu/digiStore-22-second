@@ -2490,6 +2490,11 @@
     "@typescript-eslint/types" "5.27.1"
     "eslint-visitor-keys" "^3.3.0"
 
+"@use-it/event-listener@^0.1.2":
+  "integrity" "sha512-hgfExDzUU9uTRTPDCpw2s9jWTxcxmpJya3fK5ADpf5VDpSy8WYwY/kh28XE0tUcbsljeP8wfan48QvAQTSSa3Q=="
+  "resolved" "https://registry.npmjs.org/@use-it/event-listener/-/event-listener-0.1.7.tgz"
+  "version" "0.1.7"
+
 "@webassemblyjs/ast@1.11.1":
   "integrity" "sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw=="
   "resolved" "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.11.1.tgz"
@@ -7112,7 +7117,7 @@
   dependencies:
     "brace-expansion" "^1.1.7"
 
-"minimist@^1.2.0", "minimist@^1.2.6":
+"minimist@^1.2.0", "minimist@^1.2.5", "minimist@^1.2.6":
   "integrity" "sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q=="
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.6.tgz"
   "version" "1.2.6"
@@ -8692,6 +8697,15 @@
     "@types/canvas-confetti" "1.4.2"
     "canvas-confetti" "1.5.1"
 
+"react-clear-cache@^1.4.12":
+  "integrity" "sha512-9EattRZHTWGYyemzCUIBvEu9utYjEa40DhlNkNfsyDbjigp0eLEyN2oVzXbx1tRbdv9QVbgtXbZN/pXXXUmNpA=="
+  "resolved" "https://registry.npmjs.org/react-clear-cache/-/react-clear-cache-1.4.12.tgz"
+  "version" "1.4.12"
+  dependencies:
+    "minimist" "^1.2.5"
+    "use-persisted-state" "^0.3.0"
+    "uuid" "^3.3.2"
+
 "react-countdown@^2.3.2":
   "integrity" "sha512-Q4SADotHtgOxNWhDdvgupmKVL0pMB9DvoFcxv5AzjsxVhzOVxnttMbAywgqeOdruwEAmnPhOhNv/awAgkwru2w=="
   "resolved" "https://registry.npmjs.org/react-countdown/-/react-countdown-2.3.2.tgz"
@@ -8729,7 +8743,7 @@
     "strip-ansi" "^6.0.1"
     "text-table" "^0.2.0"
 
-"react-dom@*", "react-dom@^0.14.6 || 15.x.x || 16.x.x || 17.x.x", "react-dom@^16.12.0 || ^17.0.0", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8.0", "react-dom@^16.8.0  || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^18.0.0", "react-dom@^18.1.0", "react-dom@>= 15", "react-dom@>=16", "react-dom@>=16.14.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
+"react-dom@*", "react-dom@^0.14.6 || 15.x.x || 16.x.x || 17.x.x", "react-dom@^15.0.0 || ^16.0.0", "react-dom@^16.12.0 || ^17.0.0", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8.0", "react-dom@^16.8.0  || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^18.0.0", "react-dom@^18.1.0", "react-dom@>= 15", "react-dom@>=16", "react-dom@>=16.14.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
   "integrity" "sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.1.0.tgz"
   "version" "18.1.0"
@@ -8984,7 +8998,7 @@
     "ts-easing" "^0.2.0"
     "tslib" "^2.1.0"
 
-"react@*", "react@^0.14.6 || 15.x.x || 16.x.x || 17.x.x", "react@^16.0.0", "react@^16.12.0 || ^17.0.0", "react@^16.3.0 || ^17.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0", "react@^16.8.0  || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^18.0.0", "react@^18.1.0", "react@>= 15", "react@>= 16", "react@>=0.14.0", "react@>=15.0.0", "react@>=16", "react@>=16.0.0", "react@>=16.13.1", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.3.0 || ^16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.8.6", "react@>=16.x":
+"react@*", "react@^0.14.6 || 15.x.x || 16.x.x || 17.x.x", "react@^15.0.0 || ^16.0.0", "react@^16.0.0", "react@^16.12.0 || ^17.0.0", "react@^16.3.0 || ^17.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0", "react@^16.8.0  || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^18.0.0", "react@^18.1.0", "react@>= 15", "react@>= 16", "react@>=0.14.0", "react@>=15.0.0", "react@>=16", "react@>=16.0.0", "react@>=16.13.1", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.3.0 || ^16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.8.6", "react@>=16.x":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
@@ -10428,6 +10442,13 @@
   dependencies:
     "punycode" "^2.1.0"
 
+"use-persisted-state@^0.3.0":
+  "integrity" "sha512-pCNlvYC8+XjRxwnIut4teGC9f2p9aD88R8OGseQGZa2dvqG/h1vEGk1vRE1IZG0Vf161UDpn+NlW4+UGubQflQ=="
+  "resolved" "https://registry.npmjs.org/use-persisted-state/-/use-persisted-state-0.3.3.tgz"
+  "version" "0.3.3"
+  dependencies:
+    "@use-it/event-listener" "^0.1.2"
+
 "use-sync-external-store@^1.0.0":
   "integrity" "sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ=="
   "resolved" "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.1.0.tgz"
@@ -10457,6 +10478,11 @@
   "integrity" "sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA=="
   "resolved" "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
   "version" "1.0.1"
+
+"uuid@^3.3.2":
+  "integrity" "sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
+  "version" "3.4.0"
 
 "uuid@^8.3.2":
   "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
