@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Container, Image, Row, Col } from 'react-bootstrap'
+import { Container, Image, Row, Col, Card } from 'react-bootstrap'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 import Breadcrumb from '../wrappers/Breadcrumb'
 
@@ -85,7 +85,7 @@ function TransactionScreen() {
           <Message variant='danger'>{error}</Message>
         ) : (
           orders.map((order) => (
-            <div className='order-container' key={order._id}>
+            <Card className='order-container' key={order._id}>
               <div className='order-sub-container'>
                 <Row className='orderid-date-container'>
                   <Col className='order orderId'>Order ID: {order.orderId}</Col>
@@ -131,7 +131,7 @@ function TransactionScreen() {
                   {order.totalPrice}
                 </Col>
               </Row>
-            </div>
+            </Card>
           ))
         )}
         <h2 className='transaction-title'>Scratch Cards</h2>
@@ -143,7 +143,7 @@ function TransactionScreen() {
         ) : (
           cards.map((card) => (
             <>
-              <div className='scrached-cards-container' key={card._id}>
+              <Card className='scrached-cards-container' key={card._id}>
                 <div className='scrached-cards-subcontainer'>
                   Card ID: {card.cardId}
                 </div>
@@ -159,7 +159,7 @@ function TransactionScreen() {
                   </div>
                   <div>{card.digiDollas}</div>
                 </div>
-              </div>
+              </Card>
             </>
           ))
         )}
