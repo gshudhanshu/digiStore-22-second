@@ -77,6 +77,9 @@ const CartScreen = () => {
   // const { order, success, error } = orderCreate
 
   useEffect(() => {
+    if (!userInfo) {
+      navigate('/login')
+    }
     if (productId) {
       dispatch(addToCart(productId, qty))
     }
