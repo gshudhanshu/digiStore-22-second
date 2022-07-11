@@ -9,7 +9,7 @@ const scratchCardSchema = mongoose.Schema(
     cardId: {
       type: String,
       default: nanoid(),
-      unique: true,
+      // unique: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

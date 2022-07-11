@@ -7,7 +7,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Col className='copyright text-center'>
-            Copyright &copy; 2021 Digicel Group. All rights reserved.
+            Copyright &copy; 2022 Digicel Group. All rights reserved.
           </Col>
         </Row>
       </Container>
