@@ -47,13 +47,16 @@ const CartScreen = () => {
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const orderNewCreate = useSelector((state) => state.orderNewCreate)
   let {
     loading: loadingNewOrder,
     order: orderNewOrder,
     success: successNewOrder,
     error: errorNewOrder,
-    userInfo,
+    // userInfo,
   } = orderNewCreate
 
   //   Calculate prices
