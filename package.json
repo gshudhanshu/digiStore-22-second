@@ -5,6 +5,7 @@
   "main": "server.js",
   "type": "module",
   "private": true,
+  "homepage": ".",
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
