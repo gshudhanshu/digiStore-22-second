@@ -78,91 +78,97 @@ function TransactionScreen() {
       </BreadcrumbsItem>
       <Breadcrumb />
       <Container>
-        <h2 className='transaction-title'>Product Orders</h2>
-        {loadingOrders && loadingCards ? (
-          <Loader />
-        ) : error || !orders ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          orders.map((order) => (
-            <Card className='order-container' key={order._id}>
-              <div className='order-sub-container'>
-                <Row className='orderid-date-container'>
-                  <Col className='order orderId'>Order ID: {order.orderId}</Col>
-                  <Col className='order order-date'>
-                    Date: {order.createdAt.substring(0, 10)}
-                  </Col>
-                </Row>
-                {order.orderItems.map((product) => (
-                  <Row key={product._id} className='product-container'>
-                    <Col className='order img-container'>
-                      <Image
-                        className=' img-fluid'
-                        src={product.image}
-                        alt=''
-                      />
+        <div className='transaction-container'>
+          <h2 className='transaction-title'>Product Orders</h2>
+          {loadingOrders && loadingCards ? (
+            <Loader />
+          ) : error || !orders ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            orders.map((order) => (
+              <Card className='order-container' key={order._id}>
+                <div className='order-sub-container'>
+                  <Row className='orderid-date-container'>
+                    <Col className='order orderId'>
+                      Order ID: {order.orderId}
                     </Col>
-                    <Col className=' order-product-price-qty'>
-                      <Row className=' product-name'>{product.name}</Row>
-                      <Row className=' product-price-qty'>
-                        <Col className='qty'>Quantity: {product.qty}</Col>
-                        <Col>
-                          <Row className='order-product-price'>
-                            <Image
-                              className='order img-fluid'
-                              src='/assets/img/digi_dollar.png'
-                            />
-                            {product.qty * product.price}
-                            {/* <Col xs={6}>{product.qty * product.price}</Col> */}
-                          </Row>
-                        </Col>
-                      </Row>
+                    <Col className='order order-date'>
+                      Date: {order.createdAt.substring(0, 10)}
                     </Col>
                   </Row>
-                ))}
-              </div>
-              <Row className='order-total-price justify-content-end'>
-                <Col>
-                  Total:{' '}
-                  <Image
-                    className='img-fluid'
-                    src='/assets/img/digi_dollar.png'
-                  />
-                  {order.totalPrice}
-                </Col>
-              </Row>
-            </Card>
-          ))
-        )}
-        <h2 className='transaction-title'>Scratch Cards</h2>
-
-        {loadingCards ? (
-          <>{/* <Loader /> */}</>
-        ) : error || !cards ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          cards.map((card) => (
-            <>
-              <Card className='scrached-cards-container' key={card._id}>
-                <div className='scrached-cards-subcontainer'>
-                  Card ID: {card.cardId}
+                  {order.orderItems.map((product) => (
+                    <Row key={product._id} className='product-container'>
+                      <Col className='order img-container'>
+                        <Image
+                          className=' img-fluid'
+                          src={product.image}
+                          alt=''
+                        />
+                      </Col>
+                      <Col className=' order-product-price-qty'>
+                        <Row className=' product-name'>{product.name}</Row>
+                        <Row className=' product-price-qty'>
+                          <Col className='qty'>Quantity: {product.qty}</Col>
+                          <Col>
+                            <Row className='order-product-price'>
+                              <Image
+                                className='order img-fluid'
+                                src='/assets/img/digi_dollar.png'
+                              />
+                              {product.qty * product.price}
+                              {/* <Col xs={6}>{product.qty * product.price}</Col> */}
+                            </Row>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  ))}
                 </div>
-                <div className='scrached-cards-subcontainer'>
-                  Date: {card.createdAt.substring(0, 10)}
-                </div>
-                <div className='scratchcard-price'>
-                  <div>
+                <Row className='order-total-price justify-content-end'>
+                  <Col>
+                    Total:{' '}
                     <Image
                       className='img-fluid'
                       src='/assets/img/digi_dollar.png'
                     />
-                  </div>
-                  <div>{card.digiDollas}</div>
-                </div>
+                    {order.totalPrice}
+                  </Col>
+                </Row>
               </Card>
-            </>
-          ))
-        )}
+            ))
+          )}
+        </div>
+        <div className='transaction-container'>
+          <h2 className='transaction-title'>Scratch Cards</h2>
+
+          {loadingCards ? (
+            <>{/* <Loader /> */}</>
+          ) : error || !cards ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            cards.map((card) => (
+              <>
+                <Card className='scrached-cards-container' key={card._id}>
+                  <div className='scrached-cards-subcontainer'>
+                    Card ID: {card.cardId}
+                  </div>
+                  <div className='scrached-cards-subcontainer'>
+                    Date: {card.createdAt.substring(0, 10)}
+                  </div>
+                  <div className='scratchcard-price'>
+                    <div>
+                      <Image
+                        className='img-fluid'
+                        src='/assets/img/digi_dollar.png'
+                      />
+                    </div>
+                    <div>{card.digiDollas}</div>
+                  </div>
+                </Card>
+              </>
+            ))
+          )}
+        </div>
       </Container>
     </>
   )
