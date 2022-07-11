@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "type": "module",
-  "homepage": "https://digistore-22-second-production.up.railway.app/",
   "private": true,
   "scripts": {
     "start": "node backend/server",
