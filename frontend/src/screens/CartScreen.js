@@ -90,7 +90,7 @@ const CartScreen = () => {
     // if (successNewOrder) {
     //   navigate(`/order/${orderNewOrder._id}`)
     // }
-  }, [dispatch, navigate, orderNewOrder, productId, qty])
+  }, [dispatch, navigate, orderNewOrder, productId, qty, userInfo])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -111,7 +111,7 @@ const CartScreen = () => {
     )
   }
 
-  if (successNewOrder && sweetAlert) {
+  if (successNewOrder) {
     MySwal.fire({
       title: 'Order Confirmed!',
       text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
