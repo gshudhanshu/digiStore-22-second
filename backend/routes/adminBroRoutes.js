@@ -1,6 +1,5 @@
 import AdminJS from 'adminjs'
 import AdminJSExpress from '@adminjs/express'
-
 import AdminJSMongoose from '@adminjs/mongoose'
 AdminJS.registerAdapter(AdminJSMongoose)
 
@@ -17,7 +16,12 @@ const adminJs = new AdminJS({
   resources: [
     {
       resource: User,
-      options: { listProperties: ['fname', 'lname', 'full_mobile', 'isAdmin'] },
+      options: {
+        listProperties: ['fname', 'lname', 'full_mobile', 'isAdmin'],
+        properties: {
+          full_mobile: { isTitle: true },
+        },
+      },
     },
     {
       resource: Product,
@@ -33,19 +37,15 @@ const adminJs = new AdminJS({
         ],
       },
     },
-    Order,
-    //   {
-    //     resource: Order,
-    //   //   options: {
-    //   //     listProperties: [
-    //   //       'user.full_mobile',
-    //   //       // 'lname',
-    //   //       // 'full_mobile',
-    //   //       'totalPrice',
-    //   //       'createdAt',
-    //   //     ],
-    //   //   },
-    //   // },
+    {
+      resource: Order,
+      options: {
+        listProperties: ['user', 'full_mobile', 'totalPrice', 'createdAt'],
+        // properties: {
+        //   user: { type: 'reference' },
+        // },
+      },
+    },
     //   ScrachCard,
   ],
 
