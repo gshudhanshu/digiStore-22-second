@@ -27,10 +27,16 @@ reportWebVitals()
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  // dev code
-  serviceWorker.unregister()
-} else {
-  // production code
-  serviceWorker.register()
-}
+// if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+//   // dev code
+//   serviceWorker.unregister()
+// } else {
+//   // production code
+//   serviceWorker.register()
+// }
+
+navigator.serviceWorker.getRegistrations().then(function (registrations) {
+  for (let registration of registrations) {
+    registration.unregister()
+  }
+})
