@@ -147,25 +147,23 @@ function TransactionScreen() {
             <Message variant='danger'>{error}</Message>
           ) : (
             cards.map((card) => (
-              <>
-                <Card className='scrached-cards-container' key={card._id}>
-                  <div className='scrached-cards-subcontainer'>
-                    Card ID: {card.cardId}
+              <Card className='scrached-cards-container' key={card._id}>
+                <div className='scrached-cards-subcontainer'>
+                  Card ID: {card.cardId}
+                </div>
+                <div className='scrached-cards-subcontainer'>
+                  Date: {card.createdAt.substring(0, 10)}
+                </div>
+                <div className='scratchcard-price'>
+                  <div>
+                    <Image
+                      className='img-fluid'
+                      src='/assets/img/digi_dollar.png'
+                    />
                   </div>
-                  <div className='scrached-cards-subcontainer'>
-                    Date: {card.createdAt.substring(0, 10)}
-                  </div>
-                  <div className='scratchcard-price'>
-                    <div>
-                      <Image
-                        className='img-fluid'
-                        src='/assets/img/digi_dollar.png'
-                      />
-                    </div>
-                    <div>{card.digiDollas}</div>
-                  </div>
-                </Card>
-              </>
+                  <div>{card.digiDollas}</div>
+                </div>
+              </Card>
             ))
           )}
         </div>

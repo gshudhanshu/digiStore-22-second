@@ -105,7 +105,7 @@ const CartScreen = () => {
     )
   }
 
-  if (successNewOrder) {
+  if (successNewOrder && sweetAlert) {
     MySwal.fire({
       title: 'Order Confirmed!',
       text: 'Thank you for shopping in the DigiStore. Your order has been placed. A representative from the DigiStore will contact you within 48 hours to collect your purchases.',
@@ -115,6 +115,9 @@ const CartScreen = () => {
       customClass: {
         confirmButton: 'btn btn-primary digicel-button',
       },
+    }).then((result) => {
+      // setSweetAlert(false)
+      successNewOrder = false
     })
   }
 
