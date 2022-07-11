@@ -5768,11 +5768,6 @@
     "has" "^1.0.3"
     "side-channel" "^1.0.4"
 
-"intl-tel-input@^17.0.16":
-  "integrity" "sha512-aDcfhkl+wf9NYYpvA2v40dPiNUZHLlORAaKogC85IwfN0v6B2jJtq+NyMd0GgM0MCAZp8N2dNG2oygz9pQVVaQ=="
-  "resolved" "https://registry.npmjs.org/intl-tel-input/-/intl-tel-input-17.0.16.tgz"
-  "version" "17.0.16"
-
 "invariant@^2.2.4":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
