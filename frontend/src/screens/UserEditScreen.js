@@ -40,7 +40,7 @@ function UserEditScreen() {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET })
-      navigate('/admin/userlist')
+      navigate('/adminfrontend/userlist')
     } else {
       if (!user.fname || !user.lname || user._id !== userId) {
         dispatch(getUserDetails(userId))
@@ -60,7 +60,7 @@ function UserEditScreen() {
 
   return (
     <>
-      <Link to='/admin/userlist' className='btn btn-light my-3'>
+      <Link to='/adminfrontend/userlist' className='btn btn-light my-3'>
         Go Back
       </Link>
       <FormContainer>

@@ -45,7 +45,7 @@ function ProductEditScreen() {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET })
-      navigate('/admin/productlist')
+      navigate('/adminfrontend/productlist')
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId))
@@ -99,7 +99,7 @@ function ProductEditScreen() {
 
   return (
     <>
-      <Link to='/admin/productlist' className='btn btn-light my-3'>
+      <Link to='/adminfrontend/productlist' className='btn btn-light my-3'>
         Go Back
       </Link>
       <FormContainer>
